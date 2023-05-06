@@ -16,7 +16,7 @@ class Drive_Counter extends StatefulWidget {
   State<Drive_Counter> createState() => _Drive_CounterState();
 }
 
-const double narrowScreenWidthThreshold = 450;
+const double narrowScreenWidthThreshold = 700;
 
 const Color m3BaseColor = Color(0xff6750a4);
 const Color blue = Color(0xff5E81AC);

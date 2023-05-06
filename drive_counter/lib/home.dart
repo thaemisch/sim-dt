@@ -25,8 +25,8 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-    final double screenWidth = screenSize.width - 80;
-    final double screenHeight = screenSize.height - 200;
+    final double screenWidth = screenSize.width;
+    final double screenHeight = screenSize.height - 270;
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,15 +107,15 @@ const List<NavigationDestination> appBarDestinations = [
   ),
   NavigationDestination(
     tooltip: "",
-    icon: Icon(Icons.question_mark),
-    label: 'N/A',
-    selectedIcon: Icon(Icons.question_mark),
+    icon: Icon(Icons.data_array),
+    label: 'Data',
+    selectedIcon: Icon(Icons.data_array),
   ),
   NavigationDestination(
     tooltip: "",
-    icon: Icon(Icons.question_mark),
-    label: 'N/A',
-    selectedIcon: Icon(Icons.question_mark),
+    icon: Icon(Icons.settings),
+    label: 'Settings',
+    selectedIcon: Icon(Icons.settings),
   ),
 ];
 
@@ -134,27 +134,6 @@ final List<NavigationRailDestination> navRailDestinations = appBarDestinations
       ),
     )
     .toList();
-
-const List<Widget> exampleBarDestinations = [
-  NavigationDestination(
-    tooltip: "",
-    icon: Icon(Icons.explore_outlined),
-    label: 'Explore',
-    selectedIcon: Icon(Icons.explore),
-  ),
-  NavigationDestination(
-    tooltip: "",
-    icon: Icon(Icons.pets_outlined),
-    label: 'Pets',
-    selectedIcon: Icon(Icons.pets),
-  ),
-  NavigationDestination(
-    tooltip: "",
-    icon: Icon(Icons.account_box_outlined),
-    label: 'Account',
-    selectedIcon: Icon(Icons.account_box),
-  )
-];
 
 class NavigationBars extends StatefulWidget {
   final void Function(int)? onSelectItem;
@@ -190,8 +169,7 @@ class _NavigationBarsState extends State<NavigationBars> {
         });
         if (!widget.isExampleBar) widget.onSelectItem!(index);
       },
-      destinations:
-          widget.isExampleBar ? exampleBarDestinations : appBarDestinations,
+      destinations: appBarDestinations,
     );
   }
 }
