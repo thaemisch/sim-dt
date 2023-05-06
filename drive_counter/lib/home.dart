@@ -9,7 +9,6 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-
   @override
   initState() {
     super.initState();
@@ -17,7 +16,46 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Text(''));
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width - 80;
+    final double screenHeight = screenSize.height - 150;
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight / 4,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text('Button 1'),
+            ),
+          ),
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight / 4,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text('Button 2'),
+            ),
+          ),
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight / 4,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text('Button 3'),
+            ),
+          ),
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight / 4,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text('Button 4'),
+            ),
+          ),
+        ]);
   }
 }
 
@@ -30,15 +68,15 @@ const List<NavigationDestination> appBarDestinations = [
   ),
   NavigationDestination(
     tooltip: "",
-    icon: Icon(Icons.history),
-    label: 'History',
-    selectedIcon: Icon(Icons.history),
+    icon: Icon(Icons.question_mark),
+    label: 'N/A',
+    selectedIcon: Icon(Icons.question_mark),
   ),
   NavigationDestination(
     tooltip: "",
-    icon: Icon(Icons.settings),
-    label: 'Settings',
-    selectedIcon: Icon(Icons.settings),
+    icon: Icon(Icons.question_mark),
+    label: 'N/A',
+    selectedIcon: Icon(Icons.question_mark),
   ),
 ];
 
