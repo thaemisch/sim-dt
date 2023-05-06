@@ -14,11 +14,19 @@ class _homeState extends State<home> {
     super.initState();
   }
 
+  void handleQueuePressed() {}
+
+  void handleOrderPressed() {}
+
+  void handlePickupPressed() {}
+
+  void handleExitPressed() {}
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width - 80;
-    final double screenHeight = screenSize.height - 150;
+    final double screenHeight = screenSize.height - 200;
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,33 +35,64 @@ class _homeState extends State<home> {
             width: screenWidth,
             height: screenHeight / 4,
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Button 1'),
-            ),
+                onPressed: () {
+                  handleQueuePressed();
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('QUEUE'),
+                    Text('counter / live number, add later'),
+                  ],
+                )),
           ),
           SizedBox(
             width: screenWidth,
             height: screenHeight / 4,
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Button 2'),
-            ),
+                onPressed: () {
+                  handleOrderPressed();
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('ORDER'),
+                    Text('is occupied?'),
+                  ],
+                )),
           ),
           SizedBox(
             width: screenWidth,
             height: screenHeight / 4,
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Button 3'),
-            ),
+                onPressed: () {
+                  handlePickupPressed();
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('PICKUP'),
+                    Text('is occupied?'),
+                  ],
+                )),
           ),
           SizedBox(
             width: screenWidth,
             height: screenHeight / 4,
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Button 4'),
-            ),
+                onPressed: () {
+                  handleExitPressed();
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('EXIT'),
+                  ],
+                )),
           ),
         ]);
   }
