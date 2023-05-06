@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Widget divider = SizedBox(height: 10);
 
-const double narrowScreenWidthThreshold = 400;
+const double narrowScreenWidthThreshold = 700;
 
 class history extends StatelessWidget {
   const history({super.key});
