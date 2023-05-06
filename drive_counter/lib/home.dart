@@ -15,17 +15,46 @@ class _homeState extends State<home> {
     super.initState();
   }
 
-  void handleQueuePressed() {}
+  int queue = 0;
+  bool orderOccupied = false;
+  bool pickupOccupied = false;
+  int exit = 0;
+
+  void handleQueuePressed() {
+    setState(() {
+      queue++;
+    });
+  }
+
   void setQueueSP() {}
+  void getQueueSP() {}
 
-  void handleOrderPressed() {}
+  void handleOrderPressed() {
+    setState(() {
+      orderOccupied = !orderOccupied;
+    });
+  }
+
   void setOrderSP() {}
+  void getOrderSP() {}
 
-  void handlePickupPressed() {}
+  void handlePickupPressed() {
+    setState(() {
+      pickupOccupied = !pickupOccupied;
+    });
+  }
+
   void setPickupSP() {}
+  void getPickupSP() {}
 
-  void handleExitPressed() {}
+  void handleExitPressed() {
+    setState(() {
+      exit++;
+    });
+  }
+
   void setExitSP() {}
+  void getExitSP() {}
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +77,7 @@ class _homeState extends State<home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('QUEUE'),
-                    Text('counter / live number, add later'),
+                    Text('is $queue'),
                   ],
                 )),
           ),
@@ -64,7 +93,10 @@ class _homeState extends State<home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('ORDER'),
-                    Text('is occupied?'),
+                    if (orderOccupied)
+                      Text('is occupied')
+                    else
+                      Text('is empty'),
                   ],
                 )),
           ),
@@ -80,7 +112,10 @@ class _homeState extends State<home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('PICKUP'),
-                    Text('is occupied?'),
+                    if (pickupOccupied)
+                      Text('is occupied')
+                    else
+                      Text('is empty'),
                   ],
                 )),
           ),
@@ -96,6 +131,7 @@ class _homeState extends State<home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('EXIT'),
+                    Text('$exit have exited'),
                   ],
                 )),
           ),
