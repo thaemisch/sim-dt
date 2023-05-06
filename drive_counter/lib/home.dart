@@ -32,6 +32,7 @@ class _homeState extends State<home> {
   void handleOrderPressed() {
     setState(() {
       orderOccupied = !orderOccupied;
+      queue--;
     });
   }
 
@@ -41,6 +42,7 @@ class _homeState extends State<home> {
   void handlePickupPressed() {
     setState(() {
       pickupOccupied = !pickupOccupied;
+      orderOccupied = !orderOccupied;
     });
   }
 
@@ -50,6 +52,7 @@ class _homeState extends State<home> {
   void handleExitPressed() {
     setState(() {
       exit++;
+      pickupOccupied = !pickupOccupied;
     });
   }
 
@@ -94,9 +97,9 @@ class _homeState extends State<home> {
                   children: [
                     Text('ORDER'),
                     if (orderOccupied)
-                      Text('is occupied')
+                      Text('is OCCUPIED')
                     else
-                      Text('is empty'),
+                      Text('is EMPTY'),
                   ],
                 )),
           ),
@@ -113,9 +116,9 @@ class _homeState extends State<home> {
                   children: [
                     Text('PICKUP'),
                     if (pickupOccupied)
-                      Text('is occupied')
+                      Text('is OCCUPIED')
                     else
-                      Text('is empty'),
+                      Text('is EMPTY'),
                   ],
                 )),
           ),
