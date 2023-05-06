@@ -15,12 +15,16 @@ class _homeState extends State<home> {
   }
 
   void handleQueuePressed() {}
+  void setQueueSP() {}
 
   void handleOrderPressed() {}
+  void setOrderSP() {}
 
   void handlePickupPressed() {}
+  void setPickupSP() {}
 
   void handleExitPressed() {}
+  void setExitSP() {}
 
   @override
   Widget build(BuildContext context) {
