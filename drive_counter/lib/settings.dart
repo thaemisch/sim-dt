@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class settings extends StatelessWidget {
   const settings({super.key});
 
-  void handleResetPressed() {}
+  void handleResetPressed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('queue', 0);
+    prefs.setBool('orderOccupied', false);
+    prefs.setBool('pickupOccupied', false);
+    prefs.setInt('exit', 0);
+  }
 
   @override
   Widget build(BuildContext context) {

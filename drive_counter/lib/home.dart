@@ -13,6 +13,10 @@ class _homeState extends State<home> {
   @override
   initState() {
     super.initState();
+    getQueueSP();
+    getOrderSP();
+    getPickupSP();
+    getExitSP();
   }
 
   int queue = 0;
@@ -24,40 +28,84 @@ class _homeState extends State<home> {
     setState(() {
       queue++;
     });
+    setQueueSP();
   }
 
-  void setQueueSP() {}
-  void getQueueSP() {}
+  void setQueueSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('queue', queue);
+  }
 
-  void handleOrderPressed() {
+  void getQueueSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    queue = prefs.getInt('queue') as int;
+    setState(() {
+      queue = queue;
+    });
+  }
+
+  void handleOrderPressed() async {
     setState(() {
       orderOccupied = !orderOccupied;
       queue--;
     });
+    setOrderSP();
   }
 
-  void setOrderSP() {}
-  void getOrderSP() {}
+  void setOrderSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('orderOccupied', orderOccupied);
+  }
+
+  void getOrderSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    orderOccupied = prefs.getBool('orderOccupied') as bool;
+    setState(() {
+      orderOccupied = orderOccupied;
+    });
+  }
 
   void handlePickupPressed() {
     setState(() {
       pickupOccupied = !pickupOccupied;
       orderOccupied = !orderOccupied;
     });
+    setPickupSP();
   }
 
-  void setPickupSP() {}
-  void getPickupSP() {}
+  void setPickupSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('pickupOccupied', pickupOccupied);
+  }
+
+  void getPickupSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    pickupOccupied = prefs.getBool('pickupOccupied') as bool;
+    setState(() {
+      pickupOccupied = pickupOccupied;
+    });
+  }
 
   void handleExitPressed() {
     setState(() {
       exit++;
       pickupOccupied = !pickupOccupied;
     });
+    setExitSP();
   }
 
-  void setExitSP() {}
-  void getExitSP() {}
+  void setExitSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('exit', exit);
+  }
+
+  void getExitSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    exit = prefs.getInt('exit') as int;
+    setState(() {
+      exit = exit;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
