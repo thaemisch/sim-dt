@@ -119,7 +119,7 @@ class _homeState extends State<home> {
       });
       pickupQueue.add(DateTime.now());
       setPickupQueueSP();
-    } else if (pickupQueueCount > 0) {
+    } else if (!pickupOccupied && pickupQueueCount > 0) {
       setState(() {
         pickupQueueCount--;
         pickupOccupied = true;
