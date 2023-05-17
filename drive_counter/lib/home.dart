@@ -1,7 +1,11 @@
+import 'dart:io';
 import 'package:drive_counter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import 'package:file_picker/file_picker.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -185,6 +189,33 @@ class _homeState extends State<home> {
     Vibrate.feedback(FeedbackType.success);
   }
 
+  Future<void> writeListsToFile() async {
+    List<String> lists = [
+      "queueEntry: " + queueEntry.toString(),
+      "orderEntry: " + orderEntry.toString(),
+      "pickupQueue: " + pickupQueue.toString(),
+      "pickupEntry: " + pickupEntry.toString(),
+      "exitEntry: " + exitEntry.toString()
+    ];
+
+    // Prompt the user to choose the save directory
+    String? directoryPath = await FilePicker.platform.getDirectoryPath();
+
+    if (directoryPath != null) {
+      Directory directory = Directory(directoryPath);
+
+      // Convert the list to a JSON string
+      String jsonStr = jsonEncode(lists);
+
+      // Write the JSON string to the file
+      File file = File('${directory.path}/lists.json');
+      await file.writeAsString(jsonStr);
+    } else {
+      // User canceled the directory selection
+      print('No directory selected');
+    }
+  }
+
 //test
   @override
   Widget build(BuildContext context) {
@@ -249,6 +280,21 @@ class _homeState extends State<home> {
                   children: [
                     Text('EXIT'),
                     Text('$exit have exited'),
+                  ],
+                )),
+          ),
+          SizedBox(
+            width: screenWidth,
+            height: screenHeight / 4,
+            child: ElevatedButton(
+                onPressed: () {
+                  writeListsToFile();
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('WRITE TO FILE'),
                   ],
                 )),
           ),
