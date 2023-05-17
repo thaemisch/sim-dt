@@ -22,11 +22,13 @@ class _homeState extends State<home> {
 
   int queue = 0;
   bool orderOccupied = false;
+  int pickupQueueCount = 0;
   bool pickupOccupied = false;
   int exit = 0;
 
   List<DateTime> queueEntry = [];
   List<DateTime> orderEntry = [];
+  List<DateTime> pickupQueue = [];
   List<DateTime> pickupEntry = [];
   List<DateTime> exitEntry = [];
 
@@ -54,12 +56,29 @@ class _homeState extends State<home> {
   }
 
   void handleOrderPressed() async {
-    setState(() {
-      orderOccupied = !orderOccupied;
-      queue--;
-    });
-    orderEntry.add(DateTime.now());
-    setOrderSP();
+    if (orderOccupied) {
+      setState(() {
+        queue++;
+      });
+      queueEntry.add(DateTime.now());
+      setQueueSP();
+    } else if (queue > 0 && !orderOccupied) {
+      setState(() {
+        queue--;
+        orderOccupied = true;
+      });
+      orderEntry.add(DateTime.now());
+      setQueueSP();
+      setOrderSP();
+    } else {
+      setState(() {
+        orderOccupied = true;
+      });
+      queueEntry.add(DateTime.now());
+      orderEntry.add(DateTime.now());
+      setQueueSP();
+      setOrderSP();
+    }
   }
 
   void setOrderSP() async {
@@ -77,13 +96,46 @@ class _homeState extends State<home> {
     });
   }
 
-  void handlePickupPressed() {
+  void setPickupQueueSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('pickupQueueCount', pickupQueueCount);
+    prefs.setString('pickupQueue', pickupQueue.toString());
+  }
+
+  void getPickupQueueSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    pickupQueueCount = prefs.getInt('pickupQueueCount') as int;
+    pickupQueue = prefs.getString('pickupQueue') as List<DateTime>;
     setState(() {
-      pickupOccupied = !pickupOccupied;
-      orderOccupied = !orderOccupied;
+      pickupQueueCount = pickupQueueCount;
     });
-    pickupEntry.add(DateTime.now());
-    setPickupSP();
+  }
+
+  void handlePickupPressed() {
+    if (pickupOccupied && orderOccupied) {
+      setState(() {
+        orderOccupied = false;
+        pickupQueueCount++;
+      });
+      pickupQueue.add(DateTime.now());
+      setPickupQueueSP();
+    } else if (pickupQueueCount > 0) {
+      setState(() {
+        pickupQueueCount--;
+        pickupOccupied = true;
+      });
+      pickupEntry.add(DateTime.now());
+      setPickupSP();
+      setPickupQueueSP();
+    } else if (orderOccupied) {
+      setState(() {
+        pickupOccupied = true;
+        orderOccupied = false;
+      });
+      pickupEntry.add(DateTime.now());
+      setPickupSP();
+      setOrderSP();
+    }
   }
 
   void setPickupSP() async {
@@ -148,27 +200,7 @@ class _homeState extends State<home> {
             height: screenHeight / 4,
             child: ElevatedButton(
                 onPressed: () {
-                  handleQueuePressed();
-                  vibrateSuccess();
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('QUEUE'),
-                    Text('is $queue'),
-                  ],
-                )),
-          ),
-          SizedBox(
-            width: screenWidth,
-            height: screenHeight / 4,
-            child: ElevatedButton(
-                onPressed: () {
-                  if (queue > 0 && !orderOccupied) {
-                    handleOrderPressed();
-                    vibrateSuccess();
-                  }
+                  handleOrderPressed();
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -176,9 +208,9 @@ class _homeState extends State<home> {
                   children: [
                     Text('ORDER'),
                     if (orderOccupied)
-                      Text('is OCCUPIED')
+                      Text('OCCUPIED | Queue: $queue')
                     else
-                      Text('is EMPTY'),
+                      Text('EMPTY | Queue: $queue'),
                   ],
                 )),
           ),
@@ -187,10 +219,7 @@ class _homeState extends State<home> {
             height: screenHeight / 4,
             child: ElevatedButton(
                 onPressed: () {
-                  if (orderOccupied && !pickupOccupied) {
-                    handlePickupPressed();
-                    vibrateSuccess();
-                  }
+                  handlePickupPressed();
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,9 +227,9 @@ class _homeState extends State<home> {
                   children: [
                     Text('PICKUP'),
                     if (pickupOccupied)
-                      Text('is OCCUPIED')
+                      Text('OCCUPIED | Queue: $pickupQueueCount')
                     else
-                      Text('is EMPTY'),
+                      Text('EMPTY | Queue: $pickupQueueCount'),
                   ],
                 )),
           ),
