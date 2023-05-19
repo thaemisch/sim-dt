@@ -20,6 +20,7 @@ class _homeState extends State<home> {
     super.initState();
     getQueueSP();
     getOrderSP();
+    getPickupQueueSP();
     getPickupSP();
     getExitSP();
   }
