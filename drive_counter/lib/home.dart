@@ -6,6 +6,7 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:intl/intl.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -192,7 +193,10 @@ class _homeState extends State<home> {
 
   List<List<String>> convertListsToJson(List<List<DateTime>> lists) {
     return lists.map((list) {
-      return list.map((dateTime) => dateTime.toIso8601String()).toList();
+      return list.map((dateTime) {
+        String timeString = DateFormat.Hms().format(dateTime);
+        return timeString;
+      }).toList();
     }).toList();
   }
 
