@@ -201,16 +201,22 @@ class _homeState extends State<home> {
     List<List<String>> jsonLists = convertListsToJson(
         [queueEntry, orderEntry, pickupQueue, pickupEntry, exitEntry]);
 
-    // Get the device's documents directory
-    Directory directory = await getApplicationDocumentsDirectory();
-    String filePath = directory.path + '/lists.json';
+    // Prompt the user to choose the save directory
+    String? directoryPath = await FilePicker.platform.getDirectoryPath();
 
-    // Convert the lists to a JSON string
-    String jsonStr = jsonEncode(jsonLists);
+    if (directoryPath != null) {
+      Directory directory = Directory(directoryPath);
 
-    // Write the JSON string to the file
-    File file = File(filePath);
-    await file.writeAsString(jsonStr);
+      // Convert the lists to a JSON string
+      String jsonStr = jsonEncode(jsonLists);
+
+      // Write the JSON string to the file
+      File file = File('${directory.path}/lists.json');
+      await file.writeAsString(jsonStr);
+    } else {
+      // User canceled the directory selection
+      print('No directory selected');
+    }
   }
 
 //test
