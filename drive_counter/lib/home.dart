@@ -138,7 +138,9 @@ class _homeState extends State<home> {
         pickupOccupied = true;
         orderOccupied = false;
       });
+      pickupQueue.add(DateTime.now());
       pickupEntry.add(DateTime.now());
+      setPickupQueueSP();
       setPickupSP();
       setOrderSP();
     }
