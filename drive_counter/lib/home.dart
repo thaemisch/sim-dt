@@ -68,6 +68,7 @@ class _homeState extends State<home> {
       });
       queueEntry.add(DateTime.now());
       setQueueSP();
+      vibrateSuccess();
     } else if (queue > 0 && !orderOccupied) {
       setState(() {
         queue--;
@@ -76,6 +77,7 @@ class _homeState extends State<home> {
       orderEntry.add(DateTime.now());
       setQueueSP();
       setOrderSP();
+      vibrateSuccess();
     } else {
       setState(() {
         orderOccupied = true;
@@ -84,6 +86,7 @@ class _homeState extends State<home> {
       orderEntry.add(DateTime.now());
       setQueueSP();
       setOrderSP();
+      vibrateSuccess();
     }
   }
 
@@ -125,6 +128,7 @@ class _homeState extends State<home> {
       });
       pickupQueue.add(DateTime.now());
       setPickupQueueSP();
+      vibrateSuccess();
     } else if (!pickupOccupied && pickupQueueCount > 0) {
       setState(() {
         pickupQueueCount--;
@@ -133,6 +137,7 @@ class _homeState extends State<home> {
       pickupEntry.add(DateTime.now());
       setPickupSP();
       setPickupQueueSP();
+      vibrateSuccess();
     } else if (orderOccupied) {
       setState(() {
         pickupOccupied = true;
@@ -143,6 +148,7 @@ class _homeState extends State<home> {
       setPickupQueueSP();
       setPickupSP();
       setOrderSP();
+      vibrateSuccess();
     }
   }
 
@@ -168,6 +174,7 @@ class _homeState extends State<home> {
     });
     exitEntry.add(DateTime.now());
     setExitSP();
+    vibrateSuccess();
   }
 
   void setExitSP() async {
@@ -280,7 +287,6 @@ class _homeState extends State<home> {
                 onPressed: () {
                   if (pickupOccupied) {
                     handleExitPressed();
-                    vibrateSuccess();
                   }
                 },
                 child: Column(

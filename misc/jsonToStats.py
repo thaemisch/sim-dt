@@ -12,5 +12,17 @@ for json_list in json_data:
     lists.append(dt_list)
 
 # Use the lists in your Python program
-for lst in lists:
-    print(lst)
+#for lst in lists:
+#    print(lst)
+
+def calcQueue():
+    print("Calculating queue...")
+
+def calcOrder():
+    print("Calculating order...")
+
+def calcPickupQueue():
+    print("Calculating pickup queue...")
+
+def calcPickup():
+    print("Calculating pickup...")
