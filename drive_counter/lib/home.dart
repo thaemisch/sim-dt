@@ -190,31 +190,27 @@ class _homeState extends State<home> {
     Vibrate.feedback(FeedbackType.success);
   }
 
+  List<List<String>> convertListsToJson(List<List<DateTime>> lists) {
+    return lists.map((list) {
+      return list.map((dateTime) => dateTime.toIso8601String()).toList();
+    }).toList();
+  }
+
   Future<void> writeListsToFile() async {
-    List<String> lists = [
-      "queueEntry: " + queueEntry.toString(),
-      "orderEntry: " + orderEntry.toString(),
-      "pickupQueue: " + pickupQueue.toString(),
-      "pickupEntry: " + pickupEntry.toString(),
-      "exitEntry: " + exitEntry.toString()
-    ];
+    // Convert the lists to a JSON-serializable format
+    List<List<String>> jsonLists = convertListsToJson(
+        [queueEntry, orderEntry, pickupQueue, pickupEntry, exitEntry]);
 
-    // Prompt the user to choose the save directory
-    String? directoryPath = await FilePicker.platform.getDirectoryPath();
+    // Get the device's documents directory
+    Directory directory = await getApplicationDocumentsDirectory();
+    String filePath = directory.path + '/lists.json';
 
-    if (directoryPath != null) {
-      Directory directory = Directory(directoryPath);
+    // Convert the lists to a JSON string
+    String jsonStr = jsonEncode(jsonLists);
 
-      // Convert the list to a JSON string
-      String jsonStr = jsonEncode(lists);
-
-      // Write the JSON string to the file
-      File file = File('${directory.path}/lists.json');
-      await file.writeAsString(jsonStr);
-    } else {
-      // User canceled the directory selection
-      print('No directory selected');
-    }
+    // Write the JSON string to the file
+    File file = File(filePath);
+    await file.writeAsString(jsonStr);
   }
 
 //test
