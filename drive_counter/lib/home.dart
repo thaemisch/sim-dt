@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:html' as html;
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -214,22 +216,41 @@ class _homeState extends State<home> {
     List<List<String>> jsonLists = convertListsToJson(
         [queueEntry, orderEntry, pickupQueue, pickupEntry, exitEntry]);
 
-    // Prompt the user to choose the save directory
-    String? directoryPath = await FilePicker.platform.getDirectoryPath();
-
-    if (directoryPath != null) {
-      Directory directory = Directory(directoryPath);
-
-      // Convert the lists to a JSON string
-      String jsonStr = jsonEncode(jsonLists);
-
-      // Write the JSON string to the file
-      File file = File('${directory.path}/lists.json');
-      await file.writeAsString(jsonStr);
+    if (kIsWeb) {
+      final fileName = 'list.json';
+      downloadFile(jsonLists, fileName);
     } else {
-      // User canceled the directory selection
-      print('No directory selected');
+      // Prompt the user to choose the save directory
+      String? directoryPath = await FilePicker.platform.getDirectoryPath();
+
+      if (directoryPath != null) {
+        Directory directory = Directory(directoryPath);
+
+        // Convert the lists to a JSON string
+        String jsonStr = jsonEncode(jsonLists);
+
+        // Write the JSON string to the file
+        File file = File('${directory.path}/lists.json');
+        await file.writeAsString(jsonStr);
+      } else {
+        // User canceled the directory selection
+        print('No directory selected');
+      }
     }
+  }
+
+  void downloadFile(List<List<String>> data, String fileName) {
+    final jsonData = json.encode(data);
+    final bytes = utf8.encode(jsonData);
+    final blob = html.Blob([bytes]);
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchor = html.document.createElement('a') as html.AnchorElement;
+
+    anchor.href = url;
+    anchor.download = fileName;
+    anchor.click();
+
+    html.Url.revokeObjectUrl(url);
   }
 
 //test
