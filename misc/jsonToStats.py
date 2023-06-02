@@ -1,8 +1,10 @@
 import json
 from datetime import datetime, timedelta
 
+filename = input("Enter the filename: ")
+
 # Read the JSON file
-with open('test.json') as f:
+with open(filename) as f:
     json_data = json.load(f)
 
 # Convert the JSON data to lists of datetimes
@@ -27,6 +29,7 @@ sum_order_deltas = timedelta(0)
 sum_pickup_queue_deltas = timedelta(0)
 sum_pickup_deltas = timedelta(0)
 
+# Calculate Queue
 for i in range(len(queue)):
     queue_deltas.append(order[i] - queue[i])
 max_queue_delta = max(queue_deltas)
@@ -35,6 +38,7 @@ for i in range(len(queue_deltas)):
     sum_queue_deltas += queue_deltas[i]
 avg_queue_delta = sum_queue_deltas / len(queue_deltas)
 
+# Calculate Order
 for i in range(len(order)):
     order_deltas.append(pickup_queue[i] - order[i])
 max_order_delta = max(order_deltas)
@@ -43,6 +47,7 @@ for i in range(len(order_deltas)):
     sum_order_deltas += order_deltas[i]
 avg_order_delta = sum_order_deltas / len(order_deltas)
 
+# Calculate Pickup Queue
 for i in range(len(pickup_queue)):
     pickup_queue_deltas.append(pickup[i] - pickup_queue[i])
 max_pickup_queue_delta = max(pickup_queue_deltas)
@@ -51,6 +56,7 @@ for i in range(len(pickup_queue_deltas)):
     sum_pickup_queue_deltas += pickup_queue_deltas[i]
 avg_pickup_queue_delta = sum_pickup_queue_deltas / len(pickup_queue_deltas)
 
+# Calculate Pickup
 for i in range(len(pickup)):
     pickup_deltas.append(exit[i] - pickup[i])
 max_pickup_delta = max(pickup_deltas)
