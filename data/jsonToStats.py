@@ -94,5 +94,5 @@ markdown_string = f"""| Legend | Value |
 """
 
 # Write the markdown string to a file
-with open("output.md", "w") as f:
+with open("README.md", "w") as f:
     f.write(markdown.markdown(markdown_string))
