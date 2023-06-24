@@ -36,7 +36,46 @@ public class DT_model extends Model {
         return pickupTime.sample();
     }
 
-    // Queue for orders
-    private ProcessQueue<Customer> orderQueue;
+    // Order queue
 
+    // Pickup queue
+
+    // free / occupied windows
+
+    public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
+        super(owner, name, showInReport, showInTrace);
+    }
+
+    public void doInitialSchedules() {
+        // Schedule the first customer arrival
+        CustomerArrivalEvent customerArrivalEvent = new CustomerArrivalEvent(this, "CustomerArrivalEvent", true);
+        customerArrivalEvent.schedule(new TimeSpan(getCustomerArrivalTime()));
+    }
+
+    public void init() {
+        // Initialize the distributions
+        customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
+        orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
+        pickupTime = new ContDistUniform(this, "PickupTime", 0.5, 1.5, true, false);
+    }
+
+    public static void main(java.lang.String[] args){
+        Experiment dtExperiment = new Experiment("dt-ereignis");
+
+        DT_model dt_model = new DT_model(null, "DT Model", true, true);
+
+        dt_model.connectToExperiment(dtExperiment);
+
+        dtExperiment.setShowProgressBar(true);
+        dtExperiment.tracePeriod(new TimeInstant(0.0), new TimeInstant(240.0));
+        dtExperiment.debugPeriod(new TimeInstant(0.0), new TimeInstant(240.0));
+
+        dtExperiment.stop(new TimeInstant(240.0));
+
+        dtExperiment.start();
+
+        dtExperiment.report();
+
+        dtExperiment.finish();
+    }
 }
