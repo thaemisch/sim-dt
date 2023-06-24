@@ -24,52 +24,53 @@ public class DT_model extends Model {
 
     // Customer arrival time
     private ContDistExponential customerArrivalTime;
-
     public double getCustomerArrivalTime() {
         return customerArrivalTime.sample();
     }
 
     // Order time
     private ContDistUniform orderTime;
-
     public double getOrderTime() {
         return orderTime.sample();
     }
 
     // Pickup time
     private ContDistUniform pickupTime;
-
     public double getPickupTime() {
         return pickupTime.sample();
     }
 
     // Order queue
+    protected Queue<CustomerEntity> orderQueue;
 
     // Pickup queue
+    protected Queue<CustomerEntity> pickupQueue;
 
     // free / occupied windows
+    protected boolean orderWindowEmpty;
+    protected boolean pickupWindowEmpty;
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
         super(owner, name, showInReport, showInTrace);
     }
 
     public void doInitialSchedules() {
-        // Schedule the first customer arrival
-        //CustomerArrivalEvent customerArrivalEvent = new CustomerArrivalEvent(this, "CustomerArrivalEvent", true);
-        //customerArrivalEvent.schedule(new TimeSpan(getCustomerArrivalTime()));
+        //s
     }
 
     public void init() {
-        // Initialize the distributions
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
+        OrderEntity order = new OrderEntity(this, "Order", true);
+        orderWindowEmpty = true;
         orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
+        PickupEntity pickup = new PickupEntity(this, "Pickup", true);
+        pickupWindowEmpty = true;
         pickupTime = new ContDistUniform(this, "PickupTime", 0.5, 1.5, true, false);
     }
 
     public static void main(java.lang.String[] args){
         // Parse CLI arguments
         if (args.length > 0) {
-            // Parse the arguments and set the variables accordingly
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
                 switch (arg) {
@@ -83,14 +84,12 @@ public class DT_model extends Model {
                     }
                     case "--debug", "-d" -> debug = true;
                     case "--trace", "-t" -> trace = true;
-                    case "--progress", "-p" -> progrssbar = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
                         System.out.println("-s, --start <time>      Set the start time of the simulation (Default: 0.0)");
                         System.out.println("-e, --end <time>        Set the end time of the simulation(Default: 240.0)");
                         System.out.println("-d, --debug             Enable debug mode");
                         System.out.println("-t, --trace             Enable trace mode");
-                        System.out.println("-p, --progress          Show progress bar");
                         System.out.println("-h, --help              Show this help");
                         System.exit(0);
                     }
@@ -102,14 +101,12 @@ public class DT_model extends Model {
             }
         }
 
-        Experiment dtExperiment = new Experiment("dt-ereignis");
+        Experiment dtExperiment = new Experiment("dt-event");
 
         DT_model dt_model = new DT_model(null, "DT Model", true, true);
 
         dt_model.connectToExperiment(dtExperiment);
 
-        if (progrssbar)
-            dtExperiment.setShowProgressBar(true);
         if (debug)
             dtExperiment.debugPeriod(new TimeInstant(startTime), new TimeInstant(endTime));
         if (trace)
@@ -118,9 +115,7 @@ public class DT_model extends Model {
         dtExperiment.stop(new TimeInstant(endTime));
 
         dtExperiment.start();
-
         dtExperiment.report();
-
         dtExperiment.finish();
     }
 }
