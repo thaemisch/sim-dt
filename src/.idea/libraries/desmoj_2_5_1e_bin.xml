@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="desmoj-2.5.1e-bin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/simulation/desmoj-2.5.1e-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
