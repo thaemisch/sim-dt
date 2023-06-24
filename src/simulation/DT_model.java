@@ -48,8 +48,8 @@ public class DT_model extends Model {
 
     public void doInitialSchedules() {
         // Schedule the first customer arrival
-        CustomerArrivalEvent customerArrivalEvent = new CustomerArrivalEvent(this, "CustomerArrivalEvent", true);
-        customerArrivalEvent.schedule(new TimeSpan(getCustomerArrivalTime()));
+        //CustomerArrivalEvent customerArrivalEvent = new CustomerArrivalEvent(this, "CustomerArrivalEvent", true);
+        //customerArrivalEvent.schedule(new TimeSpan(getCustomerArrivalTime()));
     }
 
     public void init() {
