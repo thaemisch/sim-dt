@@ -1,12 +1,124 @@
-<p>| Legend | Value |
-| --- | --- |
-| New arrival: Min | 0:00:05 |
-| New arrival: Max | 0:04:01 |
-| Queue: Min | 0:00:00 |
-| Queue: Max | 0:01:04 |
-| Order: Min | 0:00:18 |
-| Order: Max | 0:01:23 |
-| Pickup Queue: Min | 0:00:00 |
-| Pickup Queue: Max | 0:03:16 |
-| Pickup: Min | 0:00:08 |
-| Pickup: Max | 0:03:20 |</p>
+
+  <table>
+  <tr>
+    <td></td>
+    <td>mcd1</td>
+    <td>mcd2</td>
+  </tr>
+  <tr>
+    <td>New Arrival</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:05</td>
+        </tr>
+        <tr>
+          <td>0:04:01</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:02</td>
+        </tr>
+        <tr>
+          <td>0:03:38</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>Queue</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:01:04</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:05:46</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>Order</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:18</td>
+        </tr>
+        <tr>
+          <td>0:01:23</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:10</td>
+        </tr>
+        <tr>
+          <td>0:02:17</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+    <tr>
+    <td>Pickup Queue</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:03:16</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:03:27</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+    <tr>
+    <td>Pickup</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:08</td>
+        </tr>
+        <tr>
+          <td>0:03:20</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:05</td>
+        </tr>
+        <tr>
+          <td>0:04:52</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  

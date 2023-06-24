@@ -1,12 +1,50 @@
-<p>| Legend | Value |
-| --- | --- |
-| New arrival: Min | 0:00:05 |
-| New arrival: Max | 0:04:01 |
-| Queue: Min | 0:00:00 |
-| Queue: Max | 0:01:04 |
-| Order: Min | 0:00:18 |
-| Order: Max | 0:01:23 |
-| Pickup Queue: Min | 0:00:00 |
-| Pickup Queue: Max | 0:03:16 |
-| Pickup: Min | 0:00:08 |
-| Pickup: Max | 0:03:20 |</p>
+<table>
+<thead>
+<tr>
+<th>Legend</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New arrival: Min</td>
+<td>0:00:05</td>
+</tr>
+<tr>
+<td>New arrival: Max</td>
+<td>0:04:01</td>
+</tr>
+<tr>
+<td>Queue: Min</td>
+<td>0:00:00</td>
+</tr>
+<tr>
+<td>Queue: Max</td>
+<td>0:01:04</td>
+</tr>
+<tr>
+<td>Order: Min</td>
+<td>0:00:18</td>
+</tr>
+<tr>
+<td>Order: Max</td>
+<td>0:01:23</td>
+</tr>
+<tr>
+<td>Pickup Queue: Min</td>
+<td>0:00:00</td>
+</tr>
+<tr>
+<td>Pickup Queue: Max</td>
+<td>0:03:16</td>
+</tr>
+<tr>
+<td>Pickup: Min</td>
+<td>0:00:08</td>
+</tr>
+<tr>
+<td>Pickup: Max</td>
+<td>0:03:20</td>
+</tr>
+</tbody>
+</table>
