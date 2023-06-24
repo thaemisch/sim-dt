@@ -2,7 +2,7 @@ package simulation;
 
 import desmoj.core.simulator.*;
 
-public class CustomerNewEvent extends Event<CustomerEntity> {
+public class CustomerNewEvent extends ExternalEvent{
 
     private DT_model myModel;
 
@@ -18,6 +18,5 @@ public class CustomerNewEvent extends Event<CustomerEntity> {
 
         CustomerNewEvent newCustomer = new CustomerNewEvent(myModel, "New Customer", true);
         newCustomer.schedule(new TimeSpan(myModel.getCustomerArrivalTime()));
-
     }
 }

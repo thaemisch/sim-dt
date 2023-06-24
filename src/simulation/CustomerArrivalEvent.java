@@ -20,6 +20,9 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
             if (myModel.orderWindowEmpty){
                 myModel.orderWindowEmpty = false;
                 myModel.orderQueue.remove(customer);
+
+                OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
+                orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
             }
 
         }
