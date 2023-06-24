@@ -4,6 +4,13 @@ import desmoj.core.simulator.*;
 import desmoj.core.dist.*;
 
 public class DT_model extends Model {
+    // Variables
+    static double startTime = 0.0;
+    static double endTime = 240.0;
+    static boolean debug = false;
+    static boolean trace = false;
+    static boolean progrssbar = false;
+
     public String description() {
         return "DT_model (Ereignisorientiert):" +
                 "simulates a drive-through of a fast-food restaurant" +
@@ -60,17 +67,55 @@ public class DT_model extends Model {
     }
 
     public static void main(java.lang.String[] args){
+        // Parse CLI arguments
+        if (args.length > 0) {
+            // Parse the arguments and set the variables accordingly
+            for (int i = 0; i < args.length; i++) {
+                String arg = args[i];
+                switch (arg) {
+                    case "--start", "-s" -> {
+                        startTime = Double.parseDouble(args[i + 1]);
+                        i++;
+                    }
+                    case "--end", "-e" -> {
+                        endTime = Double.parseDouble(args[i + 1]);
+                        i++;
+                    }
+                    case "--debug", "-d" -> debug = true;
+                    case "--trace", "-t" -> trace = true;
+                    case "--progress", "-p" -> progrssbar = true;
+                    case "--help", "-h" -> {
+                        System.out.println("Options:");
+                        System.out.println("-s, --start <time>      Set the start time of the simulation (Default: 0.0)");
+                        System.out.println("-e, --end <time>        Set the end time of the simulation(Default: 240.0)");
+                        System.out.println("-d, --debug             Enable debug mode");
+                        System.out.println("-t, --trace             Enable trace mode");
+                        System.out.println("-p, --progress          Show progress bar");
+                        System.out.println("-h, --help              Show this help");
+                        System.exit(0);
+                    }
+                    default -> {
+                        System.err.println("Unknown argument: " + arg);
+                        System.exit(1);
+                    }
+                }
+            }
+        }
+
         Experiment dtExperiment = new Experiment("dt-ereignis");
 
         DT_model dt_model = new DT_model(null, "DT Model", true, true);
 
         dt_model.connectToExperiment(dtExperiment);
 
-        dtExperiment.setShowProgressBar(true);
-        dtExperiment.tracePeriod(new TimeInstant(0.0), new TimeInstant(240.0));
-        dtExperiment.debugPeriod(new TimeInstant(0.0), new TimeInstant(240.0));
+        if (progrssbar)
+            dtExperiment.setShowProgressBar(true);
+        if (debug)
+            dtExperiment.debugPeriod(new TimeInstant(startTime), new TimeInstant(endTime));
+        if (trace)
+            dtExperiment.tracePeriod(new TimeInstant(startTime), new TimeInstant(endTime));
 
-        dtExperiment.stop(new TimeInstant(240.0));
+        dtExperiment.stop(new TimeInstant(endTime));
 
         dtExperiment.start();
 
