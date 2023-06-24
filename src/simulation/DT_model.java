@@ -36,9 +36,6 @@ public class DT_model extends Model {
     // Order queue
     protected Queue<CustomerEntity> orderQueue;
 
-    // Pickup queue
-    protected Queue<CustomerEntity> pickupQueue;
-
     // free / occupied windows
     protected boolean orderWindowEmpty;
 
