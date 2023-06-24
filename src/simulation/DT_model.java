@@ -9,7 +9,6 @@ public class DT_model extends Model {
     static double endTime = 240.0;
     static boolean debug = false;
     static boolean trace = false;
-    static boolean progrssbar = false;
 
     public String description() {
         return "DT_model (Ereignisorientiert):" +
@@ -34,12 +33,6 @@ public class DT_model extends Model {
         return orderTime.sample();
     }
 
-    // Pickup time
-    private ContDistUniform pickupTime;
-    public double getPickupTime() {
-        return pickupTime.sample();
-    }
-
     // Order queue
     protected Queue<CustomerEntity> orderQueue;
 
@@ -48,7 +41,6 @@ public class DT_model extends Model {
 
     // free / occupied windows
     protected boolean orderWindowEmpty;
-    protected boolean pickupWindowEmpty;
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
         super(owner, name, showInReport, showInTrace);
@@ -63,9 +55,6 @@ public class DT_model extends Model {
         OrderEntity order = new OrderEntity(this, "Order", true);
         orderWindowEmpty = true;
         orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
-        PickupEntity pickup = new PickupEntity(this, "Pickup", true);
-        pickupWindowEmpty = true;
-        pickupTime = new ContDistUniform(this, "PickupTime", 0.5, 1.5, true, false);
     }
 
     public static void main(java.lang.String[] args){

@@ -20,7 +20,6 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
             if (myModel.orderWindowEmpty){
                 myModel.orderWindowEmpty = false;
                 myModel.orderQueue.remove(customer);
-
             }
 
         }

@@ -11,8 +11,13 @@ public class CustomerNewEvent extends Event<CustomerEntity> {
         myModel = (DT_model) owner;
     }
 
-    public void eventRoutine(CustomerEntity customer) {
-        CustomerEntity newCustomer = new CustomerEntity(myModel, "Customer", true);
+    public void eventRoutine() {
+        CustomerEntity customer = new CustomerEntity(myModel, "Customer", true);
+        CustomerArrivalEvent customerArrival = new CustomerArrivalEvent(myModel, "Customer Arrival", true);
+        customerArrival.schedule(customer, new TimeSpan(myModel.getCustomerArrivalTime()));
+
+        CustomerNewEvent newCustomer = new CustomerNewEvent(myModel, "New Customer", true);
+        newCustomer.schedule(new TimeSpan(myModel.getCustomerArrivalTime()));
 
     }
 }
