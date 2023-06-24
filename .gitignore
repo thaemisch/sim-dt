@@ -1,2 +1,5 @@
-.idea
-.vscode
+.idea/
+.vscode/
+out/
+src/*.idea/
+src/*.html
