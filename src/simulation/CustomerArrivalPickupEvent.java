@@ -13,17 +13,19 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
 
     public void eventRoutine(CustomerEntity customer) {
         myModel.pickupQueue.insert(customer);
+
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer arrived");
         data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());
 
         if (!myModel.freePickupWindow.isEmpty()) {
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer arrived");
-            data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
+            myModel.pickupQueue.remove(customer);
+
             PickupEntity pickup = myModel.freePickupWindow.first();
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
 
-            myModel.pickupQueue.remove(customer);
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer arrived");
+            data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
 
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
             pickupExit.schedule(customer, new TimeSpan(myModel.getPickupTime()));

@@ -39,10 +39,6 @@ public class DT_model extends Model {
     /*
      * Pickup
      */
-    private ContDistExponential customerArrivalPickupTime;
-    public double getCustomerArrivalPickupTime() {
-        return customerArrivalPickupTime.sample();
-    }
     private ContDistUniform pickupTime;
     public double getPickupTime() {
         return pickupTime.sample();
@@ -79,8 +75,6 @@ public class DT_model extends Model {
         busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
 
         // Pickup
-        customerArrivalPickupTime = new ContDistExponential(this, "CustomerArrivalPickupTime", 0.0, true, false);
-        customerArrivalPickupTime.setNonNegative(true);
         pickupTime = new ContDistUniform(this, "PickupTime", 0.3, 4.52, true, false);
         pickupQueue = new Queue<CustomerEntity>(this, "PickupQueue", true, true);
         freePickupWindow = new Queue<PickupEntity>(this, "FreePickupWindow", true, true);

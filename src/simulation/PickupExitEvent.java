@@ -13,16 +13,26 @@ public class PickupExitEvent extends Event<CustomerEntity> {
 
     public void eventRoutine(CustomerEntity customer) {
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer left");
+        data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
+
+        PickupEntity pickup = myModel.busyPickupWindow.first();
+        myModel.busyPickupWindow.remove(pickup);
+        myModel.freePickupWindow.insert(pickup);
+
+        CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
+        customerArrivalPickup.schedule(customer, new TimeSpan(myModel.getPickupTime()));
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);
 
+            myModel.freePickupWindow.remove(pickup);
+            myModel.busyPickupWindow.insert(pickup);
+
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer arrived");
+            data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
+
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
             pickupExit.schedule(nextCustomer, new TimeSpan(myModel.getPickupTime()));
-        } else {
-            PickupEntity pickup = myModel.busyPickupWindow.first();
-            myModel.busyPickupWindow.remove(pickup);
-            myModel.freePickupWindow.insert(pickup);
         }
     }
 }
