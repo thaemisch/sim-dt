@@ -63,6 +63,10 @@ public class DT_model extends Model {
     }
 
     public void init() {
+        defaultInit();
+    }
+
+    public void defaultInit() {
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
         customerArrivalTime.setNonNegative(true);
