@@ -6,24 +6,26 @@ filenames = ["mcd1", "mcd2"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
+avg_queue_delta_sideways = []
 
 max_queue_delta = []
 min_queue_delta = []
+avg_queue_delta = []
 
 max_order_delta = []
 min_order_delta = []
+avg_order_delta = []
 
 max_pickup_queue_delta = []
 min_pickup_queue_delta = []
+avg_pickup_queue_delta = []
 
 max_pickup_delta = []
 min_pickup_delta = []
+avg_pickup_delta = []
 
 
 for j in range(len(filenames)):
-    print(j)
-
-
     # Read the JSON file
     with open(filenames[j] + ".json") as f:
         json_data = json.load(f)
@@ -51,6 +53,7 @@ for j in range(len(filenames)):
         queue_deltas_sideways.append(queue[i+1] - queue[i])
     max_queue_delta_sideways.append(max(queue_deltas_sideways))
     min_queue_delta_sideways.append(min(queue_deltas_sideways))
+    avg_queue_delta_sideways.append(sum(queue_deltas_sideways, timedelta()) / len(queue_deltas_sideways))
 
     # Calculate min/max of each station
     # Queue
@@ -58,24 +61,28 @@ for j in range(len(filenames)):
         queue_deltas.append(order[i] - queue[i])
     max_queue_delta.append(max(queue_deltas))
     min_queue_delta.append(min(queue_deltas))
+    avg_queue_delta.append(sum(queue_deltas, timedelta()) / len(queue_deltas))
 
     # Order
     for i in range(len(order)):
         order_deltas.append(pickup_queue[i] - order[i])
     max_order_delta.append(max(order_deltas))
     min_order_delta.append(min(order_deltas))
+    avg_order_delta.append(sum(order_deltas, timedelta()) / len(order_deltas))
 
     # Pickup Queue
     for i in range(len(pickup_queue)):
         pickup_queue_deltas.append(pickup[i] - pickup_queue[i])
     max_pickup_queue_delta.append(max(pickup_queue_deltas))
     min_pickup_queue_delta.append(min(pickup_queue_deltas))
+    avg_pickup_queue_delta.append(sum(pickup_queue_deltas, timedelta()) / len(pickup_queue_deltas))
 
     # Pickup
     for i in range(len(pickup)):
         pickup_deltas.append(exit[i] - pickup[i])
     max_pickup_delta.append(max(pickup_deltas))
     min_pickup_delta.append(min(pickup_deltas))
+    avg_pickup_delta.append(sum(pickup_deltas, timedelta()) / len(pickup_deltas))
 
 def writeToReadme():
   # Create a markdown string with the variables and descriptions as a table
@@ -94,6 +101,9 @@ def writeToReadme():
           <td>{min_queue_delta_sideways[0]}</td>
         </tr>
         <tr>
+          <td>{avg_queue_delta_sideways[0]}</td>
+        </tr>
+        <tr>
           <td>{max_queue_delta_sideways[0]}</td>
         </tr>
       </table>
@@ -102,6 +112,9 @@ def writeToReadme():
       <table>
         <tr>
           <td>{min_queue_delta_sideways[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta_sideways[1]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta_sideways[1]}</td>
@@ -117,6 +130,9 @@ def writeToReadme():
           <td>{min_queue_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_queue_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_queue_delta[0]}</td>
         </tr>
       </table>
@@ -125,6 +141,9 @@ def writeToReadme():
       <table>
         <tr>
           <td>{min_queue_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta[1]}</td>
@@ -140,6 +159,9 @@ def writeToReadme():
           <td>{min_order_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_order_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_order_delta[0]}</td>
         </tr>
       </table>
@@ -148,6 +170,9 @@ def writeToReadme():
       <table>
         <tr>
           <td>{min_order_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_order_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_order_delta[1]}</td>
@@ -163,6 +188,9 @@ def writeToReadme():
           <td>{min_pickup_queue_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_queue_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_queue_delta[0]}</td>
         </tr>
       </table>
@@ -171,6 +199,9 @@ def writeToReadme():
       <table>
         <tr>
           <td>{min_pickup_queue_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_pickup_queue_delta[1]}</td>
@@ -186,6 +217,9 @@ def writeToReadme():
           <td>{min_pickup_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_delta[0]}</td>
         </tr>
       </table>
@@ -194,6 +228,9 @@ def writeToReadme():
       <table>
         <tr>
           <td>{min_pickup_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_pickup_delta[1]}</td>
