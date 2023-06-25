@@ -68,9 +68,9 @@ public class DT_model extends Model {
 
     public void defaultInit() {
         // Order
-        customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
+        customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 1.09, true, false);
         customerArrivalTime.setNonNegative(true);
-        orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
+        orderTime = new ContDistUniform(this, "OrderTime", 0.1, 2.17, true, false);
         orderQueue = new Queue<CustomerEntity>(this, "OrderQueue", true, true);
         freeOrderWindow = new Queue<OrderEntity>(this, "FreeOrderWindow", true, true);
         OrderEntity order;
@@ -79,9 +79,9 @@ public class DT_model extends Model {
         busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
 
         // Pickup
-        customerArrivalPickupTime = new ContDistExponential(this, "CustomerArrivalPickupTime", 2.0, true, false);
+        customerArrivalPickupTime = new ContDistExponential(this, "CustomerArrivalPickupTime", 0.0, true, false);
         customerArrivalPickupTime.setNonNegative(true);
-        pickupTime = new ContDistUniform(this, "PickupTime", 0.5, 1.5, true, false);
+        pickupTime = new ContDistUniform(this, "PickupTime", 0.3, 4.52, true, false);
         pickupQueue = new Queue<CustomerEntity>(this, "PickupQueue", true, true);
         freePickupWindow = new Queue<PickupEntity>(this, "FreePickupWindow", true, true);
         PickupEntity pickup;
@@ -130,6 +130,7 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
+        data.printLog();
         System.exit(0);
     }
 }
