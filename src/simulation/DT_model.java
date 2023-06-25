@@ -8,6 +8,8 @@ public class DT_model extends Model {
     static double startTime = 0.0;
     static double endTime = 240.0;
 
+    public static Boolean quiet = false;
+
     public String description() {
         return "DT_model (Ereignisorientiert):" +
                 "simulates a drive-through of a fast-food restaurant" +
@@ -102,6 +104,7 @@ public class DT_model extends Model {
                         endTime = Double.parseDouble(args[i + 1]);
                         i++;
                     }
+                    case "--quiet", "-q" -> quiet = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
                         System.out.println("-s, --start <time>      Set the start time of the simulation (Default: 0.0)");
@@ -127,5 +130,6 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
+        System.exit(0);
     }
 }

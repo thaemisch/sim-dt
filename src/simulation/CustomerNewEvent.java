@@ -16,6 +16,8 @@ public class CustomerNewEvent extends ExternalEvent{
         CustomerArrivalEvent customerArrival = new CustomerArrivalEvent(myModel, "Customer Arrival", true);
         customerArrival.schedule(customer, new TimeSpan(myModel.getCustomerArrivalTime()));
 
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Customer created");
+
         CustomerNewEvent newCustomer = new CustomerNewEvent(myModel, "New Customer", true);
         newCustomer.schedule(new TimeSpan(myModel.getCustomerArrivalTime()));
     }

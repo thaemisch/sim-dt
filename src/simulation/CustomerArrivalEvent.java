@@ -13,8 +13,10 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
 
         public void eventRoutine(CustomerEntity customer) {
             myModel.orderQueue.insert(customer);
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer arrived");
 
             if (!myModel.freeOrderWindow.isEmpty()){
+                data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer arrived");
                 OrderEntity order = myModel.freeOrderWindow.first();
                 myModel.freeOrderWindow.remove(order);
                 myModel.busyOrderWindow.insert(order);

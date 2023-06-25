@@ -13,8 +13,10 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
 
     public void eventRoutine(CustomerEntity customer) {
         myModel.pickupQueue.insert(customer);
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer arrived");
 
         if (!myModel.freePickupWindow.isEmpty()) {
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer arrived");
             PickupEntity pickup = myModel.freePickupWindow.first();
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
