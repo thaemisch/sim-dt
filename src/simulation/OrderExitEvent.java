@@ -23,6 +23,9 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             OrderEntity order = myModel.busyOrderWindow.first();
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
+
+            CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
+            customerArrivalPickup.schedule(customer, new TimeSpan(myModel.getPickupTime()));
         }
     }
 }

@@ -12,11 +12,10 @@ public class PickupExitEvent extends Event<CustomerEntity> {
     }
 
     public void eventRoutine(CustomerEntity customer) {
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer left");
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);
-
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer left");
 
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
             pickupExit.schedule(nextCustomer, new TimeSpan(myModel.getPickupTime()));
