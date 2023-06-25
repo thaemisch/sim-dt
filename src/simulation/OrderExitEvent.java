@@ -19,7 +19,9 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
             orderExit.schedule(nextCustomer, new TimeSpan(myModel.getOrderTime()));
         } else {
-            myModel.orderWindowEmpty = true;
+            OrderEntity order = myModel.busyOrderWindow.first();
+            myModel.busyOrderWindow.remove(order);
+            myModel.freeOrderWindow.insert(order);
         }
     }
 }
