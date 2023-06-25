@@ -18,9 +18,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         PickupEntity pickup = myModel.busyPickupWindow.first();
         myModel.busyPickupWindow.remove(pickup);
         myModel.freePickupWindow.insert(pickup);
-
-        CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
-        customerArrivalPickup.schedule(customer, new TimeSpan(myModel.getPickupTime()));
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);
