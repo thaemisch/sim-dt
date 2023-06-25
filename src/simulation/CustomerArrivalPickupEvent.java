@@ -13,7 +13,6 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
 
     public void eventRoutine(CustomerEntity customer) {
         myModel.pickupQueue.insert(customer);
-        sendTraceNote("Pickup Queue length: " + myModel.pickupQueue.length());
 
         if (!myModel.freePickupWindow.isEmpty()) {
             PickupEntity pickup = myModel.freePickupWindow.first();

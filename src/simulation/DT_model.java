@@ -7,8 +7,6 @@ public class DT_model extends Model {
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
-    static boolean debug = false;
-    static boolean trace = false;
 
     public String description() {
         return "DT_model (Ereignisorientiert):" +
@@ -104,14 +102,10 @@ public class DT_model extends Model {
                         endTime = Double.parseDouble(args[i + 1]);
                         i++;
                     }
-                    case "--debug", "-d" -> debug = true;
-                    case "--trace", "-t" -> trace = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
                         System.out.println("-s, --start <time>      Set the start time of the simulation (Default: 0.0)");
                         System.out.println("-e, --end <time>        Set the end time of the simulation(Default: 240.0)");
-                        System.out.println("-d, --debug             Enable debug mode");
-                        System.out.println("-t, --trace             Enable trace mode");
                         System.out.println("-h, --help              Show this help");
                         System.exit(0);
                     }
@@ -129,15 +123,9 @@ public class DT_model extends Model {
 
         dt_model.connectToExperiment(dtExperiment);
 
-        if (debug)
-            dtExperiment.debugPeriod(new TimeInstant(startTime), new TimeInstant(endTime));
-        if (trace)
-            dtExperiment.tracePeriod(new TimeInstant(startTime), new TimeInstant(endTime));
-
         dtExperiment.stop(new TimeInstant(endTime));
 
         dtExperiment.start();
-        dtExperiment.report();
         dtExperiment.finish();
     }
 }

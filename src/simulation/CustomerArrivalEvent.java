@@ -13,7 +13,6 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
 
         public void eventRoutine(CustomerEntity customer) {
             myModel.orderQueue.insert(customer);
-            myModel.sendTraceNote("Order Queue length: " + myModel.orderQueue.length());
 
             if (!myModel.freeOrderWindow.isEmpty()){
                 OrderEntity order = myModel.freeOrderWindow.first();
