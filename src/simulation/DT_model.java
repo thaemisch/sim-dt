@@ -53,7 +53,9 @@ public class DT_model extends Model {
     }
 
     public void doInitialSchedules() {
-        //s
+        CustomerNewEvent firstCustomer = new CustomerNewEvent(this, "FirstCustomer", true);
+
+        firstCustomer.schedule(new TimeInstant(getCustomerArrivalTime()));
     }
 
     public void init() {
