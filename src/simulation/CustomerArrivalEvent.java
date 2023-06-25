@@ -12,8 +12,6 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
         }
 
         public void eventRoutine(CustomerEntity customer) {
-            System.out.println("Customer arrives at " + myModel.presentTime().getTimeAsDouble());
-
             myModel.orderQueue.insert(customer);
             myModel.sendTraceNote("Order Queue length: " + myModel.orderQueue.length());
 

@@ -46,8 +46,8 @@ public class DT_model extends Model {
         return pickupTime.sample();
     }
     protected Queue<CustomerEntity> pickupQueue;
-    protected Queue<OrderEntity> freePickupWindow;
-    protected Queue<OrderEntity> busyPickupWindow;
+    protected Queue<PickupEntity> freePickupWindow;
+    protected Queue<PickupEntity> busyPickupWindow;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
