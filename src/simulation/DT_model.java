@@ -27,17 +27,26 @@ public class DT_model extends Model {
         return customerArrivalTime.sample();
     }
 
-    // Order time
+    /*
+     * Order
+     */
     private ContDistUniform orderTime;
     public double getOrderTime() {
         return orderTime.sample();
     }
-
-    // Order queue
     protected Queue<CustomerEntity> orderQueue;
-
-    // free / occupied windows
     protected boolean orderWindowEmpty;
+
+    /*
+     * Pickup
+     */
+    private ContDistUniform pickupTime;
+    public double getPickupTime() {
+        return pickupTime.sample();
+    }
+    protected Queue<CustomerEntity> pickupQueue;
+    protected boolean pickupWindowEmpty;
+
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
         super(owner, name, showInReport, showInTrace);
