@@ -19,9 +19,9 @@ public class PickupExitEvent extends Event<CustomerEntity> {
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
             pickupExit.schedule(nextCustomer, new TimeSpan(myModel.getPickupTime()));
         } else {
-            OrderEntity order = myModel.busyPickupWindow.first();
-            myModel.busyPickupWindow.remove(order);
-            myModel.freePickupWindow.insert(order);
+            PickupEntity pickup = myModel.busyPickupWindow.first();
+            myModel.busyPickupWindow.remove(pickup);
+            myModel.freePickupWindow.insert(pickup);
         }
     }
 }
