@@ -21,15 +21,13 @@ public class DT_model extends Model {
                 "   5. customer leaves";
     }
 
-    // Customer arrival time
+    /*
+     * Order
+     */
     private ContDistExponential customerArrivalTime;
     public double getCustomerArrivalTime() {
         return customerArrivalTime.sample();
     }
-
-    /*
-     * Order
-     */
     private ContDistUniform orderTime;
     public double getOrderTime() {
         return orderTime.sample();
@@ -41,6 +39,10 @@ public class DT_model extends Model {
     /*
      * Pickup
      */
+    private ContDistExponential customerArrivalPickupTime;
+    public double getCustomerArrivalPickupTime() {
+        return customerArrivalPickupTime.sample();
+    }
     private ContDistUniform pickupTime;
     public double getPickupTime() {
         return pickupTime.sample();
@@ -61,6 +63,7 @@ public class DT_model extends Model {
     }
 
     public void init() {
+        // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
         customerArrivalTime.setNonNegative(true);
         orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
@@ -70,6 +73,17 @@ public class DT_model extends Model {
         order = new OrderEntity(this, "Order", true);
         freeOrderWindow.insert(order);
         busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
+
+        // Pickup
+        customerArrivalPickupTime = new ContDistExponential(this, "CustomerArrivalPickupTime", 2.0, true, false);
+        customerArrivalPickupTime.setNonNegative(true);
+        pickupTime = new ContDistUniform(this, "PickupTime", 0.5, 1.5, true, false);
+        pickupQueue = new Queue<CustomerEntity>(this, "PickupQueue", true, true);
+        freePickupWindow = new Queue<PickupEntity>(this, "FreePickupWindow", true, true);
+        PickupEntity pickup;
+        pickup = new PickupEntity(this, "Pickup", true);
+        freePickupWindow.insert(pickup);
+        busyPickupWindow = new Queue<PickupEntity>(this, "BusyPickupWindow", true, true);
     }
 
     public static void main(java.lang.String[] args){
