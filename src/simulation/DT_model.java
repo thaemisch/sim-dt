@@ -35,7 +35,8 @@ public class DT_model extends Model {
         return orderTime.sample();
     }
     protected Queue<CustomerEntity> orderQueue;
-    protected boolean orderWindowEmpty;
+    protected Queue<OrderEntity> freeOrderWindow;
+    protected Queue<OrderEntity> busyOrderWindow;
 
     /*
      * Pickup
@@ -45,7 +46,8 @@ public class DT_model extends Model {
         return pickupTime.sample();
     }
     protected Queue<CustomerEntity> pickupQueue;
-    protected boolean pickupWindowEmpty;
+    protected Queue<OrderEntity> freePickupWindow;
+    protected Queue<OrderEntity> busyPickupWindow;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
@@ -60,9 +62,14 @@ public class DT_model extends Model {
 
     public void init() {
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 2.0, true, false);
-        OrderEntity order = new OrderEntity(this, "Order", true);
-        orderWindowEmpty = true;
+        customerArrivalTime.setNonNegative(true);
         orderTime = new ContDistUniform(this, "OrderTime", 0.5, 1.5, true, false);
+        orderQueue = new Queue<CustomerEntity>(this, "OrderQueue", true, true);
+        freeOrderWindow = new Queue<OrderEntity>(this, "FreeOrderWindow", true, true);
+        OrderEntity order;
+        order = new OrderEntity(this, "Order", true);
+        freeOrderWindow.insert(order);
+        busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
     }
 
     public static void main(java.lang.String[] args){
