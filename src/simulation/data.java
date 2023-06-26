@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class data {
     private static String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
@@ -26,6 +25,9 @@ public class data {
 
     private static Double[] pickupExit= new Double[1000];
     private static int pickupExitIndex = 0;
+
+    private static Double[] salesVolume = new Double[1000];
+    private static int salesVolumeIndex = 0;
 
     /**
      * Prints a string to the console if the model is not in quiet mode.
@@ -66,10 +68,25 @@ public class data {
                 pickupExit[pickupExitIndex] = time;
                 pickupExitIndex++;
             }
+            case "salesVolume", "salesvolume", "sv" -> {
+                salesVolume[salesVolumeIndex] = time;
+                salesVolumeIndex++;
+            }
             default -> {
                 System.out.println("ERROR: INVALID TYPE FOR LOGGING");
             }
         }
+    }
+
+    public static Double getTotalSalesVolume() {
+        Double sum = 0.0;
+        for (Double d : salesVolume) {
+            if (d == null) {
+                break;
+            }
+            sum += d;
+        }
+        return sum;
     }
 
     public static void writeListsToFile() {
@@ -175,5 +192,7 @@ public class data {
         System.out.println("Pickup Window: " + pickupWindowIndex);
         //System.out.println("Pickup Exit: " + Arrays.toString(pickupExit));
         System.out.println("Pickup Exit: " + pickupExitIndex);
+        //System.out.println("Sales Volume: " + Arrays.toString(salesVolume));
+        System.out.println("Sales Volume: " + getTotalSalesVolume());
     }
 }
