@@ -46,9 +46,6 @@ public class OrderExitEvent extends Event<CustomerEntity> {
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
             orderExit.schedule(nextCustomer, new TimeSpan(myModel.getOrderTime()));
-        } else if (!freedOrderWindow){
-            OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
-            orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
         }
     }
 }
