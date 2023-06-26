@@ -12,28 +12,29 @@ public class PickupExitEvent extends Event<CustomerEntity> {
     }
 
     public void eventRoutine(CustomerEntity customer) {
+        PickupEntity pickup = myModel.busyPickupWindow.first();
+        myModel.busyPickupWindow.remove(pickup);
+        myModel.freePickupWindow.insert(pickup);
+
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " left");
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
         data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
-
-
-        PickupEntity pickup = myModel.busyPickupWindow.first();
-        myModel.busyPickupWindow.remove(pickup);
-        myModel.freePickupWindow.insert(pickup);
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);
+
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + nextCustomer.getName() + " left");
 
 
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
 
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + nextCustomer.getName() + " arrived");
-            data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
-
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
             pickupExit.schedule(nextCustomer, new TimeSpan(myModel.getPickupTime()));
+
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + nextCustomer.getName() + " arrived");
+            data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
         }
     }
 }
