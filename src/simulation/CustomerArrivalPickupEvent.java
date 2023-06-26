@@ -16,9 +16,9 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " arrived");
         data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());
         if (!myModel.freePickupWindow.isEmpty()) {
-            myModel.pickupQueue.remove(customer);
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " left");
+            myModel.pickupQueue.remove(customer);
 
             PickupEntity pickup = myModel.freePickupWindow.first();
             myModel.freePickupWindow.remove(pickup);

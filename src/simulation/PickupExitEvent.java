@@ -26,7 +26,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + nextCustomer.getName() + " left");
 
-
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
 
