@@ -77,6 +77,8 @@ public class data {
         List<List<Double>> jsonLists = List.of(convertDoubleArrayToList(orderQueue), convertDoubleArrayToList(orderWindow), convertDoubleArrayToList(pickupQueue), convertDoubleArrayToList(pickupWindow), convertDoubleArrayToList(pickupExit));
         if (DT_model.user.contains("tim")) {
             String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+        } else if (DT_model.user.contains("eli")) {
+            String directoryPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
         } else {
             System.exit(1);
         }
