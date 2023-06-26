@@ -15,6 +15,7 @@ public class DT_model extends Model {
     static Boolean nebenzeit = false;
     public static Boolean quiet = false;
 
+<<<<<<< HEAD
     static double arrivalTimeDiff = 0.0;
     static double orderTimeStartDiff = 0.0;
     static double orderTimeEndDiff = 0.0;
@@ -23,6 +24,8 @@ public class DT_model extends Model {
     static double pickupTimeEndDiff = 0.0;
     static double pickupTimeMeanDiff =0.0;
 
+=======
+>>>>>>> ed5151fc067e869d92c7cfb20cded362a0d52de9
     public String description() {
         return "DT_model (Ereignisorientiert):" +
                 "simulates a drive-through of a fast-food restaurant" +
@@ -45,6 +48,8 @@ public class DT_model extends Model {
     public double getOrderTime() {
         return orderTime.sample();
     }
+    static double orderTimeStartDiff = 0.0;
+    static double orderTimeEndDiff = 0.0;
     private static int orderQueueLimit = 0;
     public int getOrderQueueLimit() {
         return orderQueueLimit;
@@ -60,6 +65,9 @@ public class DT_model extends Model {
     public double getPickupTime() {
         return pickupTime.sample();
     }
+
+    static double pickupTimeStartDiff = 0.0;
+    static double pickupTimeEndDiff = 0.0;
     private static int pickupQueueLimit = 0;
     public int getPickupQueueLimit() {
         return pickupQueueLimit;
@@ -71,10 +79,14 @@ public class DT_model extends Model {
     /*
      * General
      */
+
+    static double arrivalTimeDiff = 0.0;
     private ContDistUniform salesVolumePerCustomer;
     public double getSalesVolumePerCustomer() {
         return salesVolumePerCustomer.sample();
     }
+    static double salesVolumePerCustomerMinDiff = 0.0;
+    static double salesVolumePerCustomerMaxDiff = 0.0;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
@@ -89,6 +101,7 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
+<<<<<<< HEAD
             customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
         } else if (nebenzeit){
             customInit(1.33+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.383+orderTimeEndDiff, 0.5+orderTimeMeanDiff, 0.133+pickupTimeStartDiff, 3.33+pickupTimeEndDiff, 0.8+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
@@ -98,6 +111,18 @@ public class DT_model extends Model {
     }
 
     public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double orderTimeMean, Double pickupTimeStart, Double pickupTimeEnd, Double pickupTimeMean, int orderQueueLimit, int pickupQueueLimit) {
+=======
+            customInit(1.07*arrivalTimeDiff, 0.17*orderTimeStartDiff, 2.28*orderTimeEndDiff, 0.1*pickupTimeStartDiff, 4.87*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+        } else if (nebenzeit){
+            customInit(1.3*arrivalTimeDiff, 0.3*orderTimeStartDiff, 1.38*orderTimeEndDiff, 0.13*pickupTimeStartDiff, 3.3*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+        } else {
+            customInit(1.07*arrivalTimeDiff, 0.17*orderTimeStartDiff, 2*orderTimeEndDiff, 0.1*pickupTimeStartDiff, 2*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            //Angepasste Zeiten um realen Avg zu simulieren
+        }
+    }
+
+    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, Double salesVolumePerCustomerMin, Double salesVolumePerCustomerMax) {
+>>>>>>> ed5151fc067e869d92c7cfb20cded362a0d52de9
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
         customerArrivalTime.setNonNegative(true);
@@ -119,7 +144,7 @@ public class DT_model extends Model {
         busyPickupWindow = new Queue<PickupEntity>(this, "BusyPickupWindow", true, true);
 
         // General
-        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", 5.0, 30.0, true, false);
+        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", salesVolumePerCustomerMin, salesVolumePerCustomerMax, true, false);
     }
 
     public static void main(java.lang.String[] args){
@@ -176,6 +201,16 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
+        if (user.contains("tim")) {
+            File file0 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
+            File file1 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
+            File file2 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
+            File file3 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
+            file0.delete();
+            file1.delete();
+            file2.delete();
+            file3.delete();
+        }
         if (user.contains("eli")) {
             File file0 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_debug.html");
             File file1 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_error.html");
