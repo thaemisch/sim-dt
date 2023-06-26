@@ -167,6 +167,7 @@ public class DT_model extends Model {
         dtExperiment.start();
         dtExperiment.finish();
         data.printLog();
+        data.writeListsToFile();
         System.exit(0);
     }
 }

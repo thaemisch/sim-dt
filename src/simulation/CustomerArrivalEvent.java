@@ -16,8 +16,7 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
         if (myModel.getOrderQueueLimit() == 0) {
             myModel.orderQueue.insert(customer);
             insertedCustomer = true;
-        }
-        else if (myModel.getOrderQueueLimit() > 0 && myModel.orderQueue.length() < myModel.getOrderQueueLimit()) {
+        } else if (myModel.getOrderQueueLimit() > 0 && myModel.orderQueue.length() < myModel.getOrderQueueLimit()) {
             myModel.orderQueue.insert(customer);
             insertedCustomer = true;
         } else {
