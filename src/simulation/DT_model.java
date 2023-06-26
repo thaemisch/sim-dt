@@ -15,12 +15,6 @@ public class DT_model extends Model {
     static Boolean nebenzeit = false;
     public static Boolean quiet = false;
 
-    static double arrivalTimeDiff = 0.0;
-    static double orderTimeStartDiff = 0.0;
-    static double orderTimeEndDiff = 0.0;
-    static double pickupTimeStartDiff = 0.0;
-    static double pickupTimeEndDiff = 0.0;
-
     public String description() {
         return "DT_model (Ereignisorientiert):" +
                 "simulates a drive-through of a fast-food restaurant" +
@@ -43,6 +37,8 @@ public class DT_model extends Model {
     public double getOrderTime() {
         return orderTime.sample();
     }
+    static double orderTimeStartDiff = 0.0;
+    static double orderTimeEndDiff = 0.0;
     private static int orderQueueLimit = 0;
     public int getOrderQueueLimit() {
         return orderQueueLimit;
@@ -58,6 +54,9 @@ public class DT_model extends Model {
     public double getPickupTime() {
         return pickupTime.sample();
     }
+
+    static double pickupTimeStartDiff = 0.0;
+    static double pickupTimeEndDiff = 0.0;
     private static int pickupQueueLimit = 0;
     public int getPickupQueueLimit() {
         return pickupQueueLimit;
@@ -69,10 +68,14 @@ public class DT_model extends Model {
     /*
      * General
      */
+
+    static double arrivalTimeDiff = 0.0;
     private ContDistUniform salesVolumePerCustomer;
     public double getSalesVolumePerCustomer() {
         return salesVolumePerCustomer.sample();
     }
+    static double salesVolumePerCustomerMinDiff = 0.0;
+    static double salesVolumePerCustomerMaxDiff = 0.0;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
@@ -87,16 +90,16 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2.28+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 4.87+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2.28+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 4.87+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
-            customInit(1.3+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.38+orderTimeEndDiff, 0.13+pickupTimeStartDiff, 3.3+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.3+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.38+orderTimeEndDiff, 0.13+pickupTimeStartDiff, 3.3+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
         } else {
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 2+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 2+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
             //Angepasste Zeiten um realen Avg zu simulieren
         }
     }
 
-    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, int orderQueueLimit, int pickupQueueLimit) {
+    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, Double salesVolumePerCustomerMin, Double salesVolumePerCustomerMax) {
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
         customerArrivalTime.setNonNegative(true);
@@ -118,7 +121,7 @@ public class DT_model extends Model {
         busyPickupWindow = new Queue<PickupEntity>(this, "BusyPickupWindow", true, true);
 
         // General
-        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", 5.0, 30.0, true, false);
+        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", salesVolumePerCustomerMin, salesVolumePerCustomerMax, true, false);
     }
 
     public static void main(java.lang.String[] args){
