@@ -5,8 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class data {
+    private static String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
     private static Double[] orderQueue = new Double[1000];
     private static int orderQueueIndex = 0;
 
@@ -73,8 +75,11 @@ public class data {
     public static void writeListsToFile() {
         // Convert the lists to a JSON-serializable format
         List<List<Double>> jsonLists = List.of(convertDoubleArrayToList(orderQueue), convertDoubleArrayToList(orderWindow), convertDoubleArrayToList(pickupQueue), convertDoubleArrayToList(pickupWindow), convertDoubleArrayToList(pickupExit));
-
-        String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+        if (DT_model.user.contains("tim")) {
+            String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+        } else {
+            System.exit(1);
+        }
 
         File directory = new File(directoryPath);
 

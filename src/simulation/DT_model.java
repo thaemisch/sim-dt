@@ -3,7 +3,11 @@ package simulation;
 import desmoj.core.simulator.*;
 import desmoj.core.dist.*;
 
+import java.io.File;
+import java.util.Objects;
+
 public class DT_model extends Model {
+    static String user;
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
@@ -140,6 +144,10 @@ public class DT_model extends Model {
                         pickupQueueLimit = Integer.parseInt(args[i + 1]);
                         i++;
                     }
+                    case "--user", "-u" -> {
+                        user = args[i + 1];
+                        i++;
+                    }
                     case "--quiet", "-q" -> quiet = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
@@ -166,6 +174,16 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
+        if (user.contains("tim")) {
+            File file0 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
+            File file1 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
+            File file2 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
+            File file3 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
+            file0.delete();
+            file1.delete();
+            file2.delete();
+            file3.delete();
+        }
         data.printLog();
         data.writeListsToFile();
         System.exit(0);
