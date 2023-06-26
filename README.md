@@ -1,7 +1,7 @@
 # drive-through simulation
 
-## [simulation](https://github.com/haemtim/sim-dt/tree/main/src/simulation)
+## [Simulation Code](https://github.com/haemtim/sim-dt/tree/main/src/simulation)
 
-## [real-word data](https://github.com/haemtim/sim-dt/tree/main/data)
+## [Data & Statistics](https://github.com/haemtim/sim-dt/tree/main/data)
 
-### [counter-app](https://github.com/haemtim/sim-dt/tree/main/drive_counter)
+### [Android / Web App to count real-world Drive-Through Events](https://github.com/haemtim/sim-dt/tree/main/drive_counter)
