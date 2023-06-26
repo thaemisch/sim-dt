@@ -90,11 +90,11 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2.28+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 4.87+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
+            customInit(1.07*arrivalTimeDiff, 0.17*orderTimeStartDiff, 2.28*orderTimeEndDiff, 0.1*pickupTimeStartDiff, 4.87*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
-            customInit(1.3+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.38+orderTimeEndDiff, 0.13+pickupTimeStartDiff, 3.3+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
+            customInit(1.3*arrivalTimeDiff, 0.3*orderTimeStartDiff, 1.38*orderTimeEndDiff, 0.13*pickupTimeStartDiff, 3.3*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else {
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 2+pickupTimeEndDiff, 5.0+salesVolumePerCustomerMinDiff, 30.0+salesVolumePerCustomerMaxDiff);
+            customInit(1.07*arrivalTimeDiff, 0.17*orderTimeStartDiff, 2*orderTimeEndDiff, 0.1*pickupTimeStartDiff, 2*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
             //Angepasste Zeiten um realen Avg zu simulieren
         }
     }
