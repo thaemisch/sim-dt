@@ -14,7 +14,7 @@ public class CustomerNewEvent extends ExternalEvent{
     public void eventRoutine() {
         CustomerEntity customer = new CustomerEntity(myModel, Integer.toString(DT_model.customerCounter), true);
         CustomerArrivalEvent customerArrival = new CustomerArrivalEvent(myModel, "Customer Arrival", true);
-        customerArrival.schedule(customer, new TimeSpan(myModel.getCustomerArrivalTime()));
+        customerArrival.schedule(customer, new TimeInstant(myModel.presentTime().getTimeAsDouble()));
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Customer" + customer.getName() + " created");
 
         DT_model.customerCounter++;
