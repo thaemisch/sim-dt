@@ -15,7 +15,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " left");
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
-        data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer" + customer.getName() + " left");
         data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
 
 
