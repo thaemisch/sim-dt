@@ -12,6 +12,8 @@ public class DT_model extends Model {
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
+    static double stoßzeitDuration = (endTime - startTime) / 2;
+    static double nebenzeitDuration = (endTime - startTime) / 2;
     static Boolean stoßzeit = false;
     static Boolean nebenzeit = false;
     static Boolean halfOrderSize = false;
