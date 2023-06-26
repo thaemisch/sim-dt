@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 import markdown
 
-filenames = ["mcd1", "mcd2", "simulation"]
+filenames = ["mcd1", "mcd2", "sim_default", "sim_halforder"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -128,6 +128,7 @@ def writeToReadme():
     <td>{filenames[0]}</td>
     <td>{filenames[1]}</td>
     <td>{filenames[2]}</td>
+    <td>{filenames[3]}</td>
   </tr>
   <tr>
     <td>New Arrival</td>
@@ -167,6 +168,19 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{max_queue_delta_sideways[2]}</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>{min_queue_delta_sideways[3]}</td>
+        </tr>
+        <tr>
+          <td>{median_queue_delta_sideways[3]}</td>
+        </tr>
+        <tr>
+          <td>{max_queue_delta_sideways[3]}</td>
         </tr>
       </table>
     </td>
@@ -212,6 +226,19 @@ def writeToReadme():
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>{min_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{median_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{max_queue_delta[3]}</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Order</td>
@@ -251,6 +278,19 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{max_order_delta[2]}</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>{min_order_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{median_order_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{max_order_delta[3]}</td>
         </tr>
       </table>
     </td>
@@ -296,6 +336,19 @@ def writeToReadme():
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>{min_pickup_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{median_pickup_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{max_pickup_queue_delta[3]}</td>
+        </tr>
+      </table>
+    </td>
   </tr>
     <tr>
     <td>Pickup</td>
@@ -335,6 +388,19 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{max_pickup_delta[2]}</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>{min_pickup_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{median_pickup_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{max_pickup_delta[3]}</td>
         </tr>
       </table>
     </td>

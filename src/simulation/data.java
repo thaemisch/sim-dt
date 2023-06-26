@@ -75,7 +75,11 @@ public class data {
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString(jsonLists);
 
-        fileName = "simulation.json";
+        if (DT_model.halfOrderSize) {
+            fileName = "sim_halforder.json";
+        } else {
+            fileName = "sim_default.json";
+        }
 
         // Write the JSON string to the file
         File file = new File(directory, fileName);

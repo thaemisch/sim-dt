@@ -6,13 +6,15 @@ import desmoj.core.dist.*;
 import java.io.File;
 
 public class DT_model extends Model {
+    // General
     static String user;
+    public static Boolean quiet = false;
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
     static Boolean stoßzeit = false;
     static Boolean nebenzeit = false;
-    public static Boolean quiet = false;
+    static Boolean halfOrderSize = false;
     static double arrivalTimeDiff = 1.0;
     static double orderTimeStartDiff = 1.0;
     static double orderTimeEndDiff = 1.0;
@@ -89,6 +91,15 @@ public class DT_model extends Model {
     }
 
     public void init() {
+        if (halfOrderSize){
+            orderTimeEndDiff = 0.5;
+            orderTimeMeanDiff = 0.5;
+
+            pickupTimeEndDiff = 0.5;
+            pickupTimeMeanDiff = 0.5;
+
+            salesVolumePerCustomerMaxDiff = 0.5;
+        }
         if (stoßzeit){
             customInit(1.067*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.283*orderTimeEndDiff, 1*orderTimeMeanDiff, 0.1*pickupTimeStartDiff, 4.867*pickupTimeEndDiff, 1.133*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
@@ -147,6 +158,9 @@ public class DT_model extends Model {
                     case "--pickupqueuelimit", "--pql" -> {
                         pickupQueueLimit = Integer.parseInt(args[i + 1]);
                         i++;
+                    }
+                    case "--halfordersize", "--hos" -> {
+                        halfOrderSize = true;
                     }
                     case "--user", "-u" -> {
                         user = args[i + 1];

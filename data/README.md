@@ -4,7 +4,8 @@
     <td></td>
     <td>mcd1</td>
     <td>mcd2</td>
-    <td>simulation</td>
+    <td>sim_default</td>
+    <td>sim_halforder</td>
   </tr>
   <tr>
     <td>New Arrival</td>
@@ -31,6 +32,19 @@
         </tr>
         <tr>
           <td>0:03:38</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:06</td>
+        </tr>
+        <tr>
+          <td>0:00:48</td>
+        </tr>
+        <tr>
+          <td>0:06:22</td>
         </tr>
       </table>
     </td>
@@ -89,6 +103,19 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:07</td>
+        </tr>
+        <tr>
+          <td>0:00:41</td>
+        </tr>
+        <tr>
+          <td>0:02:15</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Order</td>
@@ -128,6 +155,19 @@
         </tr>
         <tr>
           <td>0:02:12</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:11</td>
+        </tr>
+        <tr>
+          <td>0:00:36</td>
+        </tr>
+        <tr>
+          <td>0:01:06</td>
         </tr>
       </table>
     </td>
@@ -173,6 +213,19 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:15</td>
+        </tr>
+        <tr>
+          <td>0:01:01</td>
+        </tr>
+        <tr>
+          <td>0:02:15</td>
+        </tr>
+      </table>
+    </td>
   </tr>
     <tr>
     <td>Pickup</td>
@@ -212,6 +265,19 @@
         </tr>
         <tr>
           <td>1:32:52</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:01:02</td>
+        </tr>
+        <tr>
+          <td>0:11:50</td>
+        </tr>
+        <tr>
+          <td>0:21:47</td>
         </tr>
       </table>
     </td>
