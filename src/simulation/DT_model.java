@@ -14,8 +14,6 @@ public class DT_model extends Model {
     static Boolean stoßzeit = false;
     static Boolean nebenzeit = false;
     public static Boolean quiet = false;
-
-<<<<<<< HEAD
     static double arrivalTimeDiff = 0.0;
     static double orderTimeStartDiff = 0.0;
     static double orderTimeEndDiff = 0.0;
@@ -24,8 +22,6 @@ public class DT_model extends Model {
     static double pickupTimeEndDiff = 0.0;
     static double pickupTimeMeanDiff =0.0;
 
-=======
->>>>>>> ed5151fc067e869d92c7cfb20cded362a0d52de9
     public String description() {
         return "DT_model (Ereignisorientiert):" +
                 "simulates a drive-through of a fast-food restaurant" +
@@ -101,7 +97,6 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-<<<<<<< HEAD
             customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
         } else if (nebenzeit){
             customInit(1.33+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.383+orderTimeEndDiff, 0.5+orderTimeMeanDiff, 0.133+pickupTimeStartDiff, 3.33+pickupTimeEndDiff, 0.8+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
@@ -111,7 +106,7 @@ public class DT_model extends Model {
     }
 
     public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double orderTimeMean, Double pickupTimeStart, Double pickupTimeEnd, Double pickupTimeMean, int orderQueueLimit, int pickupQueueLimit) {
-=======
+        if (stoßzeit){
             customInit(1.07*arrivalTimeDiff, 0.17*orderTimeStartDiff, 2.28*orderTimeEndDiff, 0.1*pickupTimeStartDiff, 4.87*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
             customInit(1.3*arrivalTimeDiff, 0.3*orderTimeStartDiff, 1.38*orderTimeEndDiff, 0.13*pickupTimeStartDiff, 3.3*pickupTimeEndDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
@@ -122,7 +117,6 @@ public class DT_model extends Model {
     }
 
     public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, Double salesVolumePerCustomerMin, Double salesVolumePerCustomerMax) {
->>>>>>> ed5151fc067e869d92c7cfb20cded362a0d52de9
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
         customerArrivalTime.setNonNegative(true);
