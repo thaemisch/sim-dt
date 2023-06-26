@@ -42,34 +42,34 @@ public class data {
      * Logs Timestamps for the given type.
      * @param type orderQueue, orderWindow, pickupQueue, pickupWindow
      */
-    static void chronoLogger(String type, Double time){
+    static void chronoLogger(String type, Double value){
         switch (type) {
             case "orderQueue", "orderqueue", "oq" -> {
-                orderQueue[orderQueueIndex] = time;
+                orderQueue[orderQueueIndex] = value;
                 orderQueueIndex++;
             }
             case "orderWindow", "orderwindow", "ow" -> {
-                orderWindow[orderWindowIndex] = time;
+                orderWindow[orderWindowIndex] = value;
                 orderWindowIndex++;
             }
             case "orderExit", "orderexit", "oe" -> {
-                orderExit[orderExitIndex] = time;
+                orderExit[orderExitIndex] = value;
                 orderExitIndex++;
             }
             case "pickupQueue", "pickupqueue", "pq" -> {
-                pickupQueue[pickupQueueIndex] = time;
+                pickupQueue[pickupQueueIndex] = value;
                 pickupQueueIndex++;
             }
             case "pickupWindow", "pickupwindow", "pw" -> {
-                pickupWindow[pickupWindowIndex] = time;
+                pickupWindow[pickupWindowIndex] = value;
                 pickupWindowIndex++;
             }
             case "pickupExit", "pickupexit", "pe" -> {
-                pickupExit[pickupExitIndex] = time;
+                pickupExit[pickupExitIndex] = value;
                 pickupExitIndex++;
             }
             case "salesVolume", "salesvolume", "sv" -> {
-                salesVolume[salesVolumeIndex] = time;
+                salesVolume[salesVolumeIndex] = value;
                 salesVolumeIndex++;
             }
             default -> {
