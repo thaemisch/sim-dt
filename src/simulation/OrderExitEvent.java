@@ -36,6 +36,8 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             CustomerEntity nextCustomer = myModel.orderQueue.first();
             myModel.orderQueue.remove(nextCustomer);
 
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + nextCustomer.getName() + " left");
+
             myModel.freeOrderWindow.remove(order);
             myModel.busyOrderWindow.insert(order);
 

@@ -28,6 +28,7 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
         }
         if (insertedCustomer && !myModel.freeOrderWindow.isEmpty()) {
             myModel.orderQueue.remove(customer);
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + customer.getName() + " left");
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " arrived");
             data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
