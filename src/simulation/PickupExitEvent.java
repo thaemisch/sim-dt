@@ -12,10 +12,10 @@ public class PickupExitEvent extends Event<CustomerEntity> {
     }
 
     public void eventRoutine(CustomerEntity customer) {
-        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer left");
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " left");
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
-        data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer left");
+        data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer" + customer.getName() + " left");
         data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
 
 
@@ -29,7 +29,7 @@ public class PickupExitEvent extends Event<CustomerEntity> {
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
 
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer arrived");
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " arrived");
             data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
 
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);

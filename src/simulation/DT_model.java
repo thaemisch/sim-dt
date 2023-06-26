@@ -8,6 +8,7 @@ import java.io.File;
 public class DT_model extends Model {
     // General
     static String user;
+    public static int customerCounter = 0;
     public static Boolean quiet = false;
     // Variables
     static double startTime = 0.0;

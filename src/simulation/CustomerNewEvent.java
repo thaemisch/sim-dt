@@ -12,13 +12,15 @@ public class CustomerNewEvent extends ExternalEvent{
     }
 
     public void eventRoutine() {
-        CustomerEntity customer = new CustomerEntity(myModel, "Customer", true);
+        CustomerEntity customer = new CustomerEntity(myModel, Integer.toString(DT_model.customerCounter), true);
         CustomerArrivalEvent customerArrival = new CustomerArrivalEvent(myModel, "Customer Arrival", true);
         customerArrival.schedule(customer, new TimeSpan(myModel.getCustomerArrivalTime()));
 
-        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Customer created");
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Customer" + customer.getName() + " created");
 
-        CustomerNewEvent newCustomer = new CustomerNewEvent(myModel, "New Customer", true);
+        DT_model.customerCounter++;
+
+        CustomerNewEvent newCustomer = new CustomerNewEvent(myModel, Integer.toString(DT_model.customerCounter), true);
         newCustomer.schedule(new TimeSpan(myModel.getCustomerArrivalTime()));
     }
 }

@@ -23,18 +23,18 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
             System.out.println("Order Queue | Customer rejected");
         }
         if (insertedCustomer) {
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer arrived");
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + customer.getName() + " arrived");
             data.chronoLogger("oq", myModel.presentTime().getTimeAsDouble());
         }
         if (insertedCustomer && !myModel.freeOrderWindow.isEmpty()) {
             myModel.orderQueue.remove(customer);
 
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " arrived");
+            data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
+
             OrderEntity order = myModel.freeOrderWindow.first();
             myModel.freeOrderWindow.remove(order);
             myModel.busyOrderWindow.insert(order);
-
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer arrived");
-            data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
             orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
