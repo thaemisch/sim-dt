@@ -15,11 +15,12 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer left");
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
+        data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer left");
+        data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
+
         PickupEntity pickup = myModel.busyPickupWindow.first();
         myModel.busyPickupWindow.remove(pickup);
         myModel.freePickupWindow.insert(pickup);
-        data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer left");
-        data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);

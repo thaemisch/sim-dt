@@ -4,7 +4,6 @@ import desmoj.core.simulator.*;
 import desmoj.core.dist.*;
 
 import java.io.File;
-import java.util.Objects;
 
 public class DT_model extends Model {
     static String user;
@@ -14,13 +13,13 @@ public class DT_model extends Model {
     static Boolean stoßzeit = false;
     static Boolean nebenzeit = false;
     public static Boolean quiet = false;
-    static double arrivalTimeDiff = 0.0;
-    static double orderTimeStartDiff = 0.0;
-    static double orderTimeEndDiff = 0.0;
-    static double orderTimeMeanDiff =0.0;
-    static double pickupTimeStartDiff = 0.0;
-    static double pickupTimeEndDiff = 0.0;
-    static double pickupTimeMeanDiff =0.0;
+    static double arrivalTimeDiff = 1.0;
+    static double orderTimeStartDiff = 1.0;
+    static double orderTimeEndDiff = 1.0;
+    static double orderTimeMeanDiff = 1.0;
+    static double pickupTimeStartDiff = 1.0;
+    static double pickupTimeEndDiff = 1.0;
+    static double pickupTimeMeanDiff =1.0;
 
     public String description() {
         return "DT_model (Ereignisorientiert):" +
@@ -75,8 +74,8 @@ public class DT_model extends Model {
     public double getSalesVolumePerCustomer() {
         return salesVolumePerCustomer.sample();
     }
-    static double salesVolumePerCustomerMinDiff = 0.0;
-    static double salesVolumePerCustomerMaxDiff = 0.0;
+    static double salesVolumePerCustomerMinDiff;
+    static double salesVolumePerCustomerMaxDiff;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
@@ -91,11 +90,11 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(1.067*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.283*orderTimeEndDiff, 1*orderTimeMeanDiff, 0.1*pickupTimeStartDiff, 4.867*pickupTimeEndDiff, 1.133*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
-            customInit(1.33+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.383+orderTimeEndDiff, 0.5+orderTimeMeanDiff, 0.133+pickupTimeStartDiff, 3.33+pickupTimeEndDiff, 0.8+pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(1.33*arrivalTimeDiff, 0.3*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 3.33*pickupTimeEndDiff, 0.8*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else {
-            customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(1.067*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.283*orderTimeEndDiff, 1*orderTimeMeanDiff, 0.1*pickupTimeStartDiff, 4.867*pickupTimeEndDiff, 1.133*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         }
     }
 
