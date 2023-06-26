@@ -87,11 +87,12 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.04+arrivalTimeDiff, 0.1+orderTimeStartDiff, 2.17+orderTimeEndDiff, 0.6+pickupTimeStartDiff, 4.52+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2.28+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 4.87+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
         } else if (nebenzeit){
-            customInit(1.2+arrivalTimeDiff, 0.18+orderTimeStartDiff, 1.23+orderTimeEndDiff, 0.08+pickupTimeStartDiff, 3.2+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.3+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.38+orderTimeEndDiff, 0.13+pickupTimeStartDiff, 3.3+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
         } else {
-            customInit(1.04+arrivalTimeDiff, 0.1+orderTimeStartDiff, 2.17+orderTimeEndDiff, 0.6+pickupTimeStartDiff, 4.52+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 2+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            //Angepasste Zeiten um realen Avg zu simulieren
         }
     }
 
@@ -174,11 +175,11 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
-        if (user.contains("tim")) {
-            File file0 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
-            File file1 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
-            File file2 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
-            File file3 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
+        if (user.contains("eli")) {
+            File file0 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_debug.html");
+            File file1 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_error.html");
+            File file2 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_report.html");
+            File file3 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_trace.html");
             file0.delete();
             file1.delete();
             file2.delete();
