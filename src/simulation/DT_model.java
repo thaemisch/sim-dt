@@ -9,6 +9,7 @@ public class DT_model extends Model {
     // General
     static String user;
     public static int customerCounter = 0;
+    public static Boolean save = false;
     public static Boolean quiet = false;
     // Variables
     static double startTime = 0.0;
@@ -169,6 +170,7 @@ public class DT_model extends Model {
                         user = args[i + 1];
                         i++;
                     }
+                    case "--save" -> save = true;
                     case "--quiet", "-q" -> quiet = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
@@ -216,7 +218,8 @@ public class DT_model extends Model {
             file3.delete();
         }
         data.printLog();
-        data.writeListsToFile();
+        if (save)
+            data.writeListsToFile();
         System.exit(0);
     }
 }
