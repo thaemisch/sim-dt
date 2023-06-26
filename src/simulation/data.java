@@ -7,27 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class data {
-    private static String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
-    private static Double[] orderQueue = new Double[1000];
-    private static int orderQueueIndex = 0;
+    private static String dirPath;
+    private static List<Double> orderQueue = new ArrayList<>();
 
-    private static Double[] orderWindow= new Double[1000];
-    private static int orderWindowIndex = 0;
+    private static List<Double> orderWindow = new ArrayList<>();
 
-    private static Double[] orderExit= new Double[1000];
-    private static int orderExitIndex = 0;
+    private static List<Double> orderExit = new ArrayList<>();
 
-    private static Double[] pickupQueue= new Double[1000];
-    private static int pickupQueueIndex = 0;
+    private static List<Double> pickupQueue = new ArrayList<>();
 
-    private static Double[] pickupWindow= new Double[1000];
-    private static int pickupWindowIndex = 0;
+    private static List<Double> pickupWindow = new ArrayList<>();
 
-    private static Double[] pickupExit= new Double[1000];
-    private static int pickupExitIndex = 0;
+    private static List<Double> pickupExit = new ArrayList<>();
 
-    private static Double[] salesVolume = new Double[1000];
-    private static int salesVolumeIndex = 0;
+    private static List<Double> salesVolume = new ArrayList<>();
 
     /**
      * Prints a string to the console if the model is not in quiet mode.
@@ -44,34 +37,13 @@ public class data {
      */
     static void chronoLogger(String type, Double value){
         switch (type) {
-            case "orderQueue", "orderqueue", "oq" -> {
-                orderQueue[orderQueueIndex] = value;
-                orderQueueIndex++;
-            }
-            case "orderWindow", "orderwindow", "ow" -> {
-                orderWindow[orderWindowIndex] = value;
-                orderWindowIndex++;
-            }
-            case "orderExit", "orderexit", "oe" -> {
-                orderExit[orderExitIndex] = value;
-                orderExitIndex++;
-            }
-            case "pickupQueue", "pickupqueue", "pq" -> {
-                pickupQueue[pickupQueueIndex] = value;
-                pickupQueueIndex++;
-            }
-            case "pickupWindow", "pickupwindow", "pw" -> {
-                pickupWindow[pickupWindowIndex] = value;
-                pickupWindowIndex++;
-            }
-            case "pickupExit", "pickupexit", "pe" -> {
-                pickupExit[pickupExitIndex] = value;
-                pickupExitIndex++;
-            }
-            case "salesVolume", "salesvolume", "sv" -> {
-                salesVolume[salesVolumeIndex] = value;
-                salesVolumeIndex++;
-            }
+            case "orderQueue", "orderqueue", "oq" -> orderQueue.add(value);
+            case "orderWindow", "orderwindow", "ow" -> orderWindow.add(value);
+            case "orderExit", "orderexit", "oe" -> orderExit.add(value);
+            case "pickupQueue", "pickupqueue", "pq" -> pickupQueue.add(value);
+            case "pickupWindow", "pickupwindow", "pw" -> pickupWindow.add(value);
+            case "pickupExit", "pickupexit", "pe" -> pickupExit.add(value);
+            case "salesVolume", "salesvolume", "sv" -> salesVolume.add(value);
             default -> {
                 System.out.println("ERROR: INVALID TYPE FOR LOGGING");
             }
@@ -81,9 +53,6 @@ public class data {
     public static Double getTotalSalesVolume() {
         Double sum = 0.0;
         for (Double d : salesVolume) {
-            if (d == null) {
-                break;
-            }
             sum += d;
         }
         return sum;
@@ -91,16 +60,16 @@ public class data {
 
     public static void writeListsToFile() {
         // Convert the lists to a JSON-serializable format
-        List<List<Double>> jsonLists = List.of(convertDoubleArrayToList(orderQueue), convertDoubleArrayToList(orderWindow), convertDoubleArrayToList(pickupQueue), convertDoubleArrayToList(pickupWindow), convertDoubleArrayToList(pickupExit));
+        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, orderExit, pickupQueue, pickupWindow, pickupExit);
         if (DT_model.user.contains("tim")) {
-            String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
         } else if (DT_model.user.contains("eli")) {
-            String directoryPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
+            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
         } else {
             System.exit(1);
         }
 
-        File directory = new File(directoryPath);
+        File directory = new File(dirPath);
 
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString(jsonLists);
@@ -110,19 +79,9 @@ public class data {
         try {
             writeStringToFile(file, jsonStr);
         } catch (IOException e) {
+            System.out.println("ERROR: Could not write to file");
             e.printStackTrace();
         }
-    }
-
-    public static List<Double> convertDoubleArrayToList(Double[] array) {
-        List<Double> list = new ArrayList<>();
-        for (Double d : array) {
-            list.add(d);
-            if (d == null) {
-                break;
-            }
-        }
-        return list;
     }
 
     public static String convertListsToJsonString(List<List<Double>> lists) {
@@ -181,17 +140,17 @@ public class data {
 
     static void printLog(){
         //System.out.println("Order Queue: " + Arrays.toString(orderQueue));
-        System.out.println("Order Queue: " + orderQueueIndex);
+        System.out.println("Order Queue: " + orderQueue.size());
         //System.out.println("Order Window: " + Arrays.toString(orderWindow));
-        System.out.println("Order Window: " +orderWindowIndex);
+        System.out.println("Order Window: " +orderWindow.size());
         //System.out.println("Order Exit: " + Arrays.toString(orderExit));
-        System.out.println("Order Exit: " + orderExitIndex);
+        System.out.println("Order Exit: " + orderExit.size());
         //System.out.println("Pickup Queue: " + Arrays.toString(pickupQueue));
-        System.out.println("Pickup Queue: " + pickupQueueIndex);
+        System.out.println("Pickup Queue: " + pickupQueue.size());
         //System.out.println("Pickup Window: " + Arrays.toString(pickupWindow));
-        System.out.println("Pickup Window: " + pickupWindowIndex);
+        System.out.println("Pickup Window: " + pickupWindow.size());
         //System.out.println("Pickup Exit: " + Arrays.toString(pickupExit));
-        System.out.println("Pickup Exit: " + pickupExitIndex);
+        System.out.println("Pickup Exit: " + pickupExit.size());
         //System.out.println("Sales Volume: " + Arrays.toString(salesVolume));
         System.out.println("Sales Volume: " + getTotalSalesVolume());
     }
