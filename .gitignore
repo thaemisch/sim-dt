@@ -1,5 +1,5 @@
 .idea/
 .vscode/
 out/
-src/*.idea/
-src/*.html
+*.idea/
+src/simulation/*.html
