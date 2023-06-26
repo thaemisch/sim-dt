@@ -2,11 +2,25 @@
   <table>
   <tr>
     <td></td>
+    <td>mcd1</td>
     <td>mcd2</td>
     <td>simulation</td>
   </tr>
   <tr>
     <td>New Arrival</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:13</td>
+        </tr>
+        <tr>
+          <td>0:01:20</td>
+        </tr>
+        <tr>
+          <td>0:04:01</td>
+        </tr>
+      </table>
+    </td>
     <td>
       <table>
         <tr>
@@ -39,6 +53,19 @@
     <td>
       <table>
         <tr>
+          <td>0:00:09</td>
+        </tr>
+        <tr>
+          <td>0:00:30</td>
+        </tr>
+        <tr>
+          <td>0:01:04</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
           <td>0:00:27</td>
         </tr>
         <tr>
@@ -65,6 +92,19 @@
   </tr>
   <tr>
     <td>Order</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:18</td>
+        </tr>
+        <tr>
+          <td>0:00:30</td>
+        </tr>
+        <tr>
+          <td>0:01:23</td>
+        </tr>
+      </table>
+    </td>
     <td>
       <table>
         <tr>
@@ -97,6 +137,19 @@
     <td>
       <table>
         <tr>
+          <td>0:00:52</td>
+        </tr>
+        <tr>
+          <td>0:01:34</td>
+        </tr>
+        <tr>
+          <td>0:03:16</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
           <td>0:00:07</td>
         </tr>
         <tr>
@@ -123,6 +176,19 @@
   </tr>
     <tr>
     <td>Pickup</td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:08</td>
+        </tr>
+        <tr>
+          <td>0:00:48</td>
+        </tr>
+        <tr>
+          <td>0:03:20</td>
+        </tr>
+      </table>
+    </td>
     <td>
       <table>
         <tr>

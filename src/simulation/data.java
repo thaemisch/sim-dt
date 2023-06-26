@@ -8,6 +8,7 @@ import java.util.List;
 
 public class data {
     private static String dirPath;
+    private static String fileName;
     private static List<Double> orderQueue = new ArrayList<>();
 
     private static List<Double> orderWindow = new ArrayList<>();
@@ -74,8 +75,10 @@ public class data {
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString(jsonLists);
 
+        fileName = "simulation.json";
+
         // Write the JSON string to the file
-        File file = new File(directory, "simulation.json");
+        File file = new File(directory, fileName);
         try {
             writeStringToFile(file, jsonStr);
         } catch (IOException e) {
