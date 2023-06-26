@@ -39,6 +39,10 @@ public class DT_model extends Model {
     public double getOrderTime() {
         return orderTime.sample();
     }
+    private static int orderQueueLimit = 0;
+    public int getOrderQueueLimit() {
+        return orderQueueLimit;
+    }
     protected Queue<CustomerEntity> orderQueue;
     protected Queue<OrderEntity> freeOrderWindow;
     protected Queue<OrderEntity> busyOrderWindow;
@@ -50,9 +54,21 @@ public class DT_model extends Model {
     public double getPickupTime() {
         return pickupTime.sample();
     }
+    private static int pickupQueueLimit = 0;
+    public int getPickupQueueLimit() {
+        return pickupQueueLimit;
+    }
     protected Queue<CustomerEntity> pickupQueue;
     protected Queue<PickupEntity> freePickupWindow;
     protected Queue<PickupEntity> busyPickupWindow;
+
+    /*
+     * General
+     */
+    private ContDistUniform salesVolumePerCustomer;
+    public double getSalesVolumePerCustomer() {
+        return salesVolumePerCustomer.sample();
+    }
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {
@@ -67,37 +83,15 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.04+arrivalTimeDiff, 0.1+orderTimeStartDiff, 2.17+orderTimeEndDiff, 0.6+pickupTimeStartDiff, 4.52+pickupTimeEndDiff);
+            customInit(1.04+arrivalTimeDiff, 0.1+orderTimeStartDiff, 2.17+orderTimeEndDiff, 0.6+pickupTimeStartDiff, 4.52+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
         } else if (nebenzeit){
-            customInit(1.2+arrivalTimeDiff, 0.18+orderTimeStartDiff, 1.23+orderTimeEndDiff, 0.08+pickupTimeStartDiff, 3.2+pickupTimeEndDiff);
+            customInit(1.2+arrivalTimeDiff, 0.18+orderTimeStartDiff, 1.23+orderTimeEndDiff, 0.08+pickupTimeStartDiff, 3.2+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
         } else {
-            defaultInit();
+            customInit(1.04+arrivalTimeDiff, 0.1+orderTimeStartDiff, 2.17+orderTimeEndDiff, 0.6+pickupTimeStartDiff, 4.52+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
         }
     }
 
-    public void defaultInit() {
-        // Order
-        customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", 1.09, true, false);
-        customerArrivalTime.setNonNegative(true);
-        orderTime = new ContDistUniform(this, "OrderTime", 0.1, 2.17, true, false);
-        orderQueue = new Queue<CustomerEntity>(this, "OrderQueue", true, true);
-        freeOrderWindow = new Queue<OrderEntity>(this, "FreeOrderWindow", true, true);
-        OrderEntity order;
-        order = new OrderEntity(this, "Order", true);
-        freeOrderWindow.insert(order);
-        busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
-
-        // Pickup
-        pickupTime = new ContDistUniform(this, "PickupTime", 0.3, 4.52, true, false);
-        pickupQueue = new Queue<CustomerEntity>(this, "PickupQueue", true, true);
-        freePickupWindow = new Queue<PickupEntity>(this, "FreePickupWindow", true, true);
-        PickupEntity pickup;
-        pickup = new PickupEntity(this, "Pickup", true);
-        freePickupWindow.insert(pickup);
-        busyPickupWindow = new Queue<PickupEntity>(this, "BusyPickupWindow", true, true);
-    }
-
-    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd) {
+    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, int orderQueueLimit, int pickupQueueLimit) {
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
         customerArrivalTime.setNonNegative(true);
@@ -117,6 +111,9 @@ public class DT_model extends Model {
         pickup = new PickupEntity(this, "Pickup", true);
         freePickupWindow.insert(pickup);
         busyPickupWindow = new Queue<PickupEntity>(this, "BusyPickupWindow", true, true);
+
+        // General
+        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", 5.0, 30.0, true, false);
     }
 
     public static void main(java.lang.String[] args){
@@ -135,6 +132,14 @@ public class DT_model extends Model {
                     }
                     case "--stoßzeit" -> stoßzeit = true;
                     case "--nebenzeit" -> nebenzeit = true;
+                    case "--orderqueuelimit", "--oql" -> {
+                        orderQueueLimit = Integer.parseInt(args[i + 1]);
+                        i++;
+                    }
+                    case "--pickupqueuelimit", "--pql" -> {
+                        pickupQueueLimit = Integer.parseInt(args[i + 1]);
+                        i++;
+                    }
                     case "--quiet", "-q" -> quiet = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");

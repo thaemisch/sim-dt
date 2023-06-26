@@ -5,6 +5,7 @@ import desmoj.core.simulator.*;
 public class CustomerArrivalEvent extends Event<CustomerEntity>{
 
     private DT_model myModel;
+    private Boolean insertedCustomer = false;
 
     public CustomerArrivalEvent(Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
@@ -12,12 +13,21 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
     }
 
     public void eventRoutine(CustomerEntity customer) {
-        myModel.orderQueue.insert(customer);
-
-        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer arrived");
-        data.chronoLogger("oq", myModel.presentTime().getTimeAsDouble());
-
-        if (!myModel.freeOrderWindow.isEmpty()) {
+        if (myModel.getOrderQueueLimit() == 0) {
+            myModel.orderQueue.insert(customer);
+            insertedCustomer = true;
+        }
+        else if (myModel.getOrderQueueLimit() > 0 && myModel.orderQueue.length() < myModel.getOrderQueueLimit()) {
+            myModel.orderQueue.insert(customer);
+            insertedCustomer = true;
+        } else {
+            System.out.println("Order Queue | Customer rejected");
+        }
+        if (insertedCustomer) {
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer arrived");
+            data.chronoLogger("oq", myModel.presentTime().getTimeAsDouble());
+        }
+        if (insertedCustomer && !myModel.freeOrderWindow.isEmpty()) {
             myModel.orderQueue.remove(customer);
 
             OrderEntity order = myModel.freeOrderWindow.first();
