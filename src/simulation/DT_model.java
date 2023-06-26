@@ -74,8 +74,8 @@ public class DT_model extends Model {
     public double getSalesVolumePerCustomer() {
         return salesVolumePerCustomer.sample();
     }
-    static double salesVolumePerCustomerMinDiff;
-    static double salesVolumePerCustomerMaxDiff;
+    static double salesVolumePerCustomerMinDiff = 1.0;
+    static double salesVolumePerCustomerMaxDiff = 1.0;
 
 
     public DT_model(Model owner, String name, boolean showInReport, boolean showInTrace) {

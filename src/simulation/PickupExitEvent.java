@@ -18,6 +18,7 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         data.silentScreamer(myModel.getSalesVolumePerCustomer() + " | Pickup Exit: Customer left");
         data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
 
+
         PickupEntity pickup = myModel.busyPickupWindow.first();
         myModel.busyPickupWindow.remove(pickup);
         myModel.freePickupWindow.insert(pickup);
