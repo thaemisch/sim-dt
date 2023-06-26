@@ -18,8 +18,10 @@ public class DT_model extends Model {
     static double arrivalTimeDiff = 0.0;
     static double orderTimeStartDiff = 0.0;
     static double orderTimeEndDiff = 0.0;
+    static double orderTimeMeanDiff =0.0;
     static double pickupTimeStartDiff = 0.0;
     static double pickupTimeEndDiff = 0.0;
+    static double pickupTimeMeanDiff =0.0;
 
     public String description() {
         return "DT_model (Ereignisorientiert):" +
@@ -39,7 +41,7 @@ public class DT_model extends Model {
     public double getCustomerArrivalTime() {
         return customerArrivalTime.sample();
     }
-    private ContDistUniform orderTime;
+    private ContDistTriangular orderTime;
     public double getOrderTime() {
         return orderTime.sample();
     }
@@ -54,7 +56,7 @@ public class DT_model extends Model {
     /*
      * Pickup
      */
-    private ContDistUniform pickupTime;
+    private ContDistTriangular pickupTime;
     public double getPickupTime() {
         return pickupTime.sample();
     }
@@ -87,20 +89,19 @@ public class DT_model extends Model {
 
     public void init() {
         if (stoßzeit){
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2.28+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 4.87+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
         } else if (nebenzeit){
-            customInit(1.3+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.38+orderTimeEndDiff, 0.13+pickupTimeStartDiff, 3.3+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
+            customInit(1.33+arrivalTimeDiff, 0.3+orderTimeStartDiff, 1.383+orderTimeEndDiff, 0.5+orderTimeMeanDiff, 0.133+pickupTimeStartDiff, 3.33+pickupTimeEndDiff, 0.8+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
         } else {
-            customInit(1.07+arrivalTimeDiff, 0.17+orderTimeStartDiff, 2+orderTimeEndDiff, 0.1+pickupTimeStartDiff, 2+pickupTimeEndDiff, orderQueueLimit, pickupQueueLimit);
-            //Angepasste Zeiten um realen Avg zu simulieren
+            customInit(1.067+arrivalTimeDiff, 0.167+orderTimeStartDiff, 2.283+orderTimeEndDiff, 1+orderTimeMeanDiff, 0.1+pickupTimeStartDiff, 4.867+pickupTimeEndDiff, 1.133+pickupTimeMeanDiff, orderQueueLimit, pickupQueueLimit);
         }
     }
 
-    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double pickupTimeStart, Double pickupTimeEnd, int orderQueueLimit, int pickupQueueLimit) {
+    public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double orderTimeMean, Double pickupTimeStart, Double pickupTimeEnd, Double pickupTimeMean, int orderQueueLimit, int pickupQueueLimit) {
         // Order
         customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
         customerArrivalTime.setNonNegative(true);
-        orderTime = new ContDistUniform(this, "OrderTime", orderTimeStart, orderTimeEnd, true, false);
+        orderTime = new ContDistTriangular(this, "OrderTime", orderTimeStart, orderTimeEnd, orderTimeMean, true, false);
         orderQueue = new Queue<CustomerEntity>(this, "OrderQueue", true, true);
         freeOrderWindow = new Queue<OrderEntity>(this, "FreeOrderWindow", true, true);
         OrderEntity order;
@@ -109,7 +110,7 @@ public class DT_model extends Model {
         busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
 
         // Pickup
-        pickupTime = new ContDistUniform(this, "PickupTime", pickupTimeStart, pickupTimeEnd, true, false);
+        pickupTime = new ContDistTriangular(this, "PickupTime", pickupTimeStart, pickupTimeEnd, pickupTimeMean, true, false);
         pickupQueue = new Queue<CustomerEntity>(this, "PickupQueue", true, true);
         freePickupWindow = new Queue<PickupEntity>(this, "FreePickupWindow", true, true);
         PickupEntity pickup;
