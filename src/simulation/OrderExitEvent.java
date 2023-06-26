@@ -39,7 +39,7 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.freeOrderWindow.remove(order);
             myModel.busyOrderWindow.insert(order);
 
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " arrived");
+            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + nextCustomer.getName() + " arrived");
             data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
