@@ -2,24 +2,11 @@
   <table>
   <tr>
     <td></td>
-    <td>mcd1</td>
     <td>mcd2</td>
+    <td>simulation</td>
   </tr>
   <tr>
     <td>New Arrival</td>
-    <td>
-      <table>
-        <tr>
-          <td>0:00:13</td>
-        </tr>
-        <tr>
-          <td>0:01:20</td>
-        </tr>
-        <tr>
-          <td>0:04:01</td>
-        </tr>
-      </table>
-    </td>
     <td>
       <table>
         <tr>
@@ -33,22 +20,22 @@
         </tr>
       </table>
     </td>
-  </tr>
-  <tr>
-    <td>Queue</td>
     <td>
       <table>
         <tr>
-          <td>0:00:09</td>
+          <td>0:00:06</td>
         </tr>
         <tr>
-          <td>0:00:30</td>
+          <td>0:00:47</td>
         </tr>
         <tr>
-          <td>0:01:04</td>
+          <td>0:06:12</td>
         </tr>
       </table>
     </td>
+  </tr>
+  <tr>
+    <td>Queue</td>
     <td>
       <table>
         <tr>
@@ -62,22 +49,22 @@
         </tr>
       </table>
     </td>
-  </tr>
-  <tr>
-    <td>Order</td>
     <td>
       <table>
         <tr>
-          <td>0:00:18</td>
+          <td>0:00:36</td>
         </tr>
         <tr>
-          <td>0:00:30</td>
+          <td>0:30:12</td>
         </tr>
         <tr>
-          <td>0:01:23</td>
+          <td>0:50:42</td>
         </tr>
       </table>
     </td>
+  </tr>
+  <tr>
+    <td>Order</td>
     <td>
       <table>
         <tr>
@@ -91,22 +78,22 @@
         </tr>
       </table>
     </td>
-  </tr>
-    <tr>
-    <td>Pickup Queue</td>
     <td>
       <table>
-        <tr>
-          <td>0:00:52</td>
-        </tr>
         <tr>
           <td>0:01:34</td>
         </tr>
         <tr>
-          <td>0:03:16</td>
+          <td>0:03:36</td>
+        </tr>
+        <tr>
+          <td>0:06:35</td>
         </tr>
       </table>
     </td>
+  </tr>
+    <tr>
+    <td>Pickup Queue</td>
     <td>
       <table>
         <tr>
@@ -120,22 +107,22 @@
         </tr>
       </table>
     </td>
-  </tr>
-    <tr>
-    <td>Pickup</td>
     <td>
       <table>
         <tr>
-          <td>0:00:08</td>
+          <td>0:00:22</td>
         </tr>
         <tr>
-          <td>0:00:48</td>
+          <td>1:06:35</td>
         </tr>
         <tr>
-          <td>0:03:20</td>
+          <td>2:10:26</td>
         </tr>
       </table>
     </td>
+  </tr>
+    <tr>
+    <td>Pickup</td>
     <td>
       <table>
         <tr>
@@ -146,6 +133,19 @@
         </tr>
         <tr>
           <td>0:04:52</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:37</td>
+        </tr>
+        <tr>
+          <td>0:02:21</td>
+        </tr>
+        <tr>
+          <td>0:04:31</td>
         </tr>
       </table>
     </td>

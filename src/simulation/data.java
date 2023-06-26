@@ -1,23 +1,28 @@
 package simulation;
 
-public class data {
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-    private static String[] orderQueue = new String[1000];
+public class data {
+    private static Double[] orderQueue = new Double[1000];
     private static int orderQueueIndex = 0;
 
-    private static String[] orderWindow= new String[1000];
+    private static Double[] orderWindow= new Double[1000];
     private static int orderWindowIndex = 0;
 
-    private static String[] orderExit= new String[1000];
+    private static Double[] orderExit= new Double[1000];
     private static int orderExitIndex = 0;
 
-    private static String[] pickupQueue= new String[1000];
+    private static Double[] pickupQueue= new Double[1000];
     private static int pickupQueueIndex = 0;
 
-    private static String[] pickupWindow= new String[1000];
+    private static Double[] pickupWindow= new Double[1000];
     private static int pickupWindowIndex = 0;
 
-    private static String[] pickupExit= new String[1000];
+    private static Double[] pickupExit= new Double[1000];
     private static int pickupExitIndex = 0;
 
     /**
@@ -36,27 +41,27 @@ public class data {
     static void chronoLogger(String type, Double time){
         switch (type) {
             case "orderQueue", "orderqueue", "oq" -> {
-                orderQueue[orderQueueIndex] = time.toString();
+                orderQueue[orderQueueIndex] = time;
                 orderQueueIndex++;
             }
             case "orderWindow", "orderwindow", "ow" -> {
-                orderWindow[orderWindowIndex] = time.toString();
+                orderWindow[orderWindowIndex] = time;
                 orderWindowIndex++;
             }
             case "orderExit", "orderexit", "oe" -> {
-                orderExit[orderExitIndex] = time.toString();
+                orderExit[orderExitIndex] = time;
                 orderExitIndex++;
             }
             case "pickupQueue", "pickupqueue", "pq" -> {
-                pickupQueue[pickupQueueIndex] = time.toString();
+                pickupQueue[pickupQueueIndex] = time;
                 pickupQueueIndex++;
             }
             case "pickupWindow", "pickupwindow", "pw" -> {
-                pickupWindow[pickupWindowIndex] = time.toString();
+                pickupWindow[pickupWindowIndex] = time;
                 pickupWindowIndex++;
             }
             case "pickupExit", "pickupexit", "pe" -> {
-                pickupExit[pickupExitIndex] = time.toString();
+                pickupExit[pickupExitIndex] = time;
                 pickupExitIndex++;
             }
             default -> {
@@ -64,6 +69,91 @@ public class data {
             }
         }
     }
+
+    public static void writeListsToFile() {
+        // Convert the lists to a JSON-serializable format
+        List<List<Double>> jsonLists = List.of(convertDoubleArrayToList(orderQueue), convertDoubleArrayToList(orderWindow), convertDoubleArrayToList(pickupQueue), convertDoubleArrayToList(pickupWindow), convertDoubleArrayToList(pickupExit));
+
+        String directoryPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+
+        File directory = new File(directoryPath);
+
+        // Convert the lists to a JSON string
+        String jsonStr = convertListsToJsonString(jsonLists);
+
+        // Write the JSON string to the file
+        File file = new File(directory, "simulation.json");
+        try {
+            writeStringToFile(file, jsonStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Double> convertDoubleArrayToList(Double[] array) {
+        List<Double> list = new ArrayList<>();
+        for (Double d : array) {
+            list.add(d);
+            if (d == null) {
+                break;
+            }
+        }
+        return list;
+    }
+
+    public static String convertListsToJsonString(List<List<Double>> lists) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < lists.size(); i++) {
+            sb.append("[");
+            for (int j = 0; j < lists.get(i).size(); j++) {
+                try{
+                    sb.append("\"").append(convertMinutesToTimeString(lists.get(i).get(j))).append("\"");
+                }catch (NullPointerException e){
+                    sb.append("null").append("\"");
+                }
+
+                if (j < lists.get(i).size() - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("]");
+            if (i < lists.size() - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static void writeStringToFile(File file, String str) throws IOException {
+        FileWriter writer = new FileWriter(file);
+        writer.write(str);
+        writer.close();
+    }
+
+    public static String convertMinutesToTimeString(double minutes) {
+        int hours = (int) (minutes / 60);
+        int remainingMinutes = (int) (minutes % 60);
+        int seconds = (int) ((minutes * 60) % 60);
+
+        StringBuilder sb = new StringBuilder();
+        if (hours < 10) {
+            sb.append("0");
+        }
+        sb.append(hours).append(":");
+        if (remainingMinutes < 10) {
+            sb.append("0");
+        }
+        sb.append(remainingMinutes).append(":");
+        if (seconds < 10) {
+            sb.append("0");
+        }
+        sb.append(seconds);
+
+        return sb.toString();
+    }
+
 
     static void printLog(){
         //System.out.println("Order Queue: " + Arrays.toString(orderQueue));

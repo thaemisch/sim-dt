@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 import markdown
 
-filenames = ["mcd1", "mcd2"]
+filenames = ["mcd2", "simulation"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -33,7 +33,12 @@ for j in range(len(filenames)):
     # Convert the JSON data to lists of datetimes
     lists = []
     for json_list in json_data:
-        dt_list = [datetime.strptime(dt_str, "%H:%M:%S") for dt_str in json_list]
+        dt_list = []
+        for dt_str in json_list:
+          try:
+            dt_list.append(datetime.strptime(dt_str, "%H:%M:%S"))
+          except:
+            break
         lists.append(dt_list)
 
     queue = lists[0]
@@ -50,9 +55,13 @@ for j in range(len(filenames)):
 
     # Calculate min/max of new arrivals
     for i in range(len(queue)-1):
-      delta = queue[i+1] - queue[i]
-      if delta > timedelta(seconds=5):
-        queue_deltas_sideways.append(delta)
+      try:
+        if not queue[i] == "null" and not queue[i+1] == "null":
+          delta = queue[i+1] - queue[i]
+          if delta > timedelta(seconds=5):
+            queue_deltas_sideways.append(delta)
+      except:
+        break
     max_queue_delta_sideways.append(max(queue_deltas_sideways))
     min_queue_delta_sideways.append(min(queue_deltas_sideways))
     median_queue_delta_sideways.append(sorted(queue_deltas_sideways)[len(queue_deltas_sideways)//2])
@@ -60,36 +69,52 @@ for j in range(len(filenames)):
     # Calculate min/max of each station
     # Queue
     for i in range(len(queue)):
-      delta = order[i] - queue[i]
-      if delta > timedelta(seconds=5):
-        queue_deltas.append(delta)
+      try:
+        if not queue[i] == "null" and not order[i] == "null":
+          delta = order[i] - queue[i]
+          if delta > timedelta(seconds=5):
+            queue_deltas.append(delta)
+      except:
+        break
     max_queue_delta.append(max(queue_deltas))
     min_queue_delta.append(min(queue_deltas))
     median_queue_delta.append(sorted(queue_deltas)[len(queue_deltas)//2])
 
     # Order
     for i in range(len(order)):
-        delta = pickup_queue[i] - order[i]
-        if delta > timedelta(seconds=5):
-          order_deltas.append(delta)
+      try:
+        if not order[i] == "null" and not pickup_queue[i] == "null":
+          delta = pickup_queue[i] - order[i]
+          if delta > timedelta(seconds=5):
+            order_deltas.append(delta)
+      except:
+        break
     max_order_delta.append(max(order_deltas))
     min_order_delta.append(min(order_deltas))
     median_order_delta.append(sorted(order_deltas)[len(order_deltas)//2])
 
     # Pickup Queue
     for i in range(len(pickup_queue)):
-        delta = pickup[i] - pickup_queue[i]
-        if delta > timedelta(seconds=5):
-          pickup_queue_deltas.append(delta)
+      try:
+        if not pickup_queue[i] == "null" and not pickup[i] == "null":
+          delta = pickup[i] - pickup_queue[i]
+          if delta > timedelta(seconds=5):
+            pickup_queue_deltas.append(delta)
+      except:
+        break
     max_pickup_queue_delta.append(max(pickup_queue_deltas))
     min_pickup_queue_delta.append(min(pickup_queue_deltas))
     median_pickup_queue_delta.append(sorted(pickup_queue_deltas)[len(pickup_queue_deltas)//2])
 
     # Pickup
     for i in range(len(pickup)):
-      delta = exit[i] - pickup[i]
-      if delta > timedelta(seconds=5):
-        pickup_deltas.append(delta)
+      try:
+        if not pickup[i] == "null" and not exit[i] == "null":
+          delta = exit[i] - pickup[i]
+          if delta > timedelta(seconds=5):
+            pickup_deltas.append(delta)
+      except:
+        break
     max_pickup_delta.append(max(pickup_deltas))
     min_pickup_delta.append(min(pickup_deltas))
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
