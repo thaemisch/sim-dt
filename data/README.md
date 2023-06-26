@@ -203,26 +203,26 @@
     <td>
       <table>
         <tr>
-          <td>0:00:25</td>
+          <td>0:00:15</td>
         </tr>
         <tr>
-          <td>0:02:05</td>
+          <td>0:02:55</td>
         </tr>
         <tr>
-          <td>0:03:51</td>
+          <td>0:06:48</td>
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <td>0:00:15</td>
+          <td>0:00:12</td>
         </tr>
         <tr>
-          <td>0:01:01</td>
+          <td>0:02:17</td>
         </tr>
         <tr>
-          <td>0:02:15</td>
+          <td>0:10:54</td>
         </tr>
       </table>
     </td>
@@ -258,26 +258,26 @@
     <td>
       <table>
         <tr>
-          <td>0:01:59</td>
+          <td>0:01:21</td>
         </tr>
         <tr>
-          <td>0:42:41</td>
+          <td>0:45:38</td>
         </tr>
         <tr>
-          <td>1:32:52</td>
+          <td>1:36:02</td>
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <td>0:01:02</td>
+          <td>0:00:07</td>
         </tr>
         <tr>
-          <td>0:11:50</td>
+          <td>0:14:52</td>
         </tr>
         <tr>
-          <td>0:21:47</td>
+          <td>0:21:59</td>
         </tr>
       </table>
     </td>
