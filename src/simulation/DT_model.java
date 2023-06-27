@@ -12,12 +12,15 @@ public class DT_model extends Model {
     public static Boolean save = false;
     public static Boolean quiet = false;
     public static Boolean switchToNebenzeit = false;
+    public static Boolean switchToStoßzeit = false;
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
-    static double stoßzeitDuration = (endTime - startTime) / 2;
-    static double nebenzeitDuration = (endTime - startTime) / 2;
     static Boolean stoßzeit = false;
+    public static void setStoßzeit(){
+        stoßzeit = true;
+        nebenzeit = false;
+    }
     static Boolean nebenzeit = false;
     public static void setNebenzeit(){
         nebenzeit = true;
@@ -164,7 +167,14 @@ public class DT_model extends Model {
                     }
                     case "--stoßzeit", "--st" -> stoßzeit = true;
                     case "--nebenzeit", "-ne" -> nebenzeit = true;
-                    case "--switchtonebenzeit", "--stne" -> switchToNebenzeit = true;
+                    case "--stoßtonebenzeit", "--stne" -> {
+                        stoßzeit = true;
+                        switchToNebenzeit = true;
+                    }
+                    case "--nebentostoßzeit", "--nest" -> {
+                        nebenzeit = true;
+                        switchToStoßzeit = true;
+                    }
                     case "--orderqueuelimit", "--oql" -> {
                         orderQueueLimit = Integer.parseInt(args[i + 1]);
                         i++;
@@ -188,7 +198,8 @@ public class DT_model extends Model {
                         System.out.println("    --end <time> __________________________ Set the end time of the simulation(Default: 240.0)");
                         System.out.println("    --stoßzeit, --st ______________________ Set the simulation to Stoßzeit");
                         System.out.println("    --nebenzeit, --ne _____________________ Set the simulation to Nebenzeit");
-                        System.out.println("    --switchtonebenzeit, --stne ___________ Set the simulation to switch to Nebenzeit");
+                        System.out.println("    --switchtonebenzeit, --stne ___________ Set the simulation to switch from Stoß- to Nebenzeit");
+                        System.out.println("    --switchtostoßzeit, --nest ____________ Set the simulation to switch from Neben- to Stoßzeit");
                         System.out.println("    --orderqueuelimit, --oql <limit> ______ Set the order queue limit (Default: 10)");
                         System.out.println("    --pickupqueuelimit, --pql <limit> _____ Set the pickup queue limit (Default: 10)");
                         System.out.println("    --halfordersize, --hos ________________ Set the order size to half");

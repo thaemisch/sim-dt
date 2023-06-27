@@ -12,10 +12,8 @@ public class SwitchToNebenzeitEvent extends ExternalEvent{
     }
 
     public void eventRoutine() {
-        System.out.println(myModel.getCustomerArrivalTime());
         myModel.setNebenzeit();
         myModel.init();
-        System.out.println(myModel.getCustomerArrivalTime());
-        System.out.println(myModel.presentTime().getTimeAsDouble() + " | Nebenzeit");
+        System.out.println(myModel.presentTime().getTimeAsDouble() + " | Switched to Nebenzeit");
     }
 }
