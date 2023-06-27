@@ -481,18 +481,25 @@ def writeToReadme():
   <h2>Legend</h2>
   <table>
     <tr>
-      <tr>
-        <td>Min</td>
-      </tr>
-      <tr>
-        <td>Median</td>
-      </tr>
-      <tr>
-        <td>Average</td>
-      </tr>
-      <tr>
-        <td>Max</td>
-      </tr>
+      <td>Legend</td>
+      <td>
+        <table>
+          <tr>
+            <tr>
+              <td>Min</td>
+            </tr>
+            <tr>
+              <td>Median</td>
+            </tr>
+            <tr>
+              <td>Average</td>
+            </tr>
+            <tr>
+              <td>Max</td>
+            </tr>
+          </tr>
+        </table>
+      </td>
     </tr>
   </table>
   """
