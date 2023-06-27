@@ -304,7 +304,6 @@ public class DT_model extends Model {
             trace.delete();
         }
         data.printLog();
-        data.missingCustomers();
         if (save)
             data.writeListsToFile();
         System.exit(0);

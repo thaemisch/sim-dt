@@ -64,44 +64,6 @@ public class data {
         }
     }
 
-    static void nameLogger(String type, String name){
-        switch (type) {
-            case "orderQueue", "orderqueue", "oq" -> orderQueueCustomers.add(name);
-            case "orderWindow", "orderwindow", "ow" -> orderWindowCustomers.add(name);
-            case "orderExit", "orderexit", "oe" -> orderExitCustomers.add(name);
-            case "pickupQueue", "pickupqueue", "pq" -> pickupQueueCustomers.add(name);
-            case "pickupWindow", "pickupwindow", "pw" -> pickupWindowCustomers.add(name);
-            case "pickupExit", "pickupexit", "pe" -> pickupExitCustomers.add(name);
-            case "customersLost", "customerslost", "cl" -> customersLostCustomers.add(name);
-            default -> {
-                System.out.println("ERROR: INVALID TYPE FOR LOGGING");
-            }
-        }
-    }
-    // determines the names of customers that went missing
-    static void missingCustomers(){
-        int ocl = 0;
-        int pcl = 0;
-        System.out.println("------------------------");
-        System.out.println("ORDER CUSTOMERS LOST: ");
-        for (int i = 0; i < orderQueueCustomers.size(); i++) {
-            if (!orderExitCustomers.contains(orderQueueCustomers.get(i))) {
-                System.out.println(orderQueueCustomers.get(i));
-                ocl++;
-            }
-        }
-        System.out.println("Total: " + ocl);
-        System.out.println("------------------------");
-        System.out.println("PICKUP CUSTOMERS LOST: ");
-        for (int i = 0; i < pickupQueueCustomers.size(); i++) {
-            if (!pickupExitCustomers.contains(pickupQueueCustomers.get(i))) {
-                System.out.println(pickupQueueCustomers.get(i));
-                pcl++;
-            }
-        }
-        System.out.println("Total: " + pcl);
-    }
-
     public static Double getTotalSalesVolume() {
         Double sum = 0.0;
         for (Double d : salesVolume) {
@@ -213,32 +175,14 @@ public class data {
 
 
     static void printLog(){
-        //System.out.println("Order Queue: " + Arrays.toString(orderQueue));
         System.out.println("Order Queue: " + orderQueue.size());
-        //System.out.println("Order Window: " + Arrays.toString(orderWindow));
         System.out.println("Order Window: " +orderWindow.size());
-        //System.out.println("Order Exit: " + Arrays.toString(orderExit));
         System.out.println("Order Exit: " + orderExit.size());
-        //System.out.println("Pickup Queue: " + Arrays.toString(pickupQueue));
         System.out.println("Pickup Queue: " + pickupQueue.size());
-        //System.out.println("Pickup Window: " + Arrays.toString(pickupWindow));
         System.out.println("Pickup Window: " + pickupWindow.size());
-        //System.out.println("Pickup Exit: " + Arrays.toString(pickupExit));
         System.out.println("Pickup Exit: " + pickupExit.size());
-        //System.out.println("Sales Volume: " + Arrays.toString(salesVolume));
         System.out.println("Sales Volume: " + getTotalSalesVolume());
-        //System.out.println("Customers Lost: " + Arrays.toString(customersLost));
         System.out.println("Customers Lost: " + customersLost.size());
-        //System.out.println("Sales Volume Lost: " + Arrays.toString(salesVolumeLost));
         System.out.println("Sales Volume Lost: " + getTotalSalesVolumeLost());
-
-        System.out.println("--------------------");
-        System.out.println("Problems:");
-        if (orderQueue.size()- orderWindow.size() > DT_model.getOrderQueueLimit()) {
-            System.out.println("OrderQueue: " + (orderQueue.size()- orderWindow.size()- DT_model.getOrderQueueLimit()) + " too many");
-        }
-        if (pickupQueue.size()- pickupWindow.size() > DT_model.getPickupQueueLimit()) {
-            System.out.println("PickupQueue: " + (pickupQueue.size()- pickupWindow.size()- DT_model.getPickupQueueLimit()) + " too many");
-        }
     }
 }
