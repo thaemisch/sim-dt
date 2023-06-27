@@ -50,7 +50,7 @@ for j in range(len(filenames)):
     order = lists[1]
     pickup_queue = lists[2]
     pickup = lists[3]
-    exit = lists[4]
+    exit_list = lists[4]
 
     queue_deltas = []
     queue_deltas_sideways = []
@@ -118,8 +118,8 @@ for j in range(len(filenames)):
     # Pickup
     for i in range(len(pickup)):
       try:
-        if not pickup[i] == "null" and not exit[i] == "null":
-          delta = exit[i] - pickup[i]
+        if not pickup[i] == "null" and not exit_list[i] == "null":
+          delta = exit_list[i] - pickup[i]
           #if delta > timedelta(seconds=5):
           pickup_deltas.append(delta)
       except:
