@@ -236,8 +236,65 @@ def writeToReadme():
       </table>
     </td>"""
     html_string += f"""
-    </tr>
-    </table>
+  </tr>
+  <tr>
+    <td>Sales Volume</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>{min_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{max_pickup_queue_delta[i]}</td>
+        </tr>
+      </table>
+    </td>"""
+    html_string += f"""
+  </tr>
+  <tr>
+    <td>Customers Lost</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>{min_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{max_pickup_queue_delta[i]}</td>
+        </tr>
+      </table>
+    </td>"""
+    html_string += f"""
+  </tr>
+  <tr>
+    <td>Sales Volume Lost</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>{min_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[i]}</td>
+        </tr>
+        <tr>
+          <td>{max_pickup_queue_delta[i]}</td>
+        </tr>
+      </table>
+    </td>"""
+    html_string += f"""
+  </tr>
+  </table>
     """
 
     html_string += f"""
@@ -247,18 +304,13 @@ def writeToReadme():
       <td>
         <table>
           <tr>
-            <tr>
-              <td>Min</td>
-            </tr>
-            <tr>
-              <td>Median</td>
-            </tr>
-            <tr>
-              <td>Average</td>
-            </tr>
-            <tr>
-              <td>Max</td>
-            </tr>
+            <td>Min</td>
+          </tr>
+          <tr>
+            <td>Average</td>
+          </tr>
+          <tr>
+            <td>Max</td>
           </tr>
         </table>
       </td>
