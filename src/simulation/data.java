@@ -22,6 +22,8 @@ public class data {
     private static List<Double> pickupWindow = new ArrayList<>();
 
     private static List<Double> pickupExit = new ArrayList<>();
+    private static List<Double> customersLost = new ArrayList<>();
+    private static List<Double> salesVolumeLost = new ArrayList<>();
 
     private static List<Double> salesVolume = new ArrayList<>();
 
@@ -47,6 +49,8 @@ public class data {
             case "pickupWindow", "pickupwindow", "pw" -> pickupWindow.add(value);
             case "pickupExit", "pickupexit", "pe" -> pickupExit.add(value);
             case "salesVolume", "salesvolume", "sv" -> salesVolume.add(value);
+            case "customersLost", "customerslost", "cl" -> customersLost.add(value);
+            case "salesVolumeLost", "salesvolumelost", "svl" -> salesVolumeLost.add(value);
             default -> {
                 System.out.println("ERROR: INVALID TYPE FOR LOGGING");
             }
@@ -56,6 +60,14 @@ public class data {
     public static Double getTotalSalesVolume() {
         Double sum = 0.0;
         for (Double d : salesVolume) {
+            sum += d;
+        }
+        return sum;
+    }
+
+    public static Double getTotalSalesVolumeLost() {
+        Double sum = 0.0;
+        for (Double d : salesVolumeLost) {
             sum += d;
         }
         return sum;
@@ -170,6 +182,10 @@ public class data {
         System.out.println("Pickup Exit: " + pickupExit.size());
         //System.out.println("Sales Volume: " + Arrays.toString(salesVolume));
         System.out.println("Sales Volume: " + getTotalSalesVolume());
+        //System.out.println("Customers Lost: " + Arrays.toString(customersLost));
+        System.out.println("Customers Lost: " + customersLost.size());
+        //System.out.println("Sales Volume Lost: " + Arrays.toString(salesVolumeLost));
+        System.out.println("Sales Volume Lost: " + getTotalSalesVolumeLost());
 
         System.out.println("--------------------");
         System.out.println("Problems:");
