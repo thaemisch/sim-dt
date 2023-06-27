@@ -12,17 +12,24 @@ public class data {
     private static String dirPath;
     private static String fileName;
     private static List<Double> orderQueue = new ArrayList<>();
+    private static List<String> orderQueueCustomers = new ArrayList<>();
 
     private static List<Double> orderWindow = new ArrayList<>();
+    private static List<String> orderWindowCustomers = new ArrayList<>();
 
     private static List<Double> orderExit = new ArrayList<>();
+    private static List<String> orderExitCustomers = new ArrayList<>();
 
     private static List<Double> pickupQueue = new ArrayList<>();
+    private static List<String> pickupQueueCustomers = new ArrayList<>();
 
     private static List<Double> pickupWindow = new ArrayList<>();
+    private static List<String> pickupWindowCustomers = new ArrayList<>();
 
     private static List<Double> pickupExit = new ArrayList<>();
+    private static List<String> pickupExitCustomers = new ArrayList<>();
     private static List<Double> customersLost = new ArrayList<>();
+    private static List<String> customersLostCustomers = new ArrayList<>();
     private static List<Double> salesVolumeLost = new ArrayList<>();
 
     private static List<Double> salesVolume = new ArrayList<>();
@@ -55,6 +62,44 @@ public class data {
                 System.out.println("ERROR: INVALID TYPE FOR LOGGING");
             }
         }
+    }
+
+    static void nameLogger(String type, String name){
+        switch (type) {
+            case "orderQueue", "orderqueue", "oq" -> orderQueueCustomers.add(name);
+            case "orderWindow", "orderwindow", "ow" -> orderWindowCustomers.add(name);
+            case "orderExit", "orderexit", "oe" -> orderExitCustomers.add(name);
+            case "pickupQueue", "pickupqueue", "pq" -> pickupQueueCustomers.add(name);
+            case "pickupWindow", "pickupwindow", "pw" -> pickupWindowCustomers.add(name);
+            case "pickupExit", "pickupexit", "pe" -> pickupExitCustomers.add(name);
+            case "customersLost", "customerslost", "cl" -> customersLostCustomers.add(name);
+            default -> {
+                System.out.println("ERROR: INVALID TYPE FOR LOGGING");
+            }
+        }
+    }
+    // determines the names of customers that went missing
+    static void missingCustomers(){
+        int ocl = 0;
+        int pcl = 0;
+        System.out.println("------------------------");
+        System.out.println("ORDER CUSTOMERS LOST: ");
+        for (int i = 0; i < orderQueueCustomers.size(); i++) {
+            if (!orderExitCustomers.contains(orderQueueCustomers.get(i))) {
+                System.out.println(orderQueueCustomers.get(i));
+                ocl++;
+            }
+        }
+        System.out.println("Total: " + ocl);
+        System.out.println("------------------------");
+        System.out.println("PICKUP CUSTOMERS LOST: ");
+        for (int i = 0; i < pickupQueueCustomers.size(); i++) {
+            if (!pickupExitCustomers.contains(pickupQueueCustomers.get(i))) {
+                System.out.println(pickupQueueCustomers.get(i));
+                pcl++;
+            }
+        }
+        System.out.println("Total: " + pcl);
     }
 
     public static Double getTotalSalesVolume() {

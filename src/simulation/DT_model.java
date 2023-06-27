@@ -4,6 +4,8 @@ import desmoj.core.simulator.*;
 import desmoj.core.dist.*;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DT_model extends Model {
     // General
@@ -251,6 +253,7 @@ public class DT_model extends Model {
             trace.delete();
         }
         data.printLog();
+        data.missingCustomers();
         if (save)
             data.writeListsToFile();
         System.exit(0);

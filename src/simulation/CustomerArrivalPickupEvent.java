@@ -15,6 +15,7 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
         myModel.pickupQueue.insert(customer);
         customer.setPickupQueueEntry(myModel.presentTime().getTimeAsDouble());
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " arrived");
+        data.nameLogger("pq", "Customer" + customer.getName());
         data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());
         if (!myModel.freePickupWindow.isEmpty()) {
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " left");
@@ -34,6 +35,7 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
             pickupExit.schedule(customer, new TimeSpan(newPickupTime));
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " arrived");
+            data.nameLogger("pw", "Customer" + customer.getName());
             data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
         }
     }

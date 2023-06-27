@@ -37,6 +37,7 @@ public class OrderExitEvent extends Event<CustomerEntity> {
         if (freedOrderWindow) {
             System.out.println("DEBUG3: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " left");
+            data.nameLogger("oe", "Customer" + customer.getName());
             data.chronoLogger("oe", myModel.presentTime().getTimeAsDouble());
             CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
             customerArrivalPickup.schedule(customer, new TimeInstant(myModel.presentTime().getTimeAsDouble()+0.0000001));
@@ -52,6 +53,7 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.busyOrderWindow.insert(order);
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + nextCustomer.getName() + " arrived");
+            data.nameLogger("ow", "Customer" + nextCustomer.getName());
             data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
