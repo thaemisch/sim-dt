@@ -240,7 +240,17 @@ def writeToReadme():
   <tr>
     <td>Sales Volume</td>"""
     for i in range(len(filenames)):
-      html_string += f"""
+      if i < 2:
+        html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>--</td>
+        </tr>
+      </table>
+    </td>"""
+      else:
+        html_string += f"""
     <td>
       <table>
         <tr>
@@ -259,7 +269,17 @@ def writeToReadme():
   <tr>
     <td>Customers Lost</td>"""
     for i in range(len(filenames)):
-      html_string += f"""
+      if i < 2:
+        html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>--</td>
+        </tr>
+      </table>
+    </td>"""
+      else:
+        html_string += f"""
     <td>
       <table>
         <tr>
@@ -278,7 +298,17 @@ def writeToReadme():
   <tr>
     <td>Sales Volume Lost</td>"""
     for i in range(len(filenames)):
-      html_string += f"""
+      if i < 2:
+        html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>--</td>
+        </tr>
+      </table>
+    </td>"""
+      else:
+        html_string += f"""
     <td>
       <table>
         <tr>

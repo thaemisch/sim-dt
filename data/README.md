@@ -156,26 +156,14 @@
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:01:19.933333</td>
-        </tr>
-        <tr>
-          <td>0:03:16</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:00:43.437500</td>
-        </tr>
-        <tr>
-          <td>0:03:27</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
@@ -185,26 +173,14 @@
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:01:19.933333</td>
-        </tr>
-        <tr>
-          <td>0:03:16</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:00:43.437500</td>
-        </tr>
-        <tr>
-          <td>0:03:27</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
@@ -214,26 +190,14 @@
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:01:19.933333</td>
-        </tr>
-        <tr>
-          <td>0:03:16</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
     <td>
       <table>
         <tr>
-          <td>0:00:00</td>
-        </tr>
-        <tr>
-          <td>0:00:43.437500</td>
-        </tr>
-        <tr>
-          <td>0:03:27</td>
+          <td>--</td>
         </tr>
       </table>
     </td>
