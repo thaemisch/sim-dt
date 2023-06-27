@@ -21,12 +21,10 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
             insertedCustomer = true;
         } else{
             data.chronoLogger("cl", myModel.presentTime().getTimeAsDouble());
-            data.nameLogger("cl", "Customer" + customer.getName());
             data.chronoLogger("svl", myModel.getSalesVolumePerCustomer());
         }
         if (insertedCustomer) {
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + customer.getName() + " arrived");
-            data.nameLogger("oq", "Customer" + customer.getName());
             data.chronoLogger("oq", myModel.presentTime().getTimeAsDouble());
         }
         if (insertedCustomer && !myModel.freeOrderWindow.isEmpty()) {
@@ -34,7 +32,6 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + customer.getName() + " left");
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " arrived");
-            data.nameLogger("ow", "Customer" + customer.getName());
             data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
 
             OrderEntity order = myModel.freeOrderWindow.first();

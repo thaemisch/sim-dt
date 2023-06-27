@@ -14,6 +14,6 @@ public class SwitchToStoßzeit extends ExternalEvent{
     public void eventRoutine() {
         myModel.setStoßzeit();
         myModel.init();
-        System.out.println(myModel.presentTime().getTimeAsDouble() + " | Switched to Stoßzeit");
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Switched to Stoßzeit");
     }
 }

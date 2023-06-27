@@ -26,18 +26,9 @@ public class OrderExitEvent extends Event<CustomerEntity> {
         } else {
             myModel.stuckInOrder.insert(customer);
             CustomerEntity test = myModel.stuckInOrder.first();
-            System.out.println("DEBUG1 " + test.getName() +" | "+ myModel.presentTime().getTimeAsDouble());
-            /*
-            System.out.println("DEBUG1: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
-            OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
-            orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
-            System.out.println("DEBUG2: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
-            */
         }
         if (freedOrderWindow) {
-            System.out.println("DEBUG3: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " left");
-            data.nameLogger("oe", "Customer" + customer.getName());
             data.chronoLogger("oe", myModel.presentTime().getTimeAsDouble());
 
             data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
@@ -55,7 +46,6 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.busyOrderWindow.insert(order);
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + nextCustomer.getName() + " arrived");
-            data.nameLogger("ow", "Customer" + nextCustomer.getName());
             data.chronoLogger("ow", myModel.presentTime().getTimeAsDouble());
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);

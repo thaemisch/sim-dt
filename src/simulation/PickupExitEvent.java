@@ -17,7 +17,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         myModel.freePickupWindow.insert(pickup);
 
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + customer.getName() + " left");
-        data.nameLogger("pe", "Customer" + customer.getName());
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
         if (!myModel.pickupQueue.isEmpty()) {
@@ -31,7 +30,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
             CustomerEntity stuckCustomer = myModel.stuckInOrder.first();
             if (stuckCustomer != null && myModel.pickupQueue.length() != myModel.getPickupQueueLimit()) {
                 myModel.stuckInOrder.remove(stuckCustomer);
-                System.out.println("DEBUG2 " + stuckCustomer.getName() +" | "+ myModel.presentTime().getTimeAsDouble());
                 OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
                 orderExit.schedule(stuckCustomer, new TimeInstant(myModel.presentTime().getTimeAsDouble()+0.0000001));
             }
@@ -48,7 +46,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
             pickupExit.schedule(nextCustomer, new TimeSpan(newPickupTime));
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + nextCustomer.getName() + " arrived");
-            data.nameLogger("pw", "Customer" + nextCustomer.getName());
             data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
         }
 
