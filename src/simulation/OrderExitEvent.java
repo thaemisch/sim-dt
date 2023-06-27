@@ -39,6 +39,8 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " left");
             data.nameLogger("oe", "Customer" + customer.getName());
             data.chronoLogger("oe", myModel.presentTime().getTimeAsDouble());
+
+            data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
             CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
             customerArrivalPickup.schedule(customer, new TimeInstant(myModel.presentTime().getTimeAsDouble()+0.0000001));
 

@@ -29,6 +29,7 @@ public class DT_model extends Model {
         stoßzeit = false;
     }
     static Boolean halfOrderSize = false;
+    static Boolean threeQuarterOrderSize = false;
     static double arrivalTimeDiff = 1.0;
     static double orderTimeStartDiff = 1.0;
     static double orderTimeEndDiff = 1.0;
@@ -113,12 +114,20 @@ public class DT_model extends Model {
     public void init() {
         if (halfOrderSize){
             orderTimeEndDiff = 0.5;
-            orderTimeMeanDiff = 0.5;
+            orderTimeMeanDiff = 0.75;
 
             pickupTimeEndDiff = 0.5;
-            pickupTimeMeanDiff = 0.5;
+            pickupTimeMeanDiff = 0.75;
 
             salesVolumePerCustomerMaxDiff = 0.5;
+        } else if (threeQuarterOrderSize){
+            orderTimeEndDiff = 0.75;
+            orderTimeMeanDiff = 0.875;
+
+            pickupTimeEndDiff = 0.75;
+            pickupTimeMeanDiff = 0.875;
+
+            salesVolumePerCustomerMaxDiff = 0.75;
         }
         if (stoßzeit){
             customInit(1.167*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.2833*orderTimeEndDiff, 0.967*orderTimeMeanDiff, 0.0833*pickupTimeStartDiff, 8.3167*pickupTimeEndDiff, 1.833*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
@@ -137,6 +146,14 @@ public class DT_model extends Model {
             pickupTimeMeanDiff = 0.5;
 
             salesVolumePerCustomerMaxDiff = 0.5;
+        } else if (threeQuarterOrderSize){
+            orderTimeEndDiff = 0.75;
+            orderTimeMeanDiff = 0.875;
+
+            pickupTimeEndDiff = 0.75;
+            pickupTimeMeanDiff = 0.875;
+
+            salesVolumePerCustomerMaxDiff = 0.75;
         }
         if (stoßzeit){
             customInitSwitch(1.167*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.2833*orderTimeEndDiff, 0.967*orderTimeMeanDiff, 0.0833*pickupTimeStartDiff, 8.3167*pickupTimeEndDiff, 1.833*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
@@ -221,6 +238,9 @@ public class DT_model extends Model {
                     }
                     case "--halfordersize", "--hos" -> {
                         halfOrderSize = true;
+                    }
+                    case "--threequarterordersize", "--tos" -> {
+                        threeQuarterOrderSize = true;
                     }
                     case "--user", "-u" -> {
                         user = args[i + 1];

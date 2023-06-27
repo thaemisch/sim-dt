@@ -20,7 +20,6 @@ public class PickupExitEvent extends Event<CustomerEntity> {
         data.nameLogger("pe", "Customer" + customer.getName());
         data.chronoLogger("pe", myModel.presentTime().getTimeAsDouble());
 
-        data.chronoLogger("sv", myModel.getSalesVolumePerCustomer());
         if (!myModel.pickupQueue.isEmpty()) {
             CustomerEntity nextCustomer = myModel.pickupQueue.first();
             myModel.pickupQueue.remove(nextCustomer);
