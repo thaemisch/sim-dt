@@ -7,22 +7,27 @@ filenames = ["mcd1", "mcd2", "sim_default", "sim_halforder"]
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
 median_queue_delta_sideways = []
+avg_queue_delta_sideways = []
 
 max_queue_delta = []
 min_queue_delta = []
 median_queue_delta = []
+avg_queue_delta = []
 
 max_order_delta = []
 min_order_delta = []
 median_order_delta = []
+avg_order_delta = []
 
 max_pickup_queue_delta = []
 min_pickup_queue_delta = []
 median_pickup_queue_delta = []
+avg_pickup_queue_delta = []
 
 max_pickup_delta = []
 min_pickup_delta = []
 median_pickup_delta = []
+avg_pickup_delta = []
 
 
 for j in range(len(filenames)):
@@ -65,6 +70,7 @@ for j in range(len(filenames)):
     max_queue_delta_sideways.append(max(queue_deltas_sideways))
     min_queue_delta_sideways.append(min(queue_deltas_sideways))
     median_queue_delta_sideways.append(sorted(queue_deltas_sideways)[len(queue_deltas_sideways)//2])
+    avg_queue_delta_sideways.append(sum(queue_deltas_sideways, timedelta(0)) / len(queue_deltas_sideways))
 
     # Calculate min/max of each station
     # Queue
@@ -79,6 +85,7 @@ for j in range(len(filenames)):
     max_queue_delta.append(max(queue_deltas))
     min_queue_delta.append(min(queue_deltas))
     median_queue_delta.append(sorted(queue_deltas)[len(queue_deltas)//2])
+    avg_queue_delta.append(sum(queue_deltas, timedelta(0)) / len(queue_deltas))
 
     # Order
     for i in range(len(order)):
@@ -92,6 +99,7 @@ for j in range(len(filenames)):
     max_order_delta.append(max(order_deltas))
     min_order_delta.append(min(order_deltas))
     median_order_delta.append(sorted(order_deltas)[len(order_deltas)//2])
+    avg_order_delta.append(sum(order_deltas, timedelta(0)) / len(order_deltas))
 
     # Pickup Queue
     for i in range(len(pickup_queue)):
@@ -105,6 +113,7 @@ for j in range(len(filenames)):
     max_pickup_queue_delta.append(max(pickup_queue_deltas))
     min_pickup_queue_delta.append(min(pickup_queue_deltas))
     median_pickup_queue_delta.append(sorted(pickup_queue_deltas)[len(pickup_queue_deltas)//2])
+    avg_pickup_queue_delta.append(sum(pickup_queue_deltas, timedelta(0)) / len(pickup_queue_deltas))
 
     # Pickup
     for i in range(len(pickup)):
@@ -118,10 +127,12 @@ for j in range(len(filenames)):
     max_pickup_delta.append(max(pickup_deltas))
     min_pickup_delta.append(min(pickup_deltas))
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
+    avg_pickup_delta.append(sum(pickup_deltas, timedelta(0)) / len(pickup_deltas))
 
 def writeToReadme():
   # Create a markdown string with the variables and descriptions as a table
   html_string = f"""
+  <h1>Data</h1>
   <table>
   <tr>
     <td></td>
@@ -141,6 +152,9 @@ def writeToReadme():
           <td>{median_queue_delta_sideways[0]}</td>
         </tr>
         <tr>
+          <td>{avg_queue_delta_sideways[0]}</td>
+        </tr>
+        <tr>
           <td>{max_queue_delta_sideways[0]}</td>
         </tr>
       </table>
@@ -152,6 +166,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_queue_delta_sideways[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta_sideways[1]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta_sideways[1]}</td>
@@ -167,6 +184,9 @@ def writeToReadme():
           <td>{median_queue_delta_sideways[2]}</td>
         </tr>
         <tr>
+          <td>{avg_queue_delta_sideways[2]}</td>
+        </tr>
+        <tr>
           <td>{max_queue_delta_sideways[2]}</td>
         </tr>
       </table>
@@ -178,6 +198,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_queue_delta_sideways[3]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta_sideways[3]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta_sideways[3]}</td>
@@ -195,6 +218,9 @@ def writeToReadme():
         <tr>
           <td>{median_queue_delta[0]}</td>
         </tr>
+        tr>
+          <td>{avg_queue_delta[0]}</td>
+        </tr>
         <tr>
           <td>{max_queue_delta[0]}</td>
         </tr>
@@ -207,6 +233,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_queue_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta[1]}</td>
@@ -222,6 +251,9 @@ def writeToReadme():
           <td>{median_queue_delta[2]}</td>
         </tr>
         <tr>
+          <td>{avg_queue_delta[2]}</td>
+        </tr>
+        <tr>
           <td>{max_queue_delta[2]}</td>
         </tr>
       </table>
@@ -233,6 +265,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta[3]}</td>
         </tr>
         <tr>
           <td>{max_queue_delta[3]}</td>
@@ -251,6 +286,9 @@ def writeToReadme():
           <td>{median_order_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_order_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_order_delta[0]}</td>
         </tr>
       </table>
@@ -262,6 +300,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_order_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_order_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_order_delta[1]}</td>
@@ -277,6 +318,9 @@ def writeToReadme():
           <td>{median_order_delta[2]}</td>
         </tr>
         <tr>
+          <td>{avg_order_delta[2]}</td>
+        </tr>
+        <tr>
           <td>{max_order_delta[2]}</td>
         </tr>
       </table>
@@ -288,6 +332,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_order_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{avg_order_delta[3]}</td>
         </tr>
         <tr>
           <td>{max_order_delta[3]}</td>
@@ -306,6 +353,9 @@ def writeToReadme():
           <td>{median_pickup_queue_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_queue_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_queue_delta[0]}</td>
         </tr>
       </table>
@@ -317,6 +367,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_pickup_queue_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_pickup_queue_delta[1]}</td>
@@ -332,6 +385,9 @@ def writeToReadme():
           <td>{median_pickup_queue_delta[2]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_queue_delta[2]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_queue_delta[2]}</td>
         </tr>
       </table>
@@ -343,6 +399,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_pickup_queue_delta[3]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_queue_delta[3]}</td>
         </tr>
         <tr>
           <td>{max_pickup_queue_delta[3]}</td>
@@ -361,6 +420,9 @@ def writeToReadme():
           <td>{median_pickup_delta[0]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_delta[0]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_delta[0]}</td>
         </tr>
       </table>
@@ -372,6 +434,9 @@ def writeToReadme():
         </tr>
         <tr>
           <td>{median_pickup_delta[1]}</td>
+        </tr>
+        <tr>
+          <td>{avg_pickup_delta[1]}</td>
         </tr>
         <tr>
           <td>{max_pickup_delta[1]}</td>
@@ -387,6 +452,9 @@ def writeToReadme():
           <td>{median_pickup_delta[2]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_delta[2]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_delta[2]}</td>
         </tr>
       </table>
@@ -400,11 +468,32 @@ def writeToReadme():
           <td>{median_pickup_delta[3]}</td>
         </tr>
         <tr>
+          <td>{avg_pickup_delta[3]}</td>
+        </tr>
+        <tr>
           <td>{max_pickup_delta[3]}</td>
         </tr>
       </table>
     </td>
   </tr>
+  </table>
+
+  <h2>Legend</h2>
+  <table>
+    <tr>
+      <tr>
+        <td>Min</td>
+      </tr>
+      <tr>
+        <td>Median</td>
+      </tr>
+      <tr>
+        <td>Average</td>
+      </tr>
+      <tr>
+        <td>Max</td>
+      </tr>
+    </tr>
   </table>
   """
 
