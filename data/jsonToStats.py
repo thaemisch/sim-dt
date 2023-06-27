@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 import markdown
 
-filenames = ["mcd1", "mcd2", "sim_default", "sim_halforder"]
+filenames = ["mcd1", "mcd2"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -129,356 +129,118 @@ for j in range(len(filenames)):
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
     avg_pickup_delta.append(sum(pickup_deltas, timedelta(0)) / len(pickup_deltas))
 
-
 def writeToReadme():
-  # Create a markdown string with the variables and descriptions as a table
-  html_string = f"""
+    # Create a markdown string with the variables and descriptions as a table
+    html_string = f"""
   <h1>Data</h1>
   <table>
   <tr>
-    <td></td>
-    <td>{filenames[0]}</td>
-    <td>{filenames[1]}</td>
-    <td>{filenames[2]}</td>
-    <td>{filenames[3]}</td>
+    <td></td>"""
+    for filename in filenames:
+        html_string += f"""
+    <td>{filename}</td>"""
+    html_string += f"""
+  </tr>"""
+    html_string += f"""
+  <tr>
+    <td>New Arrival</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
+    <td>
+      <table>
+        <tr>
+          <td>{min_queue_delta_sideways[i]}</td>
+        </tr>
+        <tr>
+          <td>{avg_queue_delta_sideways[i]}</td>
+        </tr>
+        <tr>
+          <td>{max_queue_delta_sideways[i]}</td>
+        </tr>
+      </table>
+    </td>"""
+    html_string += f"""
   </tr>
   <tr>
-    <td>New Arrival</td>
+    <td>Queue</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
     <td>
       <table>
         <tr>
-          <td>{min_queue_delta_sideways[0]}</td>
+          <td>{min_queue_delta[i]}</td>
         </tr>
         <tr>
-          <td>{median_queue_delta_sideways[0]}</td>
+          <td>{avg_queue_delta[i]}</td>
         </tr>
         <tr>
-          <td>{avg_queue_delta_sideways[0]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta_sideways[0]}</td>
+          <td>{max_queue_delta[i]}</td>
         </tr>
       </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta_sideways[1]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta_sideways[1]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta_sideways[1]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta_sideways[1]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta_sideways[2]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta_sideways[2]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta_sideways[2]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta_sideways[2]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta_sideways[3]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta_sideways[3]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta_sideways[3]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta_sideways[3]}</td>
-        </tr>
-      </table>
-    </td>
+    </td>"""
+    html_string += f"""
   </tr>
   <tr>
-    <td>Queue</td>
+    <td>Order</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
     <td>
       <table>
         <tr>
-          <td>{min_queue_delta[0]}</td>
+          <td>{min_order_delta[i]}</td>
         </tr>
         <tr>
-          <td>{median_queue_delta[0]}</td>
+          <td>{avg_order_delta[i]}</td>
         </tr>
         <tr>
-          <td>{avg_queue_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta[0]}</td>
+          <td>{max_order_delta[i]}</td>
         </tr>
       </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta[1]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta[2]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{median_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{avg_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{max_queue_delta[3]}</td>
-        </tr>
-      </table>
-    </td>
+    </td>"""
+    html_string += f"""
   </tr>
   <tr>
-    <td>Order</td>
+    <td>Pickup Queue</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
     <td>
       <table>
         <tr>
-          <td>{min_order_delta[0]}</td>
+          <td>{min_pickup_queue_delta[i]}</td>
         </tr>
         <tr>
-          <td>{median_order_delta[0]}</td>
+          <td>{avg_pickup_queue_delta[i]}</td>
         </tr>
         <tr>
-          <td>{avg_order_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{max_order_delta[0]}</td>
+          <td>{max_pickup_queue_delta[i]}</td>
         </tr>
       </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_order_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{median_order_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{avg_order_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{max_order_delta[1]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_order_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{median_order_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{avg_order_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{max_order_delta[2]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_order_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{median_order_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{avg_order_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{max_order_delta[3]}</td>
-        </tr>
-      </table>
-    </td>
+    </td>"""
+    html_string += f"""
   </tr>
-    <tr>
-    <td>Pickup Queue</td>
+  <tr>
+    <td>Pickup</td>"""
+    for i in range(len(filenames)):
+      html_string += f"""
     <td>
       <table>
         <tr>
-          <td>{min_pickup_queue_delta[0]}</td>
+          <td>{min_pickup_delta[i]}</td>
         </tr>
         <tr>
-          <td>{median_pickup_queue_delta[0]}</td>
+          <td>{avg_pickup_delta[i]}</td>
         </tr>
         <tr>
-          <td>{avg_pickup_queue_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[0]}</td>
+          <td>{max_pickup_delta[i]}</td>
         </tr>
       </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[1]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[2]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[3]}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-    <tr>
-    <td>Pickup</td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_delta[0]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_delta[0]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_delta[1]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_delta[1]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_delta[2]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_delta[2]}</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>{min_pickup_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{median_pickup_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_delta[3]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_delta[3]}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  </table>
+    </td>"""
+    html_string += f"""
+    </tr>
+    </table>
+    """
 
+    html_string += f"""
   <table>
     <tr>
       <td>Legend</td>
@@ -502,12 +264,11 @@ def writeToReadme():
       </td>
     </tr>
   </table>
-  """
+    """
 
-  # Write the HTML string to the output.html file
-  with open("README.md", "w") as f:
-    f.write(html_string)
 
+    # Write the HTML string to the README.md file
+    with open("README.md", "w") as f:
+        f.write(html_string)
 
 writeToReadme()
-#writeToReadmeEnhanced()
