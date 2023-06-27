@@ -5,7 +5,6 @@ import desmoj.core.simulator.*;
 public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
 
     private DT_model myModel;
-    private Boolean insertedCustomer = false;
 
     public CustomerArrivalPickupEvent(Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
@@ -13,21 +12,10 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
     }
 
     public void eventRoutine(CustomerEntity customer) {
-        if (myModel.getPickupQueueLimit() == 0){
-            myModel.pickupQueue.insert(customer);
-            insertedCustomer = true;
-        } else if (myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() < myModel.getPickupQueueLimit()) {
-            myModel.pickupQueue.insert(customer);
-            insertedCustomer = true;
-        } else {
-            System.out.println("Pickup Queue | Customer rejected");
-        }
-        if (insertedCustomer) {
-            customer.setPickupQueueEntry(myModel.presentTime().getTimeAsDouble());
-            data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " arrived");
-            data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());
-        }
-        if (insertedCustomer && !myModel.freePickupWindow.isEmpty()) {
+        customer.setPickupQueueEntry(myModel.presentTime().getTimeAsDouble());
+        data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " arrived");
+        data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());
+        if (!myModel.freePickupWindow.isEmpty()) {
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " left");
             myModel.pickupQueue.remove(customer);
             customer.setPickupQueueExit(myModel.presentTime().getTimeAsDouble());
