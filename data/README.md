@@ -351,117 +351,27 @@
   </tr>
   <tr>
     <td>Sales Volume</td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>2375.192972588421</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>1837.0168750118958</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>2128.8065178575803</td>
-        </tr>
-      </table>
-    </td>
+          <td>2375.19</td>
+          <td>1837.02</td>
+          <td>2128.81</td>
   </tr>
   <tr>
     <td>Customers Lost</td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>3699.8725309999995</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
+          <td>45</td>
           <td>0</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>2505.6068709999995</td>
-        </tr>
-      </table>
-    </td>
+          <td>28</td>
   </tr>
   <tr>
     <td>Sales Volume Lost</td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
           <td>--</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>730.4875231775732</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
+          <td>730.49</td>
           <td>0</td>
-        </tr>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tr>
-          <td>399.84516868688456</td>
-        </tr>
-      </table>
-    </td>
+          <td>399.85</td>
   </tr>
   </table>
     

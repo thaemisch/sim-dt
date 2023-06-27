@@ -47,6 +47,7 @@ for j in range(len(filenames)):
           try:
             dt_list.append(datetime.strptime(dt_str, "%H:%M:%S"))
           except:
+            print("Error parsing datetime: " + dt_str)
             break
         lists.append(dt_list)
 
@@ -55,6 +56,7 @@ for j in range(len(filenames)):
     pickup_queue = lists[2]
     pickup = lists[3]
     exit_list = lists[4]
+    customers_lost_list = lists[5]
 
     queue_deltas = []
     queue_deltas_sideways = []
@@ -133,6 +135,9 @@ for j in range(len(filenames)):
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
     avg_pickup_delta.append(sum(pickup_deltas, timedelta(0)) / len(pickup_deltas))
 
+
+    customers_lost_total_list.append(len(customers_lost_list))
+
 for k in range(len(filenames_extended)):
   with open(filenames_extended[k] + ".json") as f:
     json_data_extended = json.load(f)
@@ -145,12 +150,10 @@ for k in range(len(filenames_extended)):
     lists_extended.append(double_list)
 
   sales_volume_list = lists_extended[0]
-  customers_lost_list = lists_extended[1]
-  sales_volume_lost_list = lists_extended[2]
+  sales_volume_lost_list = lists_extended[1]
 
-  sales_volume_total_list.append(sum(sales_volume_list))
-  customers_lost_total_list.append(sum(customers_lost_list))
-  sales_volume_lost_total_list.append(sum(sales_volume_lost_list))
+  sales_volume_total_list.append(round(sum(sales_volume_list), 2))
+  sales_volume_lost_total_list.append(round(sum(sales_volume_lost_list), 2))
 
 
 def writeToReadme():
@@ -266,22 +269,10 @@ def writeToReadme():
     for i in range(len(filenames)):
       if i < 2:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>--</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>--</td>"""
       else:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>{sales_volume_total_list[i-2]}</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>{sales_volume_total_list[i-2]}</td>"""
     html_string += f"""
   </tr>
   <tr>
@@ -289,22 +280,10 @@ def writeToReadme():
     for i in range(len(filenames)):
       if i < 2:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>--</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>--</td>"""
       else:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>{customers_lost_total_list[i-2]}</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>{customers_lost_total_list[i]}</td>"""
     html_string += f"""
   </tr>
   <tr>
@@ -312,22 +291,10 @@ def writeToReadme():
     for i in range(len(filenames)):
       if i < 2:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>--</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>--</td>"""
       else:
         html_string += f"""
-    <td>
-      <table>
-        <tr>
-          <td>{sales_volume_lost_total_list[i-2]}</td>
-        </tr>
-      </table>
-    </td>"""
+          <td>{sales_volume_lost_total_list[i-2]}</td>"""
     html_string += f"""
   </tr>
   </table>
