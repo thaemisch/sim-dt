@@ -154,17 +154,17 @@ public class DT_model extends Model {
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
                 switch (arg) {
-                    case "--start", "-s" -> {
+                    case "--start" -> {
                         startTime = Double.parseDouble(args[i + 1]);
                         i++;
                     }
-                    case "--end", "-e" -> {
+                    case "--end" -> {
                         endTime = Double.parseDouble(args[i + 1]);
                         i++;
                     }
-                    case "--stoßzeit" -> stoßzeit = true;
-                    case "--nebenzeit" -> nebenzeit = true;
-                    case "--switchtonebenzeit", "--stn" -> switchToNebenzeit = true;
+                    case "--stoßzeit", "--st" -> stoßzeit = true;
+                    case "--nebenzeit", "-ne" -> nebenzeit = true;
+                    case "--switchtonebenzeit", "--stne" -> switchToNebenzeit = true;
                     case "--orderqueuelimit", "--oql" -> {
                         orderQueueLimit = Integer.parseInt(args[i + 1]);
                         i++;
@@ -180,17 +180,27 @@ public class DT_model extends Model {
                         user = args[i + 1];
                         i++;
                     }
-                    case "--save" -> save = true;
+                    case "--save", "-s" -> save = true;
                     case "--quiet", "-q" -> quiet = true;
                     case "--help", "-h" -> {
                         System.out.println("Options:");
-                        System.out.println("-s, --start <time>      Set the start time of the simulation (Default: 0.0)");
-                        System.out.println("-e, --end <time>        Set the end time of the simulation(Default: 240.0)");
-                        System.out.println("-h, --help              Show this help");
+                        System.out.println("    --start <time> ________________________ Set the start time of the simulation (Default: 0.0)");
+                        System.out.println("    --end <time> __________________________ Set the end time of the simulation(Default: 240.0)");
+                        System.out.println("    --stoßzeit, --st ______________________ Set the simulation to Stoßzeit");
+                        System.out.println("    --nebenzeit, --ne _____________________ Set the simulation to Nebenzeit");
+                        System.out.println("    --switchtonebenzeit, --stne ___________ Set the simulation to switch to Nebenzeit");
+                        System.out.println("    --orderqueuelimit, --oql <limit> ______ Set the order queue limit (Default: 10)");
+                        System.out.println("    --pickupqueuelimit, --pql <limit> _____ Set the pickup queue limit (Default: 10)");
+                        System.out.println("    --halfordersize, --hos ________________ Set the order size to half");
+                        System.out.println("    --user, -u <name> _____________________ Set the user name");
+                        System.out.println("    --save, -s ____________________________ Save the results to a file");
+                        System.out.println("    --quiet, -q ___________________________ Don't print the results to the console");
+                        System.out.println("    --help, -h ____________________________ Show this help");
                         System.exit(0);
                     }
                     default -> {
                         System.err.println("Unknown argument: " + arg);
+                        main(new String[]{"--help"});
                         System.exit(1);
                     }
                 }
@@ -216,8 +226,7 @@ public class DT_model extends Model {
             error.delete();
             report.delete();
             trace.delete();
-        }
-        if (user.contains("eli")) {
+        } else if (user.contains("eli")) {
             File debug = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_debug.html");
             File error = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_error.html");
             File report = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_report.html");
