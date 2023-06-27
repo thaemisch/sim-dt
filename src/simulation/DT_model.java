@@ -213,7 +213,7 @@ public class DT_model extends Model {
             File report= new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
             File trace = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
             debug.delete();
-            //error.delete();
+            error.delete();
             report.delete();
             trace.delete();
         }
