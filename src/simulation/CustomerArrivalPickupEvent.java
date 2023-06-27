@@ -12,6 +12,7 @@ public class CustomerArrivalPickupEvent extends Event<CustomerEntity>{
     }
 
     public void eventRoutine(CustomerEntity customer) {
+        myModel.pickupQueue.insert(customer);
         customer.setPickupQueueEntry(myModel.presentTime().getTimeAsDouble());
         data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Queue: Customer" + customer.getName() + " arrived");
         data.chronoLogger("pq", myModel.presentTime().getTimeAsDouble());

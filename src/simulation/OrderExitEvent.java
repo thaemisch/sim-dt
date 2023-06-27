@@ -18,7 +18,7 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
             freedOrderWindow = true;
-        } else if (myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() <= myModel.getPickupQueueLimit()) {
+        } else if ((myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() <= myModel.getPickupQueueLimit())) {
             System.out.println("PQL: " + myModel.pickupQueue.length());
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
