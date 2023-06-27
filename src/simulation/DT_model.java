@@ -117,11 +117,11 @@ public class DT_model extends Model {
             salesVolumePerCustomerMaxDiff = 0.5;
         }
         if (stoßzeit){
-            customInit(1.067*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.283*orderTimeEndDiff, 1*orderTimeMeanDiff, 0.1*pickupTimeStartDiff, 4.867*pickupTimeEndDiff, 1.133*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(0.833*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.2833*orderTimeEndDiff, 0.967*orderTimeMeanDiff, 0.0833*pickupTimeStartDiff, 8.3167*pickupTimeEndDiff, 1.833*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else if (nebenzeit){
-            customInit(1.33*arrivalTimeDiff, 0.3*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 3.33*pickupTimeEndDiff, 0.8*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(1.33*arrivalTimeDiff, 0.33*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 6.6*pickupTimeEndDiff, 2.5*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         } else {
-            customInit(1.067*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.283*orderTimeEndDiff, 1*orderTimeMeanDiff, 0.1*pickupTimeStartDiff, 4.867*pickupTimeEndDiff, 1.133*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+            customInit(1.33*arrivalTimeDiff, 0.33*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 6.6*pickupTimeEndDiff, 2.5*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         }
     }
 
