@@ -18,6 +18,10 @@ public class DT_model extends Model {
     static double nebenzeitDuration = (endTime - startTime) / 2;
     static Boolean stoßzeit = false;
     static Boolean nebenzeit = false;
+    public static void setNebenzeit(){
+        nebenzeit = true;
+        stoßzeit = false;
+    }
     static Boolean halfOrderSize = false;
     static double arrivalTimeDiff = 1.0;
     static double orderTimeStartDiff = 1.0;
@@ -90,8 +94,10 @@ public class DT_model extends Model {
 
     public void doInitialSchedules() {
         CustomerNewEvent firstCustomer = new CustomerNewEvent(this, "FirstCustomer", true);
-
         firstCustomer.schedule(new TimeInstant(getCustomerArrivalTime()));
+
+        //SwitchToNebenzeitEvent switchToNebenzeit = new SwitchToNebenzeitEvent(this, "SwitchToNebenzeit", true);
+        //switchToNebenzeit.schedule(new TimeSpan(endTime/2));
     }
 
     public void init() {
@@ -198,24 +204,24 @@ public class DT_model extends Model {
         dtExperiment.start();
         dtExperiment.finish();
         if (user.contains("tim")) {
-            File file0 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
-            File file1 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
-            File file2 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
-            File file3 = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
-            file0.delete();
-            file1.delete();
-            file2.delete();
-            file3.delete();
+            File debug = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
+            File error = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
+            File report= new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
+            File trace = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_trace.html");
+            debug.delete();
+            //error.delete();
+            report.delete();
+            trace.delete();
         }
         if (user.contains("eli")) {
-            File file0 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_debug.html");
-            File file1 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_error.html");
-            File file2 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_report.html");
-            File file3 = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_trace.html");
-            file0.delete();
-            file1.delete();
-            file2.delete();
-            file3.delete();
+            File debug = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_debug.html");
+            File error = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_error.html");
+            File report = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_report.html");
+            File trace = new File("C:/Users/elihi/IdeaProjects/sim-dt/src/simulation/dt-event_trace.html");
+            debug.delete();
+            error.delete();
+            report.delete();
+            trace.delete();
         }
         data.printLog();
         if (save)
