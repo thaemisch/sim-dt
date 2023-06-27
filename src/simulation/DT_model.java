@@ -128,7 +128,38 @@ public class DT_model extends Model {
             customInit(1.33*arrivalTimeDiff, 0.33*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 6.6*pickupTimeEndDiff, 2.5*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
         }
     }
+    public void initSwitch(){
+        if (halfOrderSize){
+            orderTimeEndDiff = 0.5;
+            orderTimeMeanDiff = 0.5;
 
+            pickupTimeEndDiff = 0.5;
+            pickupTimeMeanDiff = 0.5;
+
+            salesVolumePerCustomerMaxDiff = 0.5;
+        }
+        if (stoßzeit){
+            customInitSwitch(0.833*arrivalTimeDiff, 0.167*orderTimeStartDiff, 2.2833*orderTimeEndDiff, 0.967*orderTimeMeanDiff, 0.0833*pickupTimeStartDiff, 8.3167*pickupTimeEndDiff, 1.833*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+        } else if (nebenzeit){
+            customInitSwitch(1.33*arrivalTimeDiff, 0.33*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 6.6*pickupTimeEndDiff, 2.5*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+        } else {
+            customInitSwitch(1.33*arrivalTimeDiff, 0.33*orderTimeStartDiff, 1.383*orderTimeEndDiff, 0.5833*orderTimeMeanDiff, 0.133*pickupTimeStartDiff, 6.6*pickupTimeEndDiff, 2.5*pickupTimeMeanDiff, 5.0*salesVolumePerCustomerMinDiff, 30.0*salesVolumePerCustomerMaxDiff);
+        }
+    }
+
+
+    public void customInitSwitch(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double orderTimeMean, Double pickupTimeStart, Double pickupTimeEnd, Double pickupTimeMean, Double salesVolumePerCustomerMin, Double salesVolumePerCustomerMax) {
+        // Order
+        customerArrivalTime = new ContDistExponential(this, "CustomerArrivalTime", arrivalTime, true, false);
+        customerArrivalTime.setNonNegative(true);
+        orderTime = new ContDistTriangular(this, "OrderTime", orderTimeStart, orderTimeEnd, orderTimeMean, true, false);
+
+        // Pickup
+        pickupTime = new ContDistTriangular(this, "PickupTime", pickupTimeStart, pickupTimeEnd, pickupTimeMean, true, false);
+
+        // General
+        salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", salesVolumePerCustomerMin, salesVolumePerCustomerMax, true, false);
+    }
 
     public void customInit(Double arrivalTime, Double orderTimeStart, Double orderTimeEnd, Double orderTimeMean, Double pickupTimeStart, Double pickupTimeEnd, Double pickupTimeMean, Double salesVolumePerCustomerMin, Double salesVolumePerCustomerMax) {
         // Order
