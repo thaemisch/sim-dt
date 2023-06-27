@@ -218,7 +218,7 @@ def writeToReadme():
         <tr>
           <td>{median_queue_delta[0]}</td>
         </tr>
-        tr>
+        <tr>
           <td>{avg_queue_delta[0]}</td>
         </tr>
         <tr>
