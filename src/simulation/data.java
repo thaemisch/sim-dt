@@ -74,15 +74,23 @@ public class data {
 
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString(jsonLists);
+        StringBuilder sb = new StringBuilder();
+        sb.append("sim");
 
+        if (DT_model.switchToStoßzeit) {
+            sb.append("-nest");
+        } else if (DT_model.switchToNebenzeit) {
+            sb.append("-stne");
+        }
         if (DT_model.halfOrderSize) {
-            fileName = "sim_halforder.json";
-        } else {
-            fileName = "sim_default.json";
+            sb.append("-half");
+        }
+        if (sb.equals("sim")) {
+            sb.append("-default");
         }
 
         // Write the JSON string to the file
-        File file = new File(directory, fileName);
+        File file = new File(directory, sb.toString());
         try {
             writeStringToFile(file, jsonStr);
         } catch (IOException e) {
