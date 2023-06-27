@@ -16,20 +16,23 @@ public class DT_model extends Model {
     public static Boolean switchToNebenzeit = false;
     public static Boolean switchToStoßzeit = false;
     // Variables
-    static double startTime = 0.0;
-    static double endTime = 240.0;
+    public static double startTime = 0.0;
+    public static double endTime = 240.0;
+    public static Double getEndTime() {
+        return endTime;
+    }
     static Boolean stoßzeit = false;
     public static void setStoßzeit(){
         stoßzeit = true;
         nebenzeit = false;
     }
-    static Boolean nebenzeit = false;
+    public static Boolean nebenzeit = false;
     public static void setNebenzeit(){
         nebenzeit = true;
         stoßzeit = false;
     }
-    static Boolean halfOrderSize = false;
-    static Boolean threeQuarterOrderSize = false;
+    public static Boolean halfOrderSize = false;
+    public static Boolean threeQuarterOrderSize = false;
     static double arrivalTimeDiff = 1.0;
     static double orderTimeStartDiff = 1.0;
     static double orderTimeEndDiff = 1.0;

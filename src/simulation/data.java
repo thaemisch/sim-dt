@@ -6,30 +6,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import desmoj.core.simulator.Model;
-
 public class data {
     private static String dirPath;
     private static String fileName;
     private static List<Double> orderQueue = new ArrayList<>();
-    private static List<String> orderQueueCustomers = new ArrayList<>();
 
     private static List<Double> orderWindow = new ArrayList<>();
-    private static List<String> orderWindowCustomers = new ArrayList<>();
 
     private static List<Double> orderExit = new ArrayList<>();
-    private static List<String> orderExitCustomers = new ArrayList<>();
 
     private static List<Double> pickupQueue = new ArrayList<>();
-    private static List<String> pickupQueueCustomers = new ArrayList<>();
 
     private static List<Double> pickupWindow = new ArrayList<>();
-    private static List<String> pickupWindowCustomers = new ArrayList<>();
 
     private static List<Double> pickupExit = new ArrayList<>();
-    private static List<String> pickupExitCustomers = new ArrayList<>();
     private static List<Double> customersLost = new ArrayList<>();
-    private static List<String> customersLostCustomers = new ArrayList<>();
     private static List<Double> salesVolumeLost = new ArrayList<>();
 
     private static List<Double> salesVolume = new ArrayList<>();
@@ -80,9 +71,14 @@ public class data {
         return sum;
     }
 
-    public static void writeListsToFile() {
+    public static void writeListsToFile(){
+        writeListsToFile1();
+        writeListsToFile2();
+    }
+
+    public static void writeListsToFile1() {
         // Convert the lists to a JSON-serializable format
-        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, orderExit, pickupQueue, pickupWindow, pickupExit);
+        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow);
         if (DT_model.user.contains("tim")) {
             dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
         } else if (DT_model.user.contains("eli")) {
@@ -96,17 +92,67 @@ public class data {
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString(jsonLists);
         StringBuilder sb = new StringBuilder();
-        sb.append("sim");
+        sb.append("sim").append(DT_model.getEndTime().toString().replace('.', '-'));
 
-        if (DT_model.switchToStoßzeit) {
+        if (DT_model.switchToStoßzeit)
             sb.append("-nest");
-        } else if (DT_model.switchToNebenzeit) {
+        else if (DT_model.switchToNebenzeit)
             sb.append("-stne");
-        }
+        if (DT_model.getOrderQueueLimit() > 0)
+            sb.append("-oql").append(DT_model.getOrderQueueLimit());
+        if (DT_model.getPickupQueueLimit() > 0)
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());
         if (DT_model.halfOrderSize) {
-            sb.append("-half");
+            sb.append("-hos");
+        } else if (DT_model.threeQuarterOrderSize) {
+            sb.append("-tos");
         }
         if (sb.equals("sim")) {
+            sb.append("-default");
+        }
+
+        // Write the JSON string to the file
+        File file = new File(directory, sb.toString());
+        try {
+            writeStringToFile(file, jsonStr);
+        } catch (IOException e) {
+            System.out.println("ERROR: Could not write to file");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeListsToFile2() {
+        // Convert the lists to a JSON-serializable format
+        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow);
+        if (DT_model.user.contains("tim")) {
+            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+        } else if (DT_model.user.contains("eli")) {
+            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
+        } else {
+            System.exit(1);
+        }
+
+        File directory = new File(dirPath);
+
+        // Convert the lists to a JSON string
+        String jsonStr = convertListsToJsonString(jsonLists);
+        StringBuilder sb = new StringBuilder();
+        sb.append("extended").append(DT_model.getEndTime().toString().replace('.', '-'));
+
+        if (DT_model.switchToStoßzeit)
+            sb.append("-nest");
+        else if (DT_model.switchToNebenzeit)
+            sb.append("-stne");
+        if (DT_model.getOrderQueueLimit() > 0)
+            sb.append("-oql").append(DT_model.getOrderQueueLimit());
+        if (DT_model.getPickupQueueLimit() > 0)
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());
+        if (DT_model.halfOrderSize) {
+            sb.append("-hos");
+        } else if (DT_model.threeQuarterOrderSize) {
+            sb.append("-tos");
+        }
+        if (sb.equals("extended")) {
             sb.append("-default");
         }
 
