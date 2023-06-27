@@ -78,7 +78,7 @@ public class data {
 
     public static void writeListsToFile1() {
         // Convert the lists to a JSON-serializable format
-        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow);
+        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow, pickupExit, customersLost);
         if (DT_model.user.contains("tim")) {
             dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
         } else if (DT_model.user.contains("eli")) {
@@ -91,18 +91,20 @@ public class data {
         File directory = new File(dirPath);
 
         // Convert the lists to a JSON string
-        String jsonStr = convertListsToJsonString(jsonLists);
+        String jsonStr = convertListsToJsonString1(jsonLists);
         StringBuilder sb = new StringBuilder();
-        sb.append("sim").append(DT_model.getEndTime().toString().replace('.', '-'));
+        sb.append("sim");
+        if (DT_model.getEndTime() != 240.0)
+            sb.append(DT_model.getEndTime().toString().replace('.', '-'));
 
         if (DT_model.switchToStoßzeit)
             sb.append("-nest");
         else if (DT_model.switchToNebenzeit)
             sb.append("-stne");
-        if (DT_model.getOrderQueueLimit() > 0)
+        /*if (DT_model.getOrderQueueLimit() > 0)
             sb.append("-oql").append(DT_model.getOrderQueueLimit());
         if (DT_model.getPickupQueueLimit() > 0)
-            sb.append("-pql").append(DT_model.getPickupQueueLimit());
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());*/
         if (DT_model.halfOrderSize) {
             sb.append("-hos");
         } else if (DT_model.threeQuarterOrderSize) {
@@ -125,7 +127,7 @@ public class data {
 
     public static void writeListsToFile2() {
         // Convert the lists to a JSON-serializable format
-        List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow);
+        List<List<Double>> jsonLists = List.of(salesVolume, salesVolumeLost);
         if (DT_model.user.contains("tim")) {
             dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
         } else if (DT_model.user.contains("eli")) {
@@ -138,18 +140,20 @@ public class data {
         File directory = new File(dirPath);
 
         // Convert the lists to a JSON string
-        String jsonStr = convertListsToJsonString(jsonLists);
+        String jsonStr = convertListsToJsonString2(jsonLists);
         StringBuilder sb = new StringBuilder();
-        sb.append("extended").append(DT_model.getEndTime().toString().replace('.', '-'));
+        sb.append("extended");
+        if (DT_model.getEndTime() != 240.0)
+            sb.append(DT_model.getEndTime().toString().replace('.', '-'));
 
         if (DT_model.switchToStoßzeit)
             sb.append("-nest");
         else if (DT_model.switchToNebenzeit)
             sb.append("-stne");
-        if (DT_model.getOrderQueueLimit() > 0)
+        /*if (DT_model.getOrderQueueLimit() > 0)
             sb.append("-oql").append(DT_model.getOrderQueueLimit());
         if (DT_model.getPickupQueueLimit() > 0)
-            sb.append("-pql").append(DT_model.getPickupQueueLimit());
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());*/
         if (DT_model.halfOrderSize) {
             sb.append("-hos");
         } else if (DT_model.threeQuarterOrderSize) {
@@ -170,7 +174,7 @@ public class data {
         }
     }
 
-    public static String convertListsToJsonString(List<List<Double>> lists) {
+    public static String convertListsToJsonString1(List<List<Double>> lists) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (int i = 0; i < lists.size(); i++) {
@@ -178,6 +182,31 @@ public class data {
             for (int j = 0; j < lists.get(i).size(); j++) {
                 try{
                     sb.append("\"").append(convertMinutesToTimeString(lists.get(i).get(j))).append("\"");
+                }catch (NullPointerException e){
+                    sb.append("null").append("\"");
+                }
+
+                if (j < lists.get(i).size() - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("]");
+            if (i < lists.size() - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static String convertListsToJsonString2(List<List<Double>> lists) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < lists.size(); i++) {
+            sb.append("[");
+            for (int j = 0; j < lists.get(i).size(); j++) {
+                try{
+                    sb.append("\"").append(lists.get(i).get(j)).append("\"");
                 }catch (NullPointerException e){
                     sb.append("null").append("\"");
                 }
