@@ -84,6 +84,7 @@ public class data {
         } else if (DT_model.user.contains("eli")) {
             dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
         } else {
+            System.out.println("No user, no output! Exiting...");
             System.exit(1);
         }
 
@@ -110,6 +111,7 @@ public class data {
         if (sb.equals("sim")) {
             sb.append("-default");
         }
+        sb.append(".json");
 
         // Write the JSON string to the file
         File file = new File(directory, sb.toString());
@@ -129,6 +131,7 @@ public class data {
         } else if (DT_model.user.contains("eli")) {
             dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
         } else {
+            System.out.println("No user, no output! Exiting...");
             System.exit(1);
         }
 
@@ -155,6 +158,7 @@ public class data {
         if (sb.equals("extended")) {
             sb.append("-default");
         }
+        sb.append(".json");
 
         // Write the JSON string to the file
         File file = new File(directory, sb.toString());
