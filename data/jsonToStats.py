@@ -63,8 +63,8 @@ for j in range(len(filenames)):
       try:
         if not queue[i] == "null" and not queue[i+1] == "null":
           delta = queue[i+1] - queue[i]
-          if delta > timedelta(seconds=5):
-            queue_deltas_sideways.append(delta)
+          #if delta > timedelta(seconds=5):
+          queue_deltas_sideways.append(delta)
       except:
         break
     max_queue_delta_sideways.append(max(queue_deltas_sideways))
@@ -78,8 +78,8 @@ for j in range(len(filenames)):
       try:
         if not queue[i] == "null" and not order[i] == "null":
           delta = order[i] - queue[i]
-          if delta > timedelta(seconds=5):
-            queue_deltas.append(delta)
+          #if delta > timedelta(seconds=5):
+          queue_deltas.append(delta)
       except:
         break
     max_queue_delta.append(max(queue_deltas))
@@ -92,8 +92,8 @@ for j in range(len(filenames)):
       try:
         if not order[i] == "null" and not pickup_queue[i] == "null":
           delta = pickup_queue[i] - order[i]
-          if delta > timedelta(seconds=5):
-            order_deltas.append(delta)
+          #if delta > timedelta(seconds=5):
+          order_deltas.append(delta)
       except:
         break
     max_order_delta.append(max(order_deltas))
@@ -106,8 +106,8 @@ for j in range(len(filenames)):
       try:
         if not pickup_queue[i] == "null" and not pickup[i] == "null":
           delta = pickup[i] - pickup_queue[i]
-          if delta > timedelta(seconds=5):
-            pickup_queue_deltas.append(delta)
+          #if delta > timedelta(seconds=5):
+          pickup_queue_deltas.append(delta)
       except:
         break
     max_pickup_queue_delta.append(max(pickup_queue_deltas))
@@ -120,8 +120,8 @@ for j in range(len(filenames)):
       try:
         if not pickup[i] == "null" and not exit[i] == "null":
           delta = exit[i] - pickup[i]
-          if delta > timedelta(seconds=5):
-            pickup_deltas.append(delta)
+          #if delta > timedelta(seconds=5):
+          pickup_deltas.append(delta)
       except:
         break
     max_pickup_delta.append(max(pickup_deltas))
