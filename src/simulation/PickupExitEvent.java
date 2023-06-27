@@ -30,8 +30,13 @@ public class PickupExitEvent extends Event<CustomerEntity> {
             myModel.freePickupWindow.remove(pickup);
             myModel.busyPickupWindow.insert(pickup);
 
+            Double newPickupTime = myModel.getPickupTime()- nextCustomer.getPickupQueueTime();
+            if (newPickupTime < 0.083) {
+                newPickupTime = 0.083;
+            }
+
             PickupExitEvent pickupExit = new PickupExitEvent(myModel, "Pickup Exit", true);
-            pickupExit.schedule(nextCustomer, new TimeSpan(myModel.getPickupTime()- nextCustomer.getPickupQueueTime()));
+            pickupExit.schedule(nextCustomer, new TimeSpan(newPickupTime));
 
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Pickup Window: Customer" + nextCustomer.getName() + " arrived");
             data.chronoLogger("pw", myModel.presentTime().getTimeAsDouble());
