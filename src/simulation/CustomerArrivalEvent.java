@@ -16,9 +16,12 @@ public class CustomerArrivalEvent extends Event<CustomerEntity>{
         if (myModel.getOrderQueueLimit() == 0) {
             myModel.orderQueue.insert(customer);
             insertedCustomer = true;
-        } else if (myModel.getOrderQueueLimit() > 0 && myModel.orderQueue.length() < myModel.getOrderQueueLimit()) {
+        } else if (myModel.getOrderQueueLimit() > 0 && myModel.orderQueue.length() <= myModel.getOrderQueueLimit()) {
+            System.out.println("ORDER QUEUE LENGTH: " + myModel.orderQueue.length());
             myModel.orderQueue.insert(customer);
             insertedCustomer = true;
+        } else {
+            System.out.println("ORDER QUEUE REJECTED Customer" + customer.getName() + " Rejected");
         }
         if (insertedCustomer) {
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Queue: Customer" + customer.getName() + " arrived");
