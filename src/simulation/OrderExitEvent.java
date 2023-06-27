@@ -19,12 +19,12 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.freeOrderWindow.insert(order);
             freedOrderWindow = true;
         } else if (myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() <= myModel.getPickupQueueLimit()) {
-            System.out.println("PICKUP QUEUE LENGTH: " + myModel.pickupQueue.length());
+            System.out.println("PQL: " + myModel.pickupQueue.length());
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
             freedOrderWindow = true;
         } else {
-            System.out.println("REJECTED PICKUP QUEUE LENGTH: " + myModel.pickupQueue.length());
+            System.out.println("REJECTED PQL: " + myModel.pickupQueue.length());
             PickupQueueRejectedEvent pickupQueueRejected = new PickupQueueRejectedEvent(myModel, "Pickup Queue Rejected", true);
             pickupQueueRejected.schedule(customer, new TimeInstant(myModel.presentTime().getTimeAsDouble()+0.0000001));
         }
