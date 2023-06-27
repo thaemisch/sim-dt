@@ -6,6 +6,7 @@ public class OrderExitEvent extends Event<CustomerEntity> {
 
     private DT_model myModel;
     private Boolean freedOrderWindow = false;
+    private Boolean limit = false;
 
     public OrderExitEvent(Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
@@ -18,17 +19,23 @@ public class OrderExitEvent extends Event<CustomerEntity> {
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
             freedOrderWindow = true;
-        } else if ((myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() <= myModel.getPickupQueueLimit())) {
-            System.out.println("PQL: " + myModel.pickupQueue.length());
+        } else if (myModel.getPickupQueueLimit() > 0 && myModel.pickupQueue.length() < myModel.getPickupQueueLimit()) {
             myModel.busyOrderWindow.remove(order);
             myModel.freeOrderWindow.insert(order);
             freedOrderWindow = true;
         } else {
-            System.out.println("REJECTED PQL: " + myModel.pickupQueue.length());
-            PickupQueueRejectedEvent pickupQueueRejected = new PickupQueueRejectedEvent(myModel, "Pickup Queue Rejected", true);
-            pickupQueueRejected.schedule(customer, new TimeInstant(myModel.presentTime().getTimeAsDouble()+0.0000001));
+            myModel.stuckInOrder.insert(customer);
+            CustomerEntity test = myModel.stuckInOrder.first();
+            System.out.println("DEBUG1 " + test.getName() +" | "+ myModel.presentTime().getTimeAsDouble());
+            /*
+            System.out.println("DEBUG1: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
+            OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
+            orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
+            System.out.println("DEBUG2: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
+            */
         }
         if (freedOrderWindow) {
+            System.out.println("DEBUG3: " + myModel.presentTime().getTimeAsDouble() + " | " + myModel.pickupQueue.length() + " | " + customer.getName());
             data.silentScreamer(myModel.presentTime().getTimeAsDouble() + " | Order Window: Customer" + customer.getName() + " left");
             data.chronoLogger("oe", myModel.presentTime().getTimeAsDouble());
             CustomerArrivalPickupEvent customerArrivalPickup = new CustomerArrivalPickupEvent(myModel, "Customer Arrival Pickup", true);
@@ -49,9 +56,6 @@ public class OrderExitEvent extends Event<CustomerEntity> {
 
             OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
             orderExit.schedule(nextCustomer, new TimeSpan(myModel.getOrderTime()));
-        } else if (!freedOrderWindow){
-            OrderExitEvent orderExit = new OrderExitEvent(myModel, "Order Exit", true);
-            orderExit.schedule(customer, new TimeSpan(myModel.getOrderTime()));
         }
     }
 }

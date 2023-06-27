@@ -65,6 +65,8 @@ public class DT_model extends Model {
     protected Queue<OrderEntity> freeOrderWindow;
     protected Queue<OrderEntity> busyOrderWindow;
 
+    protected Queue<CustomerEntity> stuckInOrder;
+
     /*
      * Pickup
      */
@@ -137,6 +139,7 @@ public class DT_model extends Model {
         order = new OrderEntity(this, "Order", true);
         freeOrderWindow.insert(order);
         busyOrderWindow = new Queue<OrderEntity>(this, "BusyOrderWindow", true, true);
+        stuckInOrder = new Queue<CustomerEntity>(this, "StuckInOrder", true, true);
 
         // Pickup
         pickupTime = new ContDistTriangular(this, "PickupTime", pickupTimeStart, pickupTimeEnd, pickupTimeMean, true, false);
