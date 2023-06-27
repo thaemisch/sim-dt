@@ -2,7 +2,8 @@ import json
 from datetime import datetime, timedelta
 import markdown
 
-filenames = ["mcd1", "mcd2"]
+filenames = ["mcd1", "mcd2", "sim-stne", "sim-stne-hos", "sim-stne-tos"]
+filenames_extended = ["extended-stne", "extended-stne-hos", "extended-stne-tos"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -29,6 +30,9 @@ min_pickup_delta = []
 median_pickup_delta = []
 avg_pickup_delta = []
 
+sales_volume_total_list = []
+customers_lost_total_list = []
+sales_volume_lost_total_list = []
 
 for j in range(len(filenames)):
     # Read the JSON file
@@ -128,6 +132,26 @@ for j in range(len(filenames)):
     min_pickup_delta.append(min(pickup_deltas))
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
     avg_pickup_delta.append(sum(pickup_deltas, timedelta(0)) / len(pickup_deltas))
+
+for k in range(len(filenames_extended)):
+  with open(filenames_extended[k] + ".json") as f:
+    json_data_extended = json.load(f)
+
+  lists_extended = []
+  for json_list in json_data_extended:
+    double_list = []
+    for str in json_list:
+      double_list.append(float(str))
+    lists_extended.append(double_list)
+
+  sales_volume_list = lists_extended[0]
+  customers_lost_list = lists_extended[1]
+  sales_volume_lost_list = lists_extended[2]
+
+  sales_volume_total_list.append(sum(sales_volume_list))
+  customers_lost_total_list.append(sum(customers_lost_list))
+  sales_volume_lost_total_list.append(sum(sales_volume_lost_list))
+
 
 def writeToReadme():
     # Create a markdown string with the variables and descriptions as a table
@@ -254,13 +278,7 @@ def writeToReadme():
     <td>
       <table>
         <tr>
-          <td>{min_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[i]}</td>
+          <td>{sales_volume_total_list[i-2]}</td>
         </tr>
       </table>
     </td>"""
@@ -283,13 +301,7 @@ def writeToReadme():
     <td>
       <table>
         <tr>
-          <td>{min_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[i]}</td>
+          <td>{customers_lost_total_list[i-2]}</td>
         </tr>
       </table>
     </td>"""
@@ -312,13 +324,7 @@ def writeToReadme():
     <td>
       <table>
         <tr>
-          <td>{min_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{avg_pickup_queue_delta[i]}</td>
-        </tr>
-        <tr>
-          <td>{max_pickup_queue_delta[i]}</td>
+          <td>{sales_volume_lost_total_list[i-2]}</td>
         </tr>
       </table>
     </td>"""
@@ -337,7 +343,7 @@ def writeToReadme():
             <td>Min</td>
           </tr>
           <tr>
-            <td>Average</td>
+            <td>Avg</td>
           </tr>
           <tr>
             <td>Max</td>

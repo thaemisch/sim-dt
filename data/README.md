@@ -5,6 +5,9 @@
     <td></td>
     <td>mcd1</td>
     <td>mcd2</td>
+    <td>sim-stne</td>
+    <td>sim-stne-hos</td>
+    <td>sim-stne-tos</td>
   </tr>
   <tr>
     <td>New Arrival</td>
@@ -31,6 +34,45 @@
         </tr>
         <tr>
           <td>0:03:38</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:01</td>
+        </tr>
+        <tr>
+          <td>0:01:43.708029</td>
+        </tr>
+        <tr>
+          <td>0:09:08</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:01</td>
+        </tr>
+        <tr>
+          <td>0:01:18.065934</td>
+        </tr>
+        <tr>
+          <td>0:09:08</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:01</td>
+        </tr>
+        <tr>
+          <td>0:01:32.259740</td>
+        </tr>
+        <tr>
+          <td>0:09:08</td>
         </tr>
       </table>
     </td>
@@ -63,6 +105,45 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:11:59.409091</td>
+        </tr>
+        <tr>
+          <td>0:23:01</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:01:23.224044</td>
+        </tr>
+        <tr>
+          <td>0:05:10</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:07:11.619355</td>
+        </tr>
+        <tr>
+          <td>0:20:02</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Order</td>
@@ -89,6 +170,45 @@
         </tr>
         <tr>
           <td>0:02:17</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:15</td>
+        </tr>
+        <tr>
+          <td>0:01:46.274809</td>
+        </tr>
+        <tr>
+          <td>0:05:42</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:13</td>
+        </tr>
+        <tr>
+          <td>0:00:46.666667</td>
+        </tr>
+        <tr>
+          <td>0:03:00</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:14</td>
+        </tr>
+        <tr>
+          <td>0:01:13.006494</td>
+        </tr>
+        <tr>
+          <td>0:04:59</td>
         </tr>
       </table>
     </td>
@@ -121,6 +241,45 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:08:26.078740</td>
+        </tr>
+        <tr>
+          <td>0:15:16</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:03:18.955801</td>
+        </tr>
+        <tr>
+          <td>0:08:06</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:00</td>
+        </tr>
+        <tr>
+          <td>0:05:51.084967</td>
+        </tr>
+        <tr>
+          <td>0:11:20</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Pickup</td>
@@ -150,6 +309,45 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:04</td>
+        </tr>
+        <tr>
+          <td>0:01:52.182540</td>
+        </tr>
+        <tr>
+          <td>0:07:28</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:05</td>
+        </tr>
+        <tr>
+          <td>0:01:05.894444</td>
+        </tr>
+        <tr>
+          <td>0:03:52</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0:00:05</td>
+        </tr>
+        <tr>
+          <td>0:01:27.875000</td>
+        </tr>
+        <tr>
+          <td>0:05:31</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Sales Volume</td>
@@ -164,6 +362,27 @@
       <table>
         <tr>
           <td>--</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>2375.192972588421</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>1837.0168750118958</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>2128.8065178575803</td>
         </tr>
       </table>
     </td>
@@ -184,6 +403,27 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>3699.8725309999995</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>2505.6068709999995</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   <tr>
     <td>Sales Volume Lost</td>
@@ -201,6 +441,27 @@
         </tr>
       </table>
     </td>
+    <td>
+      <table>
+        <tr>
+          <td>730.4875231775732</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>399.84516868688456</td>
+        </tr>
+      </table>
+    </td>
   </tr>
   </table>
     
@@ -213,7 +474,7 @@
             <td>Min</td>
           </tr>
           <tr>
-            <td>Average</td>
+            <td>Avg</td>
           </tr>
           <tr>
             <td>Max</td>
