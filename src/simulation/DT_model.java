@@ -11,6 +11,7 @@ public class DT_model extends Model {
     public static int customerCounter = 0;
     public static Boolean save = false;
     public static Boolean quiet = false;
+    public static Boolean switchToNebenzeit = false;
     // Variables
     static double startTime = 0.0;
     static double endTime = 240.0;
@@ -96,8 +97,10 @@ public class DT_model extends Model {
         CustomerNewEvent firstCustomer = new CustomerNewEvent(this, "FirstCustomer", true);
         firstCustomer.schedule(new TimeInstant(getCustomerArrivalTime()));
 
-        //SwitchToNebenzeitEvent switchToNebenzeit = new SwitchToNebenzeitEvent(this, "SwitchToNebenzeit", true);
-        //switchToNebenzeit.schedule(new TimeSpan(endTime/2));
+        if (switchToNebenzeit){
+            SwitchToNebenzeitEvent switchToNebenzeit = new SwitchToNebenzeitEvent(this, "SwitchToNebenzeit", true);
+            switchToNebenzeit.schedule(new TimeSpan((endTime - startTime)/2));
+        }
     }
 
     public void init() {
@@ -161,6 +164,7 @@ public class DT_model extends Model {
                     }
                     case "--stoßzeit" -> stoßzeit = true;
                     case "--nebenzeit" -> nebenzeit = true;
+                    case "--switchtonebenzeit", "--stn" -> switchToNebenzeit = true;
                     case "--orderqueuelimit", "--oql" -> {
                         orderQueueLimit = Integer.parseInt(args[i + 1]);
                         i++;
