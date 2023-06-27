@@ -58,7 +58,7 @@ public class DT_model extends Model {
         return orderTime.sample();
     }
     private static int orderQueueLimit = 0;
-    public int getOrderQueueLimit() {
+    public static int getOrderQueueLimit() {
         return orderQueueLimit;
     }
     protected Queue<CustomerEntity> orderQueue;
@@ -75,7 +75,7 @@ public class DT_model extends Model {
         return pickupTime.sample();
     }
     private static int pickupQueueLimit = 0;
-    public int getPickupQueueLimit() {
+    public static int getPickupQueueLimit() {
         return pickupQueueLimit;
     }
     protected Queue<CustomerEntity> pickupQueue;

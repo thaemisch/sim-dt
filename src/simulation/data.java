@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import desmoj.core.simulator.Model;
+
 public class data {
     private static String dirPath;
     private static String fileName;
@@ -168,5 +170,14 @@ public class data {
         System.out.println("Pickup Exit: " + pickupExit.size());
         //System.out.println("Sales Volume: " + Arrays.toString(salesVolume));
         System.out.println("Sales Volume: " + getTotalSalesVolume());
+
+        System.out.println("--------------------");
+        System.out.println("Problems:");
+        if (orderQueue.size()- orderWindow.size() > DT_model.getOrderQueueLimit()) {
+            System.out.println("OrderQueue: " + (orderQueue.size()- orderWindow.size()- DT_model.getOrderQueueLimit()) + " too many");
+        }
+        if (pickupQueue.size()- pickupWindow.size() > DT_model.getPickupQueueLimit()) {
+            System.out.println("PickupQueue: " + (pickupQueue.size()- pickupWindow.size()- DT_model.getPickupQueueLimit()) + " too many");
+        }
     }
 }
