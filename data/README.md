@@ -345,7 +345,6 @@
   </tr>
   </table>
 
-  <h2>Legend</h2>
   <table>
     <tr>
       <td>Legend</td>
