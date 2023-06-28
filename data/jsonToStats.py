@@ -5,7 +5,7 @@ import os
 import matplotlib.pyplot as plt
 
 filenames = ["mcd1", "mcd2", "sim-stne", "sim-stne-hos", "sim-stne-tos"]
-filenames_extended = ["extended-stne", "extended-stne-hos", "extended-stne-tos"]
+filenames_extended = ["extended-stne-oql0-pql0", "extended-stne-oql0-pql0-hos", "extended-stne-oql0-pql0-tos"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -45,6 +45,12 @@ pickup_queue_lists = []
 pickup_lists = []
 exit_lists = []
 customers_lost_lists = []
+
+queue_deltas_lists = []
+queue_deltas_sideways_lists = []
+order_deltas_lists = []
+pickup_queue_deltas_lists = []
+pickup_deltas_lists = []
 
 sales_volume_lists = []
 sales_volume_lost_lists = []
@@ -95,6 +101,7 @@ for j in range(len(filenames)):
           queue_deltas_sideways.append(delta)
       except:
         break
+    queue_deltas_sideways_lists.append(queue_deltas_sideways)
     max_queue_delta_sideways.append(max(queue_deltas_sideways))
     min_queue_delta_sideways.append(min(queue_deltas_sideways))
     median_queue_delta_sideways.append(sorted(queue_deltas_sideways)[len(queue_deltas_sideways)//2])
@@ -110,6 +117,7 @@ for j in range(len(filenames)):
           queue_deltas.append(delta)
       except:
         break
+    queue_deltas_lists.append(queue_deltas)
     max_queue_delta.append(max(queue_deltas))
     min_queue_delta.append(min(queue_deltas))
     median_queue_delta.append(sorted(queue_deltas)[len(queue_deltas)//2])
@@ -124,6 +132,7 @@ for j in range(len(filenames)):
           order_deltas.append(delta)
       except:
         break
+    order_deltas_lists.append(order_deltas)
     max_order_delta.append(max(order_deltas))
     min_order_delta.append(min(order_deltas))
     median_order_delta.append(sorted(order_deltas)[len(order_deltas)//2])
@@ -138,6 +147,7 @@ for j in range(len(filenames)):
           pickup_queue_deltas.append(delta)
       except:
         break
+    pickup_queue_deltas_lists.append(pickup_deltas)
     max_pickup_queue_delta.append(max(pickup_queue_deltas))
     min_pickup_queue_delta.append(min(pickup_queue_deltas))
     median_pickup_queue_delta.append(sorted(pickup_queue_deltas)[len(pickup_queue_deltas)//2])
@@ -152,6 +162,7 @@ for j in range(len(filenames)):
           pickup_deltas.append(delta)
       except:
         break
+    pickup_deltas_lists.append(pickup_deltas)
     max_pickup_delta.append(max(pickup_deltas))
     min_pickup_delta.append(min(pickup_deltas))
     median_pickup_delta.append(sorted(pickup_deltas)[len(pickup_deltas)//2])
@@ -177,7 +188,7 @@ for k in range(len(filenames_extended)):
   sales_volume_total_list.append(round(sum(sales_volume_list), 2))
   sales_volume_lost_total_list.append(round(sum(sales_volume_lost_list), 2))
 
-def graphCustomersLost():
+def graphCustomersLost(filenameAdd):
   # Graph customers lost
   plt.figure(figsize=(10, 5))
   for k in range(len(filenames_extended)):
@@ -193,9 +204,9 @@ def graphCustomersLost():
   plt.xlabel("Time")
   plt.ylabel("Customers")
   plt.legend()
-  plt.savefig("graphs/customers_lost.png")
+  plt.savefig("graphs/customers_lost"+filenameAdd+".png")
 
-def graphCustomersExit():
+def graphCustomersExit(filenameAdd):
   plt.figure(figsize=(10, 5))
   for k in range(len(filenames_extended)):
       x = []
@@ -210,9 +221,9 @@ def graphCustomersExit():
   plt.xlabel("Time")
   plt.ylabel("Customers")
   plt.legend()
-  plt.savefig("graphs/customers_exit.png")
+  plt.savefig("graphs/customers_exit"+filenameAdd+".png")
 
-def graphCustomersArrival():
+def graphCustomersArrival(filename):
   plt.figure(figsize=(10, 5))
   for k in range(len(filenames_extended)):
       x = []
@@ -227,7 +238,7 @@ def graphCustomersArrival():
   plt.xlabel("Time")
   plt.ylabel("Customers")
   plt.legend()
-  plt.savefig("graphs/customer_arrivals.png")
+  plt.savefig("graphs/customer_arrivals"+filenameAdd+".png")
 
 def writeToReadme():
     # Create a markdown string with the variables and descriptions as a table
@@ -407,6 +418,7 @@ def writeToReadme():
         f.write(html_string)
 
 writeToReadme()
-graphCustomersArrival()
-graphCustomersExit()
-graphCustomersLost()
+#graphCustomersArrival()
+graphCustomersExit("-oql0-pql0")
+graphCustomersLost("-oql0-pql0")
+#graphOrderQueueLength()

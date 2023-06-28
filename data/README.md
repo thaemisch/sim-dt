@@ -353,9 +353,9 @@
     <td>Sales Volume</td>
           <td>--</td>
           <td>--</td>
-          <td>2375.19</td>
-          <td>1837.02</td>
-          <td>2128.81</td>
+          <td>3201.31</td>
+          <td>1837.5</td>
+          <td>2522.76</td>
   </tr>
   <tr>
     <td>Customers Lost</td>
@@ -369,9 +369,9 @@
     <td>Sales Volume Lost</td>
           <td>--</td>
           <td>--</td>
-          <td>730.49</td>
           <td>0</td>
-          <td>399.85</td>
+          <td>0</td>
+          <td>0</td>
   </tr>
   </table>
     
@@ -395,6 +395,9 @@
   </table>
   
   <h1>Graphs</h1>
-  <img src="graphs/customers_exit.png" alt="customers_exit.png">
-  <img src="graphs/customers_lost.png" alt="customers_lost.png">
-  <img src="graphs/customer_arrivals.png" alt="customer_arrivals.png">
+  <img src="graphs/customers_exit-default.png" alt="customers_exit-default.png">
+  <img src="graphs/customers_lost-default.png" alt="customers_lost-default.png">
+  <img src="graphs/customers_lost-oql0-pql0.png" alt="customers_lost-oql0-pql0.png">
+  <img src="graphs/customers_exit-oql20-pql10.png" alt="customers_exit-oql20-pql10.png">
+  <img src="graphs/customers_exit-oql0-pql0.png" alt="customers_exit-oql0-pql0.png">
+  <img src="graphs/customers_lost-oql20-pql10.png" alt="customers_lost-oql20-pql10.png">
