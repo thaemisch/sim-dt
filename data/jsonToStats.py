@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 import markdown
-
+import os
 import matplotlib.pyplot as plt
 
 filenames = ["mcd1", "mcd2", "sim-stne", "sim-stne-hos", "sim-stne-tos"]
@@ -392,7 +392,14 @@ def writeToReadme():
       </td>
     </tr>
   </table>
-    """
+  """
+
+    html_string += f"""
+  <h1>Graphs</h1>"""
+    for file in os.listdir("graphs"):
+      if file.endswith(".png"):
+        html_string += f"""
+  <img src="graphs/{file}" alt="{file}">"""
 
 
     # Write the HTML string to the README.md file

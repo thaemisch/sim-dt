@@ -393,4 +393,8 @@
       </td>
     </tr>
   </table>
-    
+  
+  <h1>Graphs</h1>
+  <img src="graphs/customers_exit.png" alt="customers_exit.png">
+  <img src="graphs/customers_lost.png" alt="customers_lost.png">
+  <img src="graphs/customer_arrivals.png" alt="customer_arrivals.png">
