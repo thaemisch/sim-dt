@@ -353,9 +353,9 @@
     <td>Sales Volume</td>
           <td>--</td>
           <td>--</td>
-          <td>3201.31</td>
-          <td>1837.5</td>
-          <td>2522.76</td>
+          <td>2375.19</td>
+          <td>1837.02</td>
+          <td>2128.81</td>
   </tr>
   <tr>
     <td>Customers Lost</td>
@@ -369,9 +369,9 @@
     <td>Sales Volume Lost</td>
           <td>--</td>
           <td>--</td>
+          <td>730.49</td>
           <td>0</td>
-          <td>0</td>
-          <td>0</td>
+          <td>399.85</td>
   </tr>
   </table>
     

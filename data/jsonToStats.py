@@ -5,7 +5,7 @@ import os
 import matplotlib.pyplot as plt
 
 filenames = ["mcd1", "mcd2", "sim-stne", "sim-stne-hos", "sim-stne-tos"]
-filenames_extended = ["extended-stne-oql0-pql0", "extended-stne-oql0-pql0-hos", "extended-stne-oql0-pql0-tos"]
+filenames_extended = ["extended-stne", "extended-stne-hos", "extended-stne-tos"]
 
 max_queue_delta_sideways = []
 min_queue_delta_sideways = []
@@ -419,6 +419,6 @@ def writeToReadme():
 
 writeToReadme()
 #graphCustomersArrival()
-graphCustomersExit("-oql0-pql0")
-graphCustomersLost("-oql0-pql0")
+graphCustomersExit("-default")
+graphCustomersLost("-default")
 #graphOrderQueueLength()
