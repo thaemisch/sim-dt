@@ -2,6 +2,8 @@ import json
 from datetime import datetime, timedelta
 import markdown
 
+import matplotlib.pyplot as plt
+
 filenames = ["mcd1", "mcd2", "sim-stne", "sim-stne-hos", "sim-stne-tos"]
 filenames_extended = ["extended-stne", "extended-stne-hos", "extended-stne-tos"]
 
@@ -34,6 +36,19 @@ sales_volume_total_list = []
 customers_lost_total_list = []
 sales_volume_lost_total_list = []
 
+sales_volume_lists_rising_sum = []
+sales_volume_lists_rising_sum_lost = []
+
+queue_lists = []
+order_lists = []    
+pickup_queue_lists = []
+pickup_lists = []
+exit_lists = []
+customers_lost_lists = []
+
+sales_volume_lists = []
+sales_volume_lost_lists = []
+
 for j in range(len(filenames)):
     # Read the JSON file
     with open("raw/" + filenames[j] + ".json") as f:
@@ -57,6 +72,13 @@ for j in range(len(filenames)):
     pickup = lists[3]
     exit_list = lists[4]
     customers_lost_list = lists[5]
+
+    queue_lists.append(lists[0])
+    order_lists.append(lists[1])
+    pickup_queue_lists.append(lists[2])
+    pickup_lists.append(lists[3])
+    exit_lists.append(lists[4])
+    customers_lost_lists.append(lists[5])
 
     queue_deltas = []
     queue_deltas_sideways = []
@@ -155,6 +177,57 @@ for k in range(len(filenames_extended)):
   sales_volume_total_list.append(round(sum(sales_volume_list), 2))
   sales_volume_lost_total_list.append(round(sum(sales_volume_lost_list), 2))
 
+def graphCustomersLost():
+  # Graph customers lost
+  plt.figure(figsize=(10, 5))
+  for k in range(len(filenames_extended)):
+      x = []
+      y = []
+      counter = 0
+      for l in range(len(customers_lost_lists[k+2])):
+        x.append(customers_lost_lists[k+2][l])
+        y.append(l)
+      plt.plot(x, y, label=filenames_extended[k].replace("extended", "sim"))
+
+  plt.title("Customers lost")
+  plt.xlabel("Time")
+  plt.ylabel("Customers")
+  plt.legend()
+  plt.savefig("graphs/customers_lost.png")
+
+def graphCustomersExit():
+  plt.figure(figsize=(10, 5))
+  for k in range(len(filenames_extended)):
+      x = []
+      y = []
+      counter = 0
+      for l in range(len(exit_lists[k+2])):
+        x.append(exit_lists[k+2][l])
+        y.append(l)
+      plt.plot(x, y, label=filenames_extended[k].replace("extended", "sim"))
+
+  plt.title("Customers exit")
+  plt.xlabel("Time")
+  plt.ylabel("Customers")
+  plt.legend()
+  plt.savefig("graphs/customers_exit.png")
+
+def graphCustomersArrival():
+  plt.figure(figsize=(10, 5))
+  for k in range(len(filenames_extended)):
+      x = []
+      y = []
+      counter = 0
+      for l in range(len(queue_lists[k+2])):
+        x.append(queue_lists[k+2][l])
+        y.append(l)
+      plt.plot(x, y, label=filenames_extended[k].replace("extended", "sim"))
+
+  plt.title("Customer arrivals")
+  plt.xlabel("Time")
+  plt.ylabel("Customers")
+  plt.legend()
+  plt.savefig("graphs/customer_arrivals.png")
 
 def writeToReadme():
     # Create a markdown string with the variables and descriptions as a table
@@ -327,3 +400,6 @@ def writeToReadme():
         f.write(html_string)
 
 writeToReadme()
+graphCustomersArrival()
+graphCustomersExit()
+graphCustomersLost()
