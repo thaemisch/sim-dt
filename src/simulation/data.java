@@ -80,9 +80,9 @@ public class data {
         // Convert the lists to a JSON-serializable format
         List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow, pickupExit, customersLost);
         if (DT_model.user.contains("tim")) {
-            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/raw/";
         } else if (DT_model.user.contains("eli")) {
-            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
+            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/raw/";
         } else {
             System.out.println("No user, no output! Exiting...");
             System.exit(1);
@@ -129,9 +129,9 @@ public class data {
         // Convert the lists to a JSON-serializable format
         List<List<Double>> jsonLists = List.of(salesVolume, salesVolumeLost);
         if (DT_model.user.contains("tim")) {
-            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/";
+            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/raw/";
         } else if (DT_model.user.contains("eli")) {
-            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/";
+            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/raw/";
         } else {
             System.out.println("No user, no output! Exiting...");
             System.exit(1);

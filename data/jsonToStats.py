@@ -36,7 +36,7 @@ sales_volume_lost_total_list = []
 
 for j in range(len(filenames)):
     # Read the JSON file
-    with open(filenames[j] + ".json") as f:
+    with open("raw/" + filenames[j] + ".json") as f:
         json_data = json.load(f)
 
     # Convert the JSON data to lists of datetimes
@@ -139,7 +139,7 @@ for j in range(len(filenames)):
     customers_lost_total_list.append(len(customers_lost_list))
 
 for k in range(len(filenames_extended)):
-  with open(filenames_extended[k] + ".json") as f:
+  with open("raw/" + filenames_extended[k] + ".json") as f:
     json_data_extended = json.load(f)
 
   lists_extended = []
