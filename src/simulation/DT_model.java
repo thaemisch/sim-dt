@@ -17,6 +17,9 @@ public class DT_model extends Model {
     public static Boolean switchToStoßzeit = false;
     // Variables
     public static long seed = 1;
+    public static long getSeed() {
+        return seed;
+    }
     public static double startTime = 0.0;
     public static double endTime = 240.0;
     public static Double getEndTime() {

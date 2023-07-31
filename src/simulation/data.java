@@ -113,6 +113,8 @@ public class data {
         if (sb.equals("sim")) {
             sb.append("-default");
         }
+        if (DT_model.getSeed() != 10)
+            sb.append("-").append(DT_model.getSeed());
         sb.append(".json");
 
         // Write the JSON string to the file
