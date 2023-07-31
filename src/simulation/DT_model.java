@@ -211,7 +211,7 @@ public class DT_model extends Model {
         salesVolumePerCustomer = new ContDistUniform(this, "SalesVolumePerCustomer", salesVolumePerCustomerMin, salesVolumePerCustomerMax, true, false);
     }
 
-    public static void main(java.lang.String[] args){
+    public static void main(java.lang.String[] args) {
         // Parse CLI arguments
         if (args.length > 0) {
             for (int i = 0; i < args.length; i++) {
@@ -298,7 +298,9 @@ public class DT_model extends Model {
 
         dtExperiment.start();
         dtExperiment.finish();
-        if (user.contains("tim")) {
+        if(user == null) {
+            System.out.println("No user set, not deleting files.");
+        } else if (user.contains("tim")) {
             File debug = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_debug.html");
             File error = new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_error.html");
             File report= new File("/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/src/simulation/dt-event_report.html");
@@ -319,6 +321,7 @@ public class DT_model extends Model {
         }
         data.printLog();
         if (save)
+
             data.writeListsToFile();
         System.exit(0);
     }

@@ -71,7 +71,19 @@ public class data {
         return sum;
     }
 
-    public static void writeListsToFile(){
+    public static void writeListsToFile() {
+        if(DT_model.user == null){
+            System.out.println("\nNo user, no output! \n To add your user / path for saving data files, edit the writeListsToFile() Method in data.java \n\nExiting...");
+            System.exit(1);
+        } else if (DT_model.user.contains("tim")) {
+            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/raw/";
+        } else if (DT_model.user.contains("eli")) {
+            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/raw/";
+        } else {
+            System.out.println("No user with the name" + DT_model.user + " found! \n\n To add your user / path for saving data files, edit the writeListsToFile() Method in data.java \n\nExiting...");
+            System.exit(1);
+        }
+
         writeListsToFile1();
         writeListsToFile2();
     }
@@ -79,14 +91,6 @@ public class data {
     public static void writeListsToFile1() {
         // Convert the lists to a JSON-serializable format
         List<List<Double>> jsonLists = List.of(orderQueue, orderWindow, pickupQueue, pickupWindow, pickupExit, customersLost);
-        if (DT_model.user.contains("tim")) {
-            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/raw/";
-        } else if (DT_model.user.contains("eli")) {
-            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/raw/";
-        } else {
-            System.out.println("No user, no output! Exiting...");
-            System.exit(1);
-        }
 
         File directory = new File(dirPath);
 
@@ -130,14 +134,6 @@ public class data {
     public static void writeListsToFile2() {
         // Convert the lists to a JSON-serializable format
         List<List<Double>> jsonLists = List.of(salesVolume, salesVolumeLost);
-        if (DT_model.user.contains("tim")) {
-            dirPath = "/home/tim/Documents/Uni/Informatik/S4/sim/sim-dt/data/raw/";
-        } else if (DT_model.user.contains("eli")) {
-            dirPath = "C:/Users/elihi/IdeaProjects/sim-dt/data/raw/";
-        } else {
-            System.out.println("No user, no output! Exiting...");
-            System.exit(1);
-        }
 
         File directory = new File(dirPath);
 
