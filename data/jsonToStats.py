@@ -190,7 +190,8 @@ for k in range(len(filenames_extended)):
 
 def graphCustomersLost(filenameAdd):
   # Graph customers lost
-  plt.figure(figsize=(10, 5))
+  plt.figure(figsize=(50, 25))
+  plt.rcParams['figure.dpi'] = 1500
   for k in range(len(filenames_extended)):
       x = []
       y = []
@@ -207,7 +208,7 @@ def graphCustomersLost(filenameAdd):
   plt.savefig("graphs/customers_lost"+filenameAdd+".png")
 
 def graphCustomersExit(filenameAdd):
-  plt.figure(figsize=(10, 5))
+  plt.figure(figsize=(50, 25))
   for k in range(len(filenames_extended)):
       x = []
       y = []
@@ -224,7 +225,7 @@ def graphCustomersExit(filenameAdd):
   plt.savefig("graphs/customers_exit"+filenameAdd+".png")
 
 def graphCustomersArrival(filename):
-  plt.figure(figsize=(10, 5))
+  plt.figure(figsize=(50, 25))
   for k in range(len(filenames_extended)):
       x = []
       y = []

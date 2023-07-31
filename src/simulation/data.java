@@ -101,10 +101,10 @@ public class data {
             sb.append("-nest");
         else if (DT_model.switchToNebenzeit)
             sb.append("-stne");
-        /*if (DT_model.getOrderQueueLimit() > 0)
+        if (DT_model.getOrderQueueLimit() != 10)
             sb.append("-oql").append(DT_model.getOrderQueueLimit());
-        if (DT_model.getPickupQueueLimit() > 0)
-            sb.append("-pql").append(DT_model.getPickupQueueLimit());*/
+        if (DT_model.getPickupQueueLimit() != 5)
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());
         if (DT_model.halfOrderSize) {
             sb.append("-hos");
         } else if (DT_model.threeQuarterOrderSize) {
@@ -150,10 +150,10 @@ public class data {
             sb.append("-nest");
         else if (DT_model.switchToNebenzeit)
             sb.append("-stne");
-        /*if (DT_model.getOrderQueueLimit() > 0)
+        if (DT_model.getOrderQueueLimit() != 10)
             sb.append("-oql").append(DT_model.getOrderQueueLimit());
-        if (DT_model.getPickupQueueLimit() > 0)
-            sb.append("-pql").append(DT_model.getPickupQueueLimit());*/
+        if (DT_model.getPickupQueueLimit() != 5)
+            sb.append("-pql").append(DT_model.getPickupQueueLimit());
         if (DT_model.halfOrderSize) {
             sb.append("-hos");
         } else if (DT_model.threeQuarterOrderSize) {

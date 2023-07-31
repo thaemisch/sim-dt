@@ -16,6 +16,7 @@ public class DT_model extends Model {
     public static Boolean switchToNebenzeit = false;
     public static Boolean switchToStoßzeit = false;
     // Variables
+    public static long seed = 1;
     public static double startTime = 0.0;
     public static double endTime = 240.0;
     public static Double getEndTime() {
@@ -143,10 +144,10 @@ public class DT_model extends Model {
     public void initSwitch(){
         if (halfOrderSize){
             orderTimeEndDiff = 0.5;
-            orderTimeMeanDiff = 0.5;
+            orderTimeMeanDiff = 0.75;
 
             pickupTimeEndDiff = 0.5;
-            pickupTimeMeanDiff = 0.5;
+            pickupTimeMeanDiff = 0.75;
 
             salesVolumePerCustomerMaxDiff = 0.5;
         } else if (threeQuarterOrderSize){
@@ -221,6 +222,10 @@ public class DT_model extends Model {
                         endTime = Double.parseDouble(args[i + 1]);
                         i++;
                     }
+                    case "--seed" -> {
+                        seed = Long.parseLong(args[i + 1]);
+                        i++;
+                    }
                     case "--stoßzeit", "--st" -> stoßzeit = true;
                     case "--nebenzeit", "-ne" -> nebenzeit = true;
                     case "--stoßtonebenzeit", "--stne" -> {
@@ -255,6 +260,7 @@ public class DT_model extends Model {
                         System.out.println("Options:");
                         System.out.println("    --start <time> ________________________ Set the start time of the simulation (Default: 0.0)");
                         System.out.println("    --end <time> __________________________ Set the end time of the simulation(Default: 240.0)");
+                        System.out.println("    --seed <seed> _________________________ Set the seed (Default: 1)");
                         System.out.println("    --stoßzeit, --st ______________________ Set the simulation to Stoßzeit");
                         System.out.println("    --nebenzeit, --ne _____________________ Set the simulation to Nebenzeit");
                         System.out.println("    --switchtonebenzeit, --stne ___________ Set the simulation to switch from Stoß- to Nebenzeit");
@@ -278,6 +284,8 @@ public class DT_model extends Model {
         }
 
         Experiment dtExperiment = new Experiment("dt-event");
+
+        dtExperiment.setSeedGenerator(0);
 
         DT_model dt_model = new DT_model(null, "DT Model", true, true);
 
