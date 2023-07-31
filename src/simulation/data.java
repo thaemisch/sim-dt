@@ -93,6 +93,8 @@ public class data {
         // Convert the lists to a JSON string
         String jsonStr = convertListsToJsonString1(jsonLists);
         StringBuilder sb = new StringBuilder();
+        if (DT_model.getSeed() != 1)
+            sb.append("custom_seed/");
         sb.append("sim");
         if (DT_model.getEndTime() != 240.0)
             sb.append(DT_model.getEndTime().toString().replace('.', '-'));
@@ -113,7 +115,7 @@ public class data {
         if (sb.equals("sim")) {
             sb.append("-default");
         }
-        if (DT_model.getSeed() != 10)
+        if (DT_model.getSeed() != 1)
             sb.append("-").append(DT_model.getSeed());
         sb.append(".json");
 
